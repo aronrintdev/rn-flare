@@ -27,6 +27,7 @@ ios/fastlane/report.xml
 ios/GetFlare.xcworkspace/xcuserdata/*
 ios/GetFlare.xcworkspace/project.xcworkspace/xcuserdata/
 ios/GetFlare.xcodeproj/xcuserdata/
+ios/Get\ Flare.ipa
 
 # dependencies
 /node_modules
