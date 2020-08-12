@@ -339,7 +339,7 @@ DEPENDENCIES:
   - ReactCommon/jscallinvoker (from `../node_modules/react-native/ReactCommon`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "ReactNativeBeaconsManager (from `../node_modules/@x-guard/react-native-beacons-manager`)"
-  - ReactNativeNavigation (from `../node_modules/react-native-navigation/ReactNativeNavigation.podspec`)
+  - ReactNativeNavigation (from `../node_modules/react-native-navigation`)
   - "RNBluetoothInfo (from `../node_modules/@bitfly/react-native-bluetooth-info`)"
   - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
   - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
@@ -447,7 +447,7 @@ EXTERNAL SOURCES:
   ReactNativeBeaconsManager:
     :path: "../node_modules/@x-guard/react-native-beacons-manager"
   ReactNativeNavigation:
-    :podspec: "../node_modules/react-native-navigation/ReactNativeNavigation.podspec"
+    :path: "../node_modules/react-native-navigation"
   RNBluetoothInfo:
     :path: "../node_modules/@bitfly/react-native-bluetooth-info"
   RNCAsyncStorage:
@@ -528,6 +528,6 @@ SPEC CHECKSUMS:
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
 
-PODFILE CHECKSUM: 2055d46aa998be32723e9348c8b8af3034f8a2e9
+PODFILE CHECKSUM: 486353390051e1ef999a125f0b802146e4ad7a05
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.3
