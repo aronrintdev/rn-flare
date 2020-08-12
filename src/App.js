@@ -8,6 +8,7 @@ import axios from 'axios';
 import { Client } from 'bugsnag-react-native';
 import RNLocation from 'react-native-location';
 
+import isPlainObject from 'lodash/isPlainObject';
 import { LEFT_NAVIGATION_WIDTH } from './constants/Config';
 import { configureStore } from './store/index';
 
@@ -20,7 +21,6 @@ import registerScreens from './screens/index';
 import sandwichMenu from './assets/sandwich-menu.png';
 import { FlareLogger, FlareLoggerCategory } from './actions/LogAction';
 import { cacheCallSounds } from './helpers/callScripts';
-import isPlainObject from 'lodash/isPlainObject';
 
 // eslint-disable-next-line no-console
 console.disableYellowBox = true;
@@ -123,10 +123,13 @@ export default class App extends Component {
         FlareLogger.initLogger();
         FlareLogger.debug(FlareLoggerCategory.wake, `App Started`);
         persistStore(store, null, () => {
-            const { email } = store.getState().user.profile;
-            FlareLogger.setLoginInfo(email);
+            const { user } = store.getState();
 
-            const callScripts = store.getState().user.callScripts;
+            if (user.profile) {
+                FlareLogger.setLoginInfo(user.profile.email);
+            }
+
+            const { callScripts } = store.getState().user;
             if (
                 isPlainObject(callScripts) &&
                 Object.keys(callScripts).length > 0
