@@ -39,17 +39,11 @@ target 'GetFlare' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
-  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
-  pod 'ReactNativeNavigation', :podspec => '../node_modules/react-native-navigation/ReactNativeNavigation.podspec'
-  pod 'react-native-contacts', :path => '../node_modules/react-native-contacts'
-  pod 'ReactNativeBeaconsManager', :path => '../node_modules/@x-guard/react-native-beacons-manager'
   permissions_path = '../node_modules/react-native-permissions/ios'
   pod 'Permission-Contacts', :path => "#{permissions_path}/Contacts.podspec"
   pod 'Permission-LocationAlways', :path => "#{permissions_path}/LocationAlways.podspec"
   pod 'Permission-LocationWhenInUse', :path => "#{permissions_path}/LocationWhenInUse.podspec"
   pod 'Permission-Notifications', :path => "#{permissions_path}/Notifications.podspec"
-  pod 'RNBluetoothInfo', :path => '../node_modules/@bitfly/react-native-bluetooth-info'
-  pod 'RNCPushNotificationIOS', :path => '../node_modules/@react-native-community/push-notification-ios'
 
   target 'GetFlareTests' do
     inherit! :search_paths
