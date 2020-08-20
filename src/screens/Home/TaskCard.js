@@ -22,8 +22,8 @@ const styles = StyleSheet.create({
     },
     cardbg: {
         position: 'absolute',
-        left: 0,
-        top: 0,
+        left: -5,
+        top: 8,
         height: 200,
         borderTopLeftRadius: 30,
         borderBottomRightRadius: 30,
@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
     body: {
         color: Colors.theme.cream,
         fontSize: 14,
+        marginTop: 10,
     },
     disabled: {
         opacity: 0.4,

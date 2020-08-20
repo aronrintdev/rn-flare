@@ -12,8 +12,17 @@ import cardPermissions from '../../assets/card-permissions.png';
 import cardShare from '../../assets/card-share.png';
 import cardAddcontacts from '../../assets/card-addcontacts.png';
 import { showShareDialog } from '../ShareDialog';
+import card911 from '../../assets/starry-911.png';
 
 const ITEM_TEMPLATES = [
+    {
+        key: '911',
+        image: { source: card911, width: 68, height: 90 },
+        title: 'Explore our new \n911 feature',
+        body:
+            'Optionally enable the 911 feature to connect with 911 dispatchers',
+        done: () => {},
+    },
     {
         key: 'permissions',
         image: { source: cardPermissions, width: 119, height: 77 },
