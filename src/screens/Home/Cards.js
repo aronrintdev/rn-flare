@@ -16,7 +16,7 @@ import card911 from '../../assets/starry-911.png';
 
 const ITEM_TEMPLATES = [
     {
-        key: '911',
+        key: 'how911works',
         image: { source: card911, width: 68, height: 90 },
         title: 'Explore our new \n911 feature',
         body:
@@ -100,6 +100,11 @@ export const useCards = ({ componentId, selector, dispatch }) => {
             addToContacts(dispatch);
         }, [dispatch]),
         share: showShareDialog,
+        how911works: React.useCallback(() => {
+            Navigation.showModal({
+                component: { name: 'com.flarejewelry.how911works' },
+            });
+        }, []),
     };
 
     return ITEM_TEMPLATES.map(({ done, key, ...rest }) => ({

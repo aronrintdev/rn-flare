@@ -21,6 +21,7 @@ import { MANUFACTURING_MODE_ENABLED } from '../constants/Config';
 import Scenarios from './Scenarios';
 import HowItWorks from './HowItWorks';
 import ShareDialog from './ShareDialog';
+import How911Works from './How911Works';
 
 export default (store, Provider) => {
     Navigation.registerComponentWithRedux(
@@ -137,6 +138,12 @@ export default (store, Provider) => {
     Navigation.registerComponentWithRedux(
         'com.flarejewelry.sharedialog',
         () => ShareDialog,
+        Provider,
+        store
+    );
+    Navigation.registerComponentWithRedux(
+        'com.flarejewelry.how911works',
+        () => How911Works,
         Provider,
         store
     );
