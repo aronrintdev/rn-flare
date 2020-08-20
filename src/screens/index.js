@@ -21,6 +21,7 @@ import { MANUFACTURING_MODE_ENABLED } from '../constants/Config';
 import Scenarios from './Scenarios';
 import HowItWorks from './HowItWorks';
 import ShareDialog from './ShareDialog';
+import About911 from './Onboarding/About911';
 
 export default (store, Provider) => {
     Navigation.registerComponentWithRedux(
@@ -120,6 +121,12 @@ export default (store, Provider) => {
     Navigation.registerComponent(
         'com.flarejewelry.onboarding.addhardware.aboutpermissions',
         () => AboutPermissions
+    );
+    Navigation.registerComponentWithRedux(
+        'com.flarejewelry.onboarding.911',
+        () => About911,
+        Provider,
+        store
     );
     Navigation.registerComponentWithRedux(
         'com.flarejewelry.scenarios',

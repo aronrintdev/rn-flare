@@ -15,6 +15,13 @@ import { showShareDialog } from '../ShareDialog';
 
 const ITEM_TEMPLATES = [
     {
+        key: 'about911',
+        image: { source: cardPermissions, width: 119, height: 77 },
+        title: '911',
+        body: 'Emergency services',
+        done: ({ about911 }) => about911,
+    },
+    {
         key: 'permissions',
         image: { source: cardPermissions, width: 119, height: 77 },
         title: 'Allow Location and Bluetooth',
@@ -67,6 +74,11 @@ const ITEM_TEMPLATES = [
 
 export const useCards = ({ componentId, selector, dispatch }) => {
     const callbacks = {
+        about911: React.useCallback(() => {
+            Navigation.push(componentId, {
+                component: { name: 'com.flarejewelry.onboarding.911' },
+            });
+        }, [componentId]),
         permissions: React.useCallback(() => {
             Navigation.showModal({
                 component: { name: 'com.flarejewelry.app.PermissionsReminder' },
