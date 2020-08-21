@@ -467,6 +467,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-permissions"
   RNSound:
     :path: "../node_modules/react-native-sound"
+  RNSVG:
+    :path: "../node_modules/react-native-svg"
   RNVectorIcons:
     :path: "../node_modules/react-native-vector-icons"
   Yoga:
@@ -534,4 +536,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 486353390051e1ef999a125f0b802146e4ad7a05
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.3
