@@ -89,9 +89,9 @@ const TextAndCall = ({ componentId }) => {
         <SafeAreaView style={styles.container}>
             <StatusBar barStyle="dark-content" />
             <WhiteBar showBack showLogo={false} black goBack={close} />
-            <Headline
-                style={styles.headline}
-            >{`A Text, And\n A call`}</Headline>
+            <Headline style={styles.headline}>
+                {`A Text, And\n A call`}
+            </Headline>
             <View style={styles.shrink} />
             <View style={styles.line} />
             <Text style={styles.subhead}>
@@ -109,7 +109,7 @@ const TextAndCall = ({ componentId }) => {
                     <NoonglightSvg width="100%" />
                 </View>
                 <BlueMsgBox containerStyles={styles.blueMsgBox2}>
-                    I'm calling you now.
+                    {"I'm calling you now."}
                 </BlueMsgBox>
             </View>
             <RoundedButton

@@ -92,9 +92,9 @@ const TalkToDispatchers = ({ componentId }) => {
         <SafeAreaView style={styles.container}>
             <StatusBar barStyle="dark-content" />
             <WhiteBar showBack showLogo={false} black goBack={close} />
-            <Headline
-                style={styles.headline}
-            >{`Talk directly to\nDispatchers`}</Headline>
+            <Headline style={styles.headline}>
+                {`Talk directly to\nDispatchers`}
+            </Headline>
             <View style={styles.shrink} />
             <View style={styles.line} />
             <Text style={styles.subhead}>
