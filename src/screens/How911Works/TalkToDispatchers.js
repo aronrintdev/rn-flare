@@ -49,11 +49,9 @@ const styles = StyleSheet.create({
         bottom: 64,
     },
     blueMsgBox1: {
-        width: '100%',
         backgroundColor: 'rgba(105,120,246, 0.75)',
     },
     rightAligned: {
-        width: '90%',
         marginLeft: '10%',
     },
     blueMsgBox2: {

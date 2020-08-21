@@ -48,11 +48,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom: 64,
     },
-    blueMsgBox1: {
-        width: '100%',
-    },
     blueMsgBox2: {
-        width: 170,
         marginTop: -30,
         marginLeft: 30,
     },
@@ -105,7 +101,7 @@ const TextAndCall = ({ componentId }) => {
                 help arrives.
             </Text>
             <View style={styles.content}>
-                <BlueMsgBox containerStyles={styles.blueMsgBox1}>
+                <BlueMsgBox>
                     Hi, this is Nikki from Noonlight. We received an alarm from
                     your Flare device. What is your emergency?
                 </BlueMsgBox>

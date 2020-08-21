@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
         lineHeight: 24,
         fontFamily: 'Nocturno Display Std',
         textAlign: 'center',
-        marginBottom: 40,
+        marginBottom: 20,
     },
     button: {
         marginTop: 16,
@@ -50,12 +50,11 @@ const styles = StyleSheet.create({
         bottom: 64,
     },
     blueMsgBox1: {
-        width: '100%',
-        marginVertical: 8,
+        marginVertical: 7,
         backgroundColor: 'rgba(105,120,246, 0.75)',
     },
     content: {
-        width: 320,
+        width: 325,
         position: 'relative',
     },
     messengerName: {
