@@ -21,7 +21,12 @@ import { MANUFACTURING_MODE_ENABLED } from '../constants/Config';
 import Scenarios from './Scenarios';
 import HowItWorks from './HowItWorks';
 import ShareDialog from './ShareDialog';
-import How911Works from './How911Works';
+import {
+    How911WorksMain,
+    How911WorksTextAndCall,
+    How911WorksTalkToDispatchers,
+    How911WorksCrewWillKnow,
+} from './How911Works';
 
 export default (store, Provider) => {
     Navigation.registerComponentWithRedux(
@@ -142,8 +147,26 @@ export default (store, Provider) => {
         store
     );
     Navigation.registerComponentWithRedux(
-        'com.flarejewelry.how911works',
-        () => How911Works,
+        'com.flarejewelry.how911works.main',
+        () => How911WorksMain,
+        Provider,
+        store
+    );
+    Navigation.registerComponentWithRedux(
+        'com.flarejewelry.how911works.textandcall',
+        () => How911WorksTextAndCall,
+        Provider,
+        store
+    );
+    Navigation.registerComponentWithRedux(
+        'com.flarejewelry.how911works.talktodispatchers',
+        () => How911WorksTalkToDispatchers,
+        Provider,
+        store
+    );
+    Navigation.registerComponentWithRedux(
+        'com.flarejewelry.how911works.crewwillknow',
+        () => How911WorksCrewWillKnow,
         Provider,
         store
     );

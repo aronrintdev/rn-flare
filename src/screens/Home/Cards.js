@@ -101,10 +101,18 @@ export const useCards = ({ componentId, selector, dispatch }) => {
         }, [dispatch]),
         share: showShareDialog,
         how911works: React.useCallback(() => {
-            Navigation.showModal({
-                component: { name: 'com.flarejewelry.how911works' },
+            Navigation.push(componentId, {
+                component: {
+                    name: 'com.flarejewelry.how911works.main',
+                    options: {
+                        topBar: {
+                            visible: false,
+                            animate: false,
+                        },
+                    },
+                },
             });
-        }, []),
+        }, [componentId]),
     };
 
     return ITEM_TEMPLATES.map(({ done, key, ...rest }) => ({
