@@ -90,14 +90,14 @@ const TextAndCall = ({ componentId }) => {
             <StatusBar barStyle="dark-content" />
             <WhiteBar showBack showLogo={false} black goBack={close} />
             <Headline style={styles.headline}>
-                {`A Text, And\n A call`}
+                {`A Text, And\n A Call`}
             </Headline>
             <View style={styles.shrink} />
             <View style={styles.line} />
             <Text style={styles.subhead}>
                 The dispatcher will text and call you within 60 seconds to
                 confirm your safety. If you are able to text or talk, you can
-                communicate directly with the dispatcher - and your Crew - until
+                communicate directly with the dispatcher – and your Crew – until
                 help arrives.
             </Text>
             <View style={styles.content}>

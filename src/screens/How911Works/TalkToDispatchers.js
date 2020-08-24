@@ -93,7 +93,7 @@ const TalkToDispatchers = ({ componentId }) => {
             <StatusBar barStyle="dark-content" />
             <WhiteBar showBack showLogo={false} black goBack={close} />
             <Headline style={styles.headline}>
-                {`Talk directly to\nDispatchers`}
+                {`Talk Directly To\nDispatchers`}
             </Headline>
             <View style={styles.shrink} />
             <View style={styles.line} />

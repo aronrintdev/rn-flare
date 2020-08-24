@@ -89,9 +89,7 @@ const How911Works = ({ componentId }) => {
             <View style={styles.shrink} />
             <View style={styles.line} />
             <Text style={styles.subhead}>
-                {
-                    "Flare will send your GPS location to 911 and your Crew - even if you don't know where you are or can't speak.\nThe dispatcher will be able to view your live location on their screen."
-                }
+                {`Flare will send your GPS location to 911 and your Crew – even if you don't know where you are or can't speak.\nThe dispatcher will be able to view your live location on their screen.`}
             </Text>
             <Image style={styles.starryImg} source={StarryLocationImg} />
             <RoundedButton

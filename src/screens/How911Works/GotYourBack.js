@@ -122,7 +122,7 @@ const GotYourBack = ({ componentId }) => {
             <StatusBar barStyle="dark-content" />
             <WhiteBar showBack showLogo={false} black goBack={close} />
             <Headline style={styles.headline}>
-                {`We’ve got your\n Back.`}
+                {`We’ve Got Your\n Back.`}
             </Headline>
             <View style={styles.shrink} />
             <View style={styles.line} />

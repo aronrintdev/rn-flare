@@ -89,7 +89,7 @@ const CrewWillKnow = ({ componentId }) => {
             <StatusBar barStyle="dark-content" />
             <WhiteBar showBack showLogo={false} black goBack={close} />
             <Headline style={styles.headline}>
-                {`Your crew will\n know, too`}
+                {`Your Crew Will\n Know, Too`}
             </Headline>
             <View style={styles.shrink} />
             <View style={styles.line} />
