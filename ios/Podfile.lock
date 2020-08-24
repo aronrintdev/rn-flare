@@ -467,6 +467,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-permissions"
   RNSound:
     :path: "../node_modules/react-native-sound"
+  RNSVG:
+    :path: "../node_modules/react-native-svg"
   RNVectorIcons:
     :path: "../node_modules/react-native-vector-icons"
   Yoga:
