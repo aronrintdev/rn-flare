@@ -109,7 +109,7 @@ const TextAndCall = ({ componentId }) => {
                     <NoonglightSvg width="100%" />
                 </View>
                 <BlueMsgBox containerStyles={styles.blueMsgBox2}>
-                    {"I'm calling you now."}
+                    I'm calling you now.
                 </BlueMsgBox>
             </View>
             <RoundedButton

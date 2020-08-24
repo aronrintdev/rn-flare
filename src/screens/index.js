@@ -26,6 +26,8 @@ import {
     How911WorksTextAndCall,
     How911WorksTalkToDispatchers,
     How911WorksCrewWillKnow,
+    How911WorksGotYourBack,
+    How911WorksSuccess,
 } from './How911Works';
 
 export default (store, Provider) => {
@@ -81,9 +83,11 @@ export default (store, Provider) => {
         Provider,
         store
     );
-    Navigation.registerComponent(
+    Navigation.registerComponentWithRedux(
         'com.flarejewelry.app.Settings',
-        () => Settings
+        () => Settings,
+        Provider,
+        store
     );
     Navigation.registerComponentWithRedux(
         'com.flarejewelry.app.settings.Account',
@@ -170,7 +174,18 @@ export default (store, Provider) => {
         Provider,
         store
     );
-
+    Navigation.registerComponentWithRedux(
+        'com.flarejewelry.how911works.gotyourback',
+        () => How911WorksGotYourBack,
+        Provider,
+        store
+    );
+    Navigation.registerComponentWithRedux(
+        'com.flarejewelry.how911works.success',
+        () => How911WorksSuccess,
+        Provider,
+        store
+    );
     if (MANUFACTURING_MODE_ENABLED) {
         Navigation.registerComponentWithRedux(
             'com.flarejewelry.manufacturing.main',

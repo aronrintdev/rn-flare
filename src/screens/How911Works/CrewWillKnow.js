@@ -73,7 +73,7 @@ const CrewWillKnow = ({ componentId }) => {
     const moveNext = React.useCallback(() => {
         Navigation.push(componentId, {
             component: {
-                name: 'com.flarejewelry.how911works.crewwillknow',
+                name: 'com.flarejewelry.how911works.gotyourback',
                 options: {
                     topBar: {
                         visible: false,

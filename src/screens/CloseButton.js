@@ -8,19 +8,21 @@ const styles = StyleSheet.create({
     wrapper: {
         paddingVertical: 16,
         paddingHorizontal: 32,
+        width: 80,
+        height: 48,
         alignSelf: 'flex-start',
     },
     image: {
-        height: 16,
-        width: 16,
+        height: '100%',
+        width: '100%',
     },
     black: {
         tintColor: Colors.black,
     },
 });
 
-const CloseButton = ({ onPress, black = false }) => (
-    <TouchableOpacity onPress={onPress} style={styles.wrapper}>
+const CloseButton = ({ onPress, style, black = false }) => (
+    <TouchableOpacity onPress={onPress} style={[styles.wrapper, style]}>
         <Image
             source={x}
             style={[styles.image, black ? styles.black : undefined]}
