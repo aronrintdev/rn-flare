@@ -64,7 +64,7 @@ const Account = ({
         <SafeAreaView style={styles.container}>
             <StatusBar barStyle="dark-content" />
             <Text style={styles.subhead}>Account</Text>
-            <View style={styles.itemContainer}>
+            <View style={[styles.itemContainer, styles.firstItemContainer]}>
                 <TouchableOpacity style={styles.item} onPress={editJewelry}>
                     <Text style={styles.text}>Add/Edit Jewelry</Text>
                     <Image
@@ -73,7 +73,9 @@ const Account = ({
                         style={styles.icon}
                     />
                 </TouchableOpacity>
-                <View style={[styles.item, styles.itemBorder]}>
+            </View>
+            <View style={[styles.itemContainer, styles.lastItemContainer]}>
+                <View style={[styles.item, styles.lastItem]}>
                     <Text style={styles.text}>
                         Send Data Analytics to Flare
                     </Text>
@@ -88,37 +90,60 @@ const Account = ({
                 Flare respects your privacy. We only use analytics to make
                 better safety products for all of us and never share your data.
             </Text>
-            <TouchableOpacity
-                style={[styles.item, { marginTop: 'auto' }]}
-                onPress={share}
+            <View
+                style={[
+                    styles.itemContainer,
+                    styles.firstItemContainer,
+                    { marginTop: 'auto' },
+                ]}
             >
-                <Text style={styles.text}>Share Flare</Text>
-                <Image
-                    source={shareIcon}
-                    style={styles.icon}
-                    resizeMode="center"
-                />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.item} onPress={support}>
-                <Text style={styles.text}>Support Center</Text>
-                <Image
-                    source={contactIcon}
-                    style={styles.icon}
-                    resizeMode="center"
-                />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.item} onPress={openTerms}>
-                <Text style={styles.text}>Terms and Conditions</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.item} onPress={openPrivacy}>
-                <Text style={styles.text}>Privacy Policy</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-                style={[styles.item, { marginTop: 'auto' }]}
-                onPress={signOut}
+                <TouchableOpacity style={[styles.item]} onPress={share}>
+                    <Text style={styles.text}>Share Flare</Text>
+                    <Image
+                        source={shareIcon}
+                        style={styles.icon}
+                        resizeMode="center"
+                    />
+                </TouchableOpacity>
+            </View>
+            <View style={styles.itemContainer}>
+                <TouchableOpacity style={styles.item} onPress={support}>
+                    <Text style={styles.text}>Support Center</Text>
+                    <Image
+                        source={contactIcon}
+                        style={styles.icon}
+                        resizeMode="center"
+                    />
+                </TouchableOpacity>
+            </View>
+            <View style={styles.itemContainer}>
+                <TouchableOpacity style={styles.item} onPress={openTerms}>
+                    <Text style={styles.text}>Terms and Conditions</Text>
+                </TouchableOpacity>
+            </View>
+            <View style={[styles.itemContainer, styles.lastItemContainer]}>
+                <TouchableOpacity
+                    style={[styles.item, styles.lastItem]}
+                    onPress={openPrivacy}
+                >
+                    <Text style={styles.text}>Privacy Policy</Text>
+                </TouchableOpacity>
+            </View>
+            <View
+                style={[
+                    styles.itemContainer,
+                    styles.firstItemContainer,
+                    styles.lastItemContainer,
+                    { marginTop: 'auto' },
+                ]}
             >
-                <Text style={styles.text}>Log Out</Text>
-            </TouchableOpacity>
+                <TouchableOpacity
+                    style={[styles.item, styles.lastItem]}
+                    onPress={signOut}
+                >
+                    <Text style={styles.text}>Log Out</Text>
+                </TouchableOpacity>
+            </View>
             <Text style={[styles.explain, { marginBottom: 16 }]}>
                 {`Get Flare version ${VersionNumber.appVersion} (build ${VersionNumber.buildVersion})`}
             </Text>
