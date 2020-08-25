@@ -97,7 +97,7 @@ const TextAndCall = ({ componentId }) => {
             <Text style={styles.subhead}>
                 The dispatcher will text and call you within 60 seconds to
                 confirm your safety. If you are able to text or talk, you can
-                communicate directly with the dispatcher – and your Crew – until
+                communicate directly with the dispatcher—and your Crew—until
                 help arrives.
             </Text>
             <View style={styles.content}>

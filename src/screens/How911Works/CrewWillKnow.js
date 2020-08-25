@@ -94,7 +94,7 @@ const CrewWillKnow = ({ componentId }) => {
             <View style={styles.shrink} />
             <View style={styles.line} />
             <Text style={styles.subhead}>
-                If you have a crew, they will be still notified that you are in
+                If you have a Crew, they will be still notified that you are in
                 a situation.
             </Text>
             <View style={styles.content}>
