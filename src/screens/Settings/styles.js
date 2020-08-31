@@ -22,28 +22,39 @@ export const styles = StyleSheet.create({
         marginBottom: 8,
     },
     explain: {
-        fontSize: 12,
-        marginLeft: 24,
+        fontSize: 13,
+        marginHorizontal: 32,
         marginTop: 8,
-        width: 240,
+        lineHeight: 15,
+        color: Colors.black,
         alignSelf: 'flex-start',
     },
-
     itemContainer: {
         flexDirection: 'column',
-        backgroundColor: Colors.white,
-        borderColor,
+        backgroundColor: Colors.backgrounds.gray,
+        paddingLeft: 0,
+    },
+    firstItemContainer: {
         borderTopWidth: 1,
+        borderColor,
+    },
+    lastItemContainer: {
         borderBottomWidth: 1,
+        borderColor,
+    },
+    lastItem: {
+        borderBottomWidth: 0,
     },
     item: {
         flexDirection: 'row',
         height: 48,
         alignItems: 'center',
         justifyContent: 'flex-start',
-        marginLeft: 18,
-        paddingLeft: 6,
+        marginLeft: 16,
+        paddingLeft: 16,
         paddingRight: 24,
+        borderColor,
+        borderBottomWidth: 1,
     },
     itemBorder: {
         borderColor,

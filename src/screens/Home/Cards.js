@@ -12,14 +12,16 @@ import cardPermissions from '../../assets/card-permissions.png';
 import cardShare from '../../assets/card-share.png';
 import cardAddcontacts from '../../assets/card-addcontacts.png';
 import { showShareDialog } from '../ShareDialog';
+import card911 from '../../assets/starry-911.png';
 
 const ITEM_TEMPLATES = [
     {
-        key: 'about911',
-        image: { source: cardPermissions, width: 119, height: 77 },
-        title: '911',
-        body: 'Emergency services',
-        done: ({ about911 }) => about911,
+        key: 'how911works',
+        image: { source: card911, width: 68, height: 90 },
+        title: 'Explore our new \n911 feature',
+        body:
+            'Optionally enable the 911 feature to connect with 911 dispatchers',
+        done: () => {},
     },
     {
         key: 'permissions',
@@ -103,6 +105,19 @@ export const useCards = ({ componentId, selector, dispatch }) => {
             addToContacts(dispatch);
         }, [dispatch]),
         share: showShareDialog,
+        how911works: React.useCallback(() => {
+            Navigation.push(componentId, {
+                component: {
+                    name: 'com.flarejewelry.how911works.main',
+                    options: {
+                        topBar: {
+                            visible: false,
+                            animate: false,
+                        },
+                    },
+                },
+            });
+        }, [componentId]),
     };
 
     return ITEM_TEMPLATES.map(({ done, key, ...rest }) => ({
