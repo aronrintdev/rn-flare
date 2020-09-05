@@ -113,6 +113,7 @@ const mapState = ({
         sawNotifSettings,
         addedToContacts,
         didShare,
+        settings,
     },
 }) => ({
     authToken,
@@ -131,6 +132,7 @@ const mapState = ({
     sawNotifSettings,
     addedToContacts,
     didShare,
+    settings,
 });
 
 const SoftLand = ({ componentId }) => {

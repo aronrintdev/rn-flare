@@ -37,7 +37,6 @@ export function user(state = initialState.user, action = {}) {
                 action.data.crews.length
                     ? action.data.crews[0]
                     : { id: 0, members: [] };
-
             return state.merge({
                 analyticsToken: action.data.analytics_token,
                 authToken: action.data.auth_token,
@@ -519,6 +518,15 @@ export function user(state = initialState.user, action = {}) {
         case types.USER_TEXT_FRIENDS_RESPONSE:
             return state.set('textFriends', action.response);
 
+        case types.USER_SET_911_FEATURE_SUCCESS:
+            return state.setIn(
+                ['settings', 'enabled911Feature'],
+                action.ems_services
+            );
+        case types.USER_SET_911_FEATURE_FAILURE:
+            return state.set('show911FeatureError', true);
+        case types.HIDE_911_FEATURE_FAILURE_ALERT:
+            return state.set('show911FeatureError', false);
         default:
             return state;
     }

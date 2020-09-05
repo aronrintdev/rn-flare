@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import {
     SafeAreaView,
     StatusBar,
@@ -6,7 +6,9 @@ import {
     Text,
     View,
     TouchableOpacity,
+    Alert,
 } from 'react-native';
+import { connect } from 'react-redux';
 import { Navigation } from 'react-native-navigation';
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -14,6 +16,7 @@ import Colors from '../../bits/Colors';
 import WhiteBar from '../Onboarding/WhiteBar';
 import Headline from '../Onboarding/Headline';
 import BlueRoundedBox from '../../bits/BlueRoundedBox';
+import * as userActions from '../../actions/userActions';
 
 import MapSvg from '../../assets/map.svg';
 import StarMarkImg from '../../assets/star-mark.svg';
@@ -100,7 +103,15 @@ const styles = StyleSheet.create({
     },
 });
 
-const GotYourBack = ({ componentId }) => {
+const GotYourBack = ({
+    componentId,
+    enabled911Feature,
+    profile,
+    authToken,
+    set911Features,
+    show911FeatureError,
+    hide911FeaturesErrorAlert,
+}) => {
     const close = React.useCallback(() => {
         Navigation.pop(componentId);
     }, [componentId]);
@@ -110,12 +121,31 @@ const GotYourBack = ({ componentId }) => {
     }, [componentId]);
 
     const enable911 = () => {
-        Navigation.showModal({
-            component: {
-                name: 'com.flarejewelry.how911works.success',
-            },
-        });
+        setTimeout(() => set911Features(authToken, profile.id), 1000);
     };
+
+    useEffect(() => {
+        if (enabled911Feature) {
+            Navigation.showModal({
+                component: {
+                    name: 'com.flarejewelry.how911works.success',
+                },
+            });
+            Navigation.popToRoot(componentId);
+        }
+        if (show911FeatureError) {
+            Alert.alert(
+                `Sorry, we are unable to connect to Flare to toggle your settings. Please try again later, or contact us at ${profile.email} if this issue persists.`
+            );
+            hide911FeaturesErrorAlert();
+        }
+    }, [
+        enabled911Feature,
+        show911FeatureError,
+        componentId,
+        hide911FeaturesErrorAlert,
+        profile,
+    ]);
 
     return (
         <SafeAreaView style={styles.container}>
@@ -157,4 +187,19 @@ const GotYourBack = ({ componentId }) => {
     );
 };
 
-export default GotYourBack;
+const mapStateToProps = state => ({
+    enabled911Feature: state.user.settings.enabled911Feature,
+    profile: state.user.profile,
+    authToken: state.user.authToken,
+    show911FeatureError: state.user.show911FeatureError,
+});
+
+const mapDispatchToProps = {
+    set911Features: userActions.set911Features,
+    hide911FeaturesErrorAlert: userActions.hide911FeaturesErrorAlert,
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(GotYourBack);

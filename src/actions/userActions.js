@@ -403,3 +403,30 @@ export const textFriendsResponse = response => ({
     type: types.USER_TEXT_FRIENDS_RESPONSE,
     response,
 });
+
+export const hide911FeaturesErrorAlert = () => ({
+    type: types.HIDE_911_FEATURE_FAILURE_ALERT,
+});
+
+export function set911Features(token, userId) {
+    return function setEnabled(dispatch) {
+        dispatch({
+            type: types.USER_SET_911_FEATURE_REQUEST,
+        });
+        ProtectedAPICall(token, API_URL, `/config/user/${userId}/toggle_ems`, {
+            method: 'POST',
+        })
+            .then(response => {
+                dispatch({
+                    type: types.USER_SET_911_FEATURE_SUCCESS,
+                    ems_services: response.data.ems_services,
+                });
+            })
+            .catch(error => {
+                dispatch({
+                    type: types.USER_SET_911_FEATURE_FAILURE,
+                    error,
+                });
+            });
+    };
+}

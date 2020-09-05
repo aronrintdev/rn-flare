@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Navigation } from 'react-native-navigation';
 
 import { openContactsScreen } from '../Contacts';
-import { shareFlare } from '../../actions';
 import addToContacts from '../AddToContacts';
 
 import cardCrew from '../../assets/card-crew.png';
@@ -21,7 +20,7 @@ const ITEM_TEMPLATES = [
         title: 'Explore our new \n911 feature',
         body:
             'Optionally enable the 911 feature to connect with 911 dispatchers',
-        done: () => {},
+        done: ({ settings }) => settings.enabled911Feature,
     },
     {
         key: 'permissions',
