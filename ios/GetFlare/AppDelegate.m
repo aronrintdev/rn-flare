@@ -8,11 +8,16 @@
 #import <ReactNativeNavigation/ReactNativeNavigation.h>
 #import <RNCPushNotificationIOS.h>
 #import <BugsnagReactNative/BugsnagReactNative.h>
+#import <Firebase.h>
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  if ([FIRApp defaultApp] == nil) {
+    [FIRApp configure];
+  }
+
   NSURL *jsCodeLocation;
   #ifdef DEBUG
     jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
