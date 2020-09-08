@@ -135,7 +135,7 @@ const GotYourBack = ({
         }
         if (show911FeatureError) {
             Alert.alert(
-                `Sorry, we are unable to connect to Flare to toggle your settings. Please try again later, or contact us at ${profile.email} if this issue persists.`
+                `Sorry, we are unable to connect to Flare to toggle your settings. Please try again later, or contact us at help@getflare.com if this issue persists.`
             );
             hide911FeaturesErrorAlert();
         }
