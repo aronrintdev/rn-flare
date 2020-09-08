@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     shrink: {
-        height: 10,
+        height: 5,
         flexShrink: 1,
     },
     headline: {
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
         marginTop: 16,
         marginBottom: 24,
         position: 'absolute',
-        bottom: 64,
+        bottom: 34,
     },
     blueMsgBox1: {
         backgroundColor: 'rgba(105,120,246, 0.75)',
@@ -55,10 +55,10 @@ const styles = StyleSheet.create({
         marginLeft: '10%',
     },
     blueMsgBox2: {
-        marginVertical: 20,
+        marginVertical: 14,
     },
     content: {
-        width: 325,
+        width: 310,
         position: 'relative',
     },
     emojis: {

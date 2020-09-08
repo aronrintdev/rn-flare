@@ -35,4 +35,5 @@ export default {
     },
     transparent: 'rgba(0, 0, 0, 0.0)',
     white: '#FFFFFF',
+    whiteBorder: '#F8F5F1',
 };

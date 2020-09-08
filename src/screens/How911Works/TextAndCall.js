@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     shrink: {
-        height: 10,
+        height: 5,
         flexShrink: 1,
     },
     headline: {
@@ -40,17 +40,17 @@ const styles = StyleSheet.create({
         lineHeight: 24,
         fontFamily: 'Nocturno Display Std',
         textAlign: 'center',
-        marginBottom: 60,
+        marginBottom: 40,
     },
     button: {
         marginTop: 16,
         marginBottom: 24,
         position: 'absolute',
-        bottom: 64,
+        bottom: 34,
     },
     blueMsgBox2: {
-        marginTop: -30,
-        marginLeft: 30,
+        marginTop: -25,
+        marginLeft: 25,
     },
     noonlightCallingBox: {
         width: 190,

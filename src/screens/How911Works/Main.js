@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     shrink: {
-        height: 10,
+        height: 5,
         flexShrink: 1,
     },
     headline: {
@@ -46,16 +46,16 @@ const styles = StyleSheet.create({
         lineHeight: 24,
         fontFamily: 'Nocturno Display Std',
         textAlign: 'center',
-        marginBottom: 60,
+        marginBottom: 40,
     },
     button: {
         marginTop: 16,
         marginBottom: 24,
         position: 'absolute',
-        bottom: 64,
+        bottom: 34,
     },
     starryImg: {
-        width: 240,
+        width: 220,
         resizeMode: 'contain',
     },
 });

@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: Colors.black,
         marginBottom: 0,
-        marginTop: 160,
+        marginTop: 140,
     },
     subhead: {
         width: 307,
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     },
     notNowButton: {
         position: 'absolute',
-        bottom: 64,
+        bottom: 50,
     },
     notNowButtonText: {
         fontSize: 12,
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     },
     enableBtnContainer: {
         position: 'absolute',
-        bottom: 110,
+        bottom: 90,
     },
     closeBtnStyle: {
         alignSelf: 'flex-end',
@@ -87,7 +87,12 @@ const Success = ({ componentId }) => {
     }, [componentId]);
 
     const onTry = () => {
-        // Give it a Try
+        Navigation.showModal({
+            component: {
+                name: 'com.flarejewelry.how911works.readytotestit',
+            },
+        });
+        Navigation.dismissModal(componentId);
     };
 
     return (

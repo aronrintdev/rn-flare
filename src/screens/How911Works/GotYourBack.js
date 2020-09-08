@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     shrink: {
-        height: 10,
+        height: 5,
         flexShrink: 1,
     },
     headline: {
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(105,120,246, 0.75)',
     },
     content: {
-        width: 325,
+        width: 310,
         position: 'relative',
         justifyContent: 'center',
     },
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     },
     notNowButton: {
         position: 'absolute',
-        bottom: 64,
+        bottom: 44,
     },
     notNowButtonText: {
         fontSize: 12,
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     },
     enableBtnContainer: {
         position: 'absolute',
-        bottom: 110,
+        bottom: 90,
     },
 });
 
