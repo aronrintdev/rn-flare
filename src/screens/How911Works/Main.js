@@ -6,6 +6,7 @@ import {
     StyleSheet,
     Text,
     View,
+    Dimensions,
 } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 
@@ -15,6 +16,8 @@ import Headline from '../Onboarding/Headline';
 import RoundedButton from '../../bits/RoundedButton';
 
 import StarryLocationImg from '../../assets/starry-location.png';
+
+const SPACE_HEIGHT = Dimensions.get('window').height - 322;
 
 const styles = StyleSheet.create({
     container: {
@@ -46,16 +49,16 @@ const styles = StyleSheet.create({
         lineHeight: 24,
         fontFamily: 'Nocturno Display Std',
         textAlign: 'center',
-        marginBottom: 40,
+        marginBottom: (SPACE_HEIGHT * 40) / 480,
     },
     button: {
-        marginTop: 16,
-        marginBottom: 24,
         position: 'absolute',
-        bottom: 34,
+        bottom: (SPACE_HEIGHT * 64) / 480,
+        height: (SPACE_HEIGHT * 48) / 480,
     },
     starryImg: {
-        width: 220,
+        width: 200,
+        maxHeight: (SPACE_HEIGHT * 270) / 480,
         resizeMode: 'contain',
     },
 });
@@ -91,7 +94,12 @@ const How911Works = ({ componentId }) => {
             <Text style={styles.subhead}>
                 {`Flare will send your GPS location to 911 and your Crew—even if you don’t know where you are or can’t speak.\nThe dispatcher will be able to view your live location on their screen.`}
             </Text>
-            <Image style={styles.starryImg} source={StarryLocationImg} />
+            <Image
+                style={styles.starryImg}
+                source={StarryLocationImg}
+                accessible
+                accessibilityLabel="Starry Phone"
+            />
             <RoundedButton
                 onPress={moveNext}
                 wrapperStyle={styles.button}

@@ -7,6 +7,7 @@ import {
     View,
     TouchableOpacity,
     Alert,
+    Dimensions,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Navigation } from 'react-native-navigation';
@@ -20,6 +21,8 @@ import * as userActions from '../../actions/userActions';
 
 import MapSvg from '../../assets/map.svg';
 import StarMarkImg from '../../assets/star-mark.svg';
+
+const SPACE_HEIGHT = Dimensions.get('window').height - 322;
 
 const styles = StyleSheet.create({
     container: {
@@ -51,14 +54,14 @@ const styles = StyleSheet.create({
         lineHeight: 24,
         fontFamily: 'Nocturno Display Std',
         textAlign: 'center',
-        marginBottom: 20,
+        marginBottom: (SPACE_HEIGHT * 20) / 480,
     },
     blueMsgBox1: {
         marginVertical: 7,
         backgroundColor: 'rgba(105,120,246, 0.75)',
     },
     content: {
-        width: 310,
+        width: 307,
         position: 'relative',
         justifyContent: 'center',
     },
@@ -70,14 +73,14 @@ const styles = StyleSheet.create({
     },
     starMarkImg: {
         marginTop: -30,
-        height: 195,
-        width: 178,
+        height: (SPACE_HEIGHT * 213) / 480,
+        width: (SPACE_HEIGHT * 200) / 480,
         resizeMode: 'contain',
         alignSelf: 'center',
     },
     notNowButton: {
         position: 'absolute',
-        bottom: 44,
+        bottom: (SPACE_HEIGHT * 44) / 480,
     },
     notNowButtonText: {
         fontSize: 12,
@@ -89,17 +92,17 @@ const styles = StyleSheet.create({
         fontSize: 14,
         lineHeight: 15,
         fontWeight: '700',
-        padding: 16,
         alignSelf: 'center',
     },
     enableBtnView: {
         borderRadius: 33,
         width: 240,
+        justifyContent: 'center',
         height: 48,
     },
     enableBtnContainer: {
         position: 'absolute',
-        bottom: 90,
+        bottom: (SPACE_HEIGHT * 90) / 480,
     },
 });
 
@@ -162,9 +165,17 @@ const GotYourBack = ({
             </Text>
             <View style={styles.content}>
                 <BlueRoundedBox>
-                    <MapSvg height={110} />
+                    <MapSvg
+                        height={100}
+                        accessible
+                        accessibilityLabel="Map View"
+                    />
                 </BlueRoundedBox>
-                <StarMarkImg style={styles.starMarkImg} />
+                <StarMarkImg
+                    style={styles.starMarkImg}
+                    accessible
+                    accessibilityLabel="Star Mark"
+                />
             </View>
             <TouchableOpacity
                 onPress={enable911}

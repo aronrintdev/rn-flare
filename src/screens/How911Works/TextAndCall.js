@@ -1,14 +1,23 @@
 import * as React from 'react';
-import { SafeAreaView, StatusBar, StyleSheet, Text, View } from 'react-native';
+import {
+    SafeAreaView,
+    StatusBar,
+    StyleSheet,
+    Text,
+    View,
+    Image,
+    Dimensions,
+} from 'react-native';
 import { Navigation } from 'react-native-navigation';
 
 import Colors from '../../bits/Colors';
 import WhiteBar from '../Onboarding/WhiteBar';
 import Headline from '../Onboarding/Headline';
 import RoundedButton from '../../bits/RoundedButton';
-import BlueMsgBox from '../../bits/BlueMsgBox';
 
-import NoonglightSvg from '../../assets/noonlight-calling.svg';
+import TextAndCallPng from '../../assets/text-and-call.png';
+
+const SPACE_HEIGHT = Dimensions.get('window').height - 322;
 
 const styles = StyleSheet.create({
     container: {
@@ -40,25 +49,21 @@ const styles = StyleSheet.create({
         lineHeight: 24,
         fontFamily: 'Nocturno Display Std',
         textAlign: 'center',
-        marginBottom: 40,
+        marginBottom: (SPACE_HEIGHT * 40) / 480,
     },
     button: {
-        marginTop: 16,
-        marginBottom: 24,
         position: 'absolute',
-        bottom: 34,
+        height: (SPACE_HEIGHT * 48) / 480,
+        bottom: (SPACE_HEIGHT * 64) / 480,
     },
     blueMsgBox2: {
         marginTop: -25,
         marginLeft: 25,
     },
     noonlightCallingBox: {
-        width: 190,
-        marginLeft: 100,
-        marginVertical: 15,
-        position: 'relative',
-        zIndex: 10,
-        borderRadius: 20,
+        width: 310,
+        height: (SPACE_HEIGHT * 300) / 480,
+        resizeMode: 'contain',
     },
     content: {
         width: 307,
@@ -100,18 +105,12 @@ const TextAndCall = ({ componentId }) => {
                 communicate directly with the dispatcher—and your Crew—until
                 help arrives.
             </Text>
-            <View style={styles.content}>
-                <BlueMsgBox>
-                    Hi, this is Nikki from Noonlight. We received an alarm from
-                    your Flare device. What is your emergency?
-                </BlueMsgBox>
-                <View style={styles.noonlightCallingBox}>
-                    <NoonglightSvg width="100%" />
-                </View>
-                <BlueMsgBox containerStyles={styles.blueMsgBox2}>
-                    I'm calling you now.
-                </BlueMsgBox>
-            </View>
+            <Image
+                source={TextAndCallPng}
+                style={styles.noonlightCallingBox}
+                accessible
+                accessibilityLabel="Text and Call Messaging"
+            />
             <RoundedButton
                 onPress={moveNext}
                 wrapperStyle={styles.button}

@@ -1,5 +1,12 @@
 import * as React from 'react';
-import { SafeAreaView, StatusBar, StyleSheet, Text, View } from 'react-native';
+import {
+    SafeAreaView,
+    StatusBar,
+    StyleSheet,
+    Text,
+    View,
+    Dimensions,
+} from 'react-native';
 import { Navigation } from 'react-native-navigation';
 
 import Colors from '../../bits/Colors';
@@ -9,6 +16,8 @@ import RoundedButton from '../../bits/RoundedButton';
 import BlueMsgBox from '../../bits/BlueMsgBox';
 
 import EmojisSvg from '../../assets/emojis.svg';
+
+const SPACE_HEIGHT = Dimensions.get('window').height - 322;
 
 const styles = StyleSheet.create({
     container: {
@@ -40,13 +49,12 @@ const styles = StyleSheet.create({
         lineHeight: 24,
         fontFamily: 'Nocturno Display Std',
         textAlign: 'center',
-        marginBottom: 60,
+        marginBottom: (SPACE_HEIGHT * 60) / 480,
     },
     button: {
-        marginTop: 16,
-        marginBottom: 24,
         position: 'absolute',
-        bottom: 34,
+        bottom: (SPACE_HEIGHT * 64) / 480,
+        height: (SPACE_HEIGHT * 48) / 480,
     },
     blueMsgBox1: {
         backgroundColor: 'rgba(105,120,246, 0.75)',

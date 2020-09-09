@@ -5,6 +5,7 @@ import {
     StyleSheet,
     Text,
     TouchableOpacity,
+    Dimensions,
 } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 
@@ -13,6 +14,8 @@ import CloseButton from '../CloseButton';
 import Headline from '../Onboarding/Headline';
 
 import TwoHandsImg from '../../assets/two-hands.svg';
+
+const SPACE_HEIGHT = Dimensions.get('window').height - 322;
 
 const styles = StyleSheet.create({
     container: {
@@ -26,7 +29,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: Colors.black,
         marginBottom: 0,
-        marginTop: 140,
+        marginTop: (SPACE_HEIGHT * 140) / 480,
     },
     subhead: {
         width: 307,
@@ -35,17 +38,17 @@ const styles = StyleSheet.create({
         lineHeight: 24,
         fontFamily: 'Nocturno Display Std',
         textAlign: 'center',
-        marginBottom: 20,
+        marginBottom: (SPACE_HEIGHT * 20) / 480,
     },
     twoHandImg: {
         height: 135,
         width: 182,
-        marginVertical: 40,
+        marginVertical: (SPACE_HEIGHT * 40) / 480,
         alignSelf: 'center',
     },
     notNowButton: {
         position: 'absolute',
-        bottom: 50,
+        bottom: (SPACE_HEIGHT * 44) / 480,
     },
     notNowButtonText: {
         fontSize: 12,
@@ -68,7 +71,7 @@ const styles = StyleSheet.create({
     },
     enableBtnContainer: {
         position: 'absolute',
-        bottom: 90,
+        bottom: (SPACE_HEIGHT * 90) / 480,
     },
     closeBtnStyle: {
         alignSelf: 'flex-end',

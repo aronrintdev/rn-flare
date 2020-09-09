@@ -6,6 +6,7 @@ import {
     Text,
     View,
     Image,
+    Dimensions,
 } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 
@@ -16,6 +17,8 @@ import Headline from '../Onboarding/Headline';
 
 import AuraBg from '../../assets/aura-1519.jpg';
 import WatchPng from '../../assets/watch.png';
+
+const SPACE_HEIGHT = Dimensions.get('window').height - 322;
 
 const styles = StyleSheet.create({
     container: {
@@ -31,7 +34,7 @@ const styles = StyleSheet.create({
         textTransform: 'capitalize',
         marginBottom: 0,
         width: 310,
-        marginTop: 20,
+        marginTop: (SPACE_HEIGHT * 20) / 480,
     },
     shrink: {
         height: 5,
@@ -50,7 +53,7 @@ const styles = StyleSheet.create({
         lineHeight: 28,
         fontFamily: 'Nocturno Display Std',
         textAlign: 'center',
-        marginBottom: 20,
+        marginBottom: (SPACE_HEIGHT * 20) / 480,
     },
     closeBtnStyle: {
         alignSelf: 'flex-end',
@@ -58,7 +61,7 @@ const styles = StyleSheet.create({
         height: 52,
     },
     watchImg: {
-        marginTop: 30,
+        marginTop: (SPACE_HEIGHT * 30) / 480,
         width: 240,
         height: 210,
         resizeMode: 'contain',
@@ -76,9 +79,9 @@ const ReadyToTestIt = ({ componentId }) => {
             <StatusBar barStyle="dark-content" />
             <Aura source={AuraBg} />
             <CloseButton white onPress={close} style={styles.closeBtnStyle} />
-            <Headline
-                style={styles.headline}
-            >{`Ready to Test it?\nBe sure to follow up!`}</Headline>
+            <Headline style={styles.headline}>
+                {`Ready to Test it?\nBe sure to follow up!`}
+            </Headline>
             <View style={styles.shrink} />
             <View style={styles.line} />
             <Text style={styles.subhead}>
@@ -87,7 +90,12 @@ const ReadyToTestIt = ({ componentId }) => {
                 and call you. Be sure to indicate that you are safe and that you
                 are testing your Flare bracelet.
             </Text>
-            <Image source={WatchPng} style={styles.watchImg} />
+            <Image
+                source={WatchPng}
+                style={styles.watchImg}
+                accessible
+                accessibilityLabel="Watch Image"
+            />
         </SafeAreaView>
     );
 };
