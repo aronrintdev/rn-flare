@@ -3,27 +3,27 @@ import { StyleSheet, Text, View } from 'react-native';
 
 const styles = StyleSheet.create({
     blueBoxText: {
-        fontSize: 14,
+        fontSize: 13,
         lineHeight: 16,
         color: '#fff',
         letterSpacing: 0,
-        paddingLeft: 24,
-        paddingRight: 20,
-        paddingVertical: 20,
+        paddingLeft: 22,
+        paddingRight: 18,
+        paddingVertical: 16,
     },
     blueMsgBox: {
-        borderTopRightRadius: 20,
-        borderTopLeftRadius: 20,
+        borderTopRightRadius: 18,
+        borderTopLeftRadius: 18,
         backgroundColor: '#6978f6',
         alignSelf: 'flex-start',
     },
     blueMsgLeftBox: {
-        borderBottomRightRadius: 20,
+        borderBottomRightRadius: 18,
         borderBottomLeftRadius: 0,
     },
     blueMsgRightBox: {
         borderBottomRightRadius: 0,
-        borderBottomLeftRadius: 20,
+        borderBottomLeftRadius: 18,
     },
 });
 

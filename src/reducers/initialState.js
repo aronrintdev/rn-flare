@@ -11,6 +11,7 @@ export const initialState = Immutable({
         callScripts: null,
         sawCallScripts: false,
         sawNotifSettings: false,
+        show911FeatureError: false,
         didShare: false,
         fetchingCallScripts: false,
         contacts: [],
@@ -34,6 +35,7 @@ export const initialState = Immutable({
             promptMessage: Strings.settings.notifications.defaultMessage,
             enableNotifications: true,
             analyticsEnabled: true,
+            enabled911Feature: false,
         },
         reg: {
             name: null,

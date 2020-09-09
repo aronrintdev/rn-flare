@@ -1,15 +1,23 @@
 import * as React from 'react';
-import { SafeAreaView, StatusBar, StyleSheet, Text, View } from 'react-native';
+import {
+    SafeAreaView,
+    StatusBar,
+    StyleSheet,
+    Text,
+    View,
+    Dimensions,
+    Image,
+} from 'react-native';
 import { Navigation } from 'react-native-navigation';
 
 import Colors from '../../bits/Colors';
 import WhiteBar from '../Onboarding/WhiteBar';
 import Headline from '../Onboarding/Headline';
 import RoundedButton from '../../bits/RoundedButton';
-import BlueMsgBox from '../../bits/BlueMsgBox';
-import BlueRoundedBox from '../../bits/BlueRoundedBox';
 
-import MapSvg from '../../assets/map.svg';
+import CrewWillKnowPng from '../../assets/crew-will-know.png';
+
+const SPACE_HEIGHT = Dimensions.get('window').height - 322;
 
 const styles = StyleSheet.create({
     container: {
@@ -19,7 +27,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     shrink: {
-        height: 10,
+        height: 5,
         flexShrink: 1,
     },
     headline: {
@@ -41,21 +49,17 @@ const styles = StyleSheet.create({
         lineHeight: 24,
         fontFamily: 'Nocturno Display Std',
         textAlign: 'center',
-        marginBottom: 20,
+        marginBottom: (SPACE_HEIGHT * 20) / 480,
     },
     button: {
-        marginTop: 16,
-        marginBottom: 24,
         position: 'absolute',
-        bottom: 64,
+        bottom: (SPACE_HEIGHT * 64) / 480,
+        height: (SPACE_HEIGHT * 48) / 480,
     },
-    blueMsgBox1: {
-        marginVertical: 7,
-        backgroundColor: 'rgba(105,120,246, 0.75)',
-    },
-    content: {
-        width: 325,
-        position: 'relative',
+    mapboxImg: {
+        width: 310,
+        maxHeight: (SPACE_HEIGHT * 460) / 480,
+        resizeMode: 'contain',
     },
     messengerName: {
         fontSize: 14,
@@ -97,23 +101,12 @@ const CrewWillKnow = ({ componentId }) => {
                 If you have a Crew, they will be still notified that you are in
                 a situation.
             </Text>
-            <View style={styles.content}>
-                <Text style={styles.messengerName}>Flare</Text>
-                <BlueMsgBox containerStyles={styles.blueMsgBox1}>
-                    Sara is in an iffy situation. Please check-in.
-                </BlueMsgBox>
-                <BlueMsgBox containerStyles={styles.blueMsgBox1}>
-                    She has also reached out to 911. Flare has shared her
-                    location with emergency first responders.
-                </BlueMsgBox>
-                <BlueRoundedBox>
-                    <MapSvg height={110} />
-                </BlueRoundedBox>
-                <Text style={styles.messengerName}>Jamie</Text>
-                <BlueMsgBox containerStyles={styles.blueMsgBox1}>
-                    Are any of you with her? Calling her now.
-                </BlueMsgBox>
-            </View>
+            <Image
+                source={CrewWillKnowPng}
+                style={styles.mapboxImg}
+                accessible
+                accessibilityLabel="Crew Will Know Messaging"
+            />
             <RoundedButton
                 onPress={moveNext}
                 wrapperStyle={styles.button}

@@ -4,3 +4,4 @@ export { default as How911WorksTalkToDispatchers } from './TalkToDispatchers';
 export { default as How911WorksCrewWillKnow } from './CrewWillKnow';
 export { default as How911WorksGotYourBack } from './GotYourBack';
 export { default as How911WorksSuccess } from './Success';
+export { default as How911WorksReadyToTestIt } from './ReadyToTestIt';

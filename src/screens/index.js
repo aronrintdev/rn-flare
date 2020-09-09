@@ -28,6 +28,7 @@ import {
     How911WorksCrewWillKnow,
     How911WorksGotYourBack,
     How911WorksSuccess,
+    How911WorksReadyToTestIt,
 } from './How911Works';
 
 export default (store, Provider) => {
@@ -191,6 +192,10 @@ export default (store, Provider) => {
         () => How911WorksSuccess,
         Provider,
         store
+    );
+    Navigation.registerComponentWithRedux(
+        'com.flarejewelry.how911works.readytotestit',
+        () => How911WorksReadyToTestIt
     );
     if (MANUFACTURING_MODE_ENABLED) {
         Navigation.registerComponentWithRedux(

@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-one-expression-per-line */
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import {
     Image,
     SafeAreaView,
@@ -8,6 +8,7 @@ import {
     TouchableOpacity,
     View,
     Switch,
+    Alert,
 } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 import { connect } from 'react-redux';
@@ -23,12 +24,17 @@ const Home = ({
     componentId,
     enableNotifications,
     notifPermission,
+    enabled911Feature,
+    authToken,
+    profile,
+    set911Features,
     setNotificationsEnabled,
     getNotificationPermission,
+    show911FeatureError,
+    hide911FeaturesErrorAlert,
 }) => {
     useSlideMenu(componentId);
 
-    const [feature911Enabled, setFeature911Enabled] = React.useState(false);
     const [crewEnabled, setCrewEnabled] = React.useState(false);
     const fullyEnabled = enableNotifications && notifPermission;
 
@@ -63,6 +69,19 @@ const Home = ({
         [notifPermission, getNotificationPermission, setNotificationsEnabled]
     );
 
+    useEffect(() => {
+        if (show911FeatureError) {
+            Alert.alert(
+                `Sorry, we are unable to connect to Flare to toggle your settings. Please try again later, or contact us at help@getflare.com if this issue persists.`
+            );
+            hide911FeaturesErrorAlert();
+        }
+    }, [show911FeatureError, hide911FeaturesErrorAlert, profile]);
+
+    const setEnable911Feature = () => {
+        set911Features(authToken, profile.id);
+    };
+
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar barStyle="dark-content" />
@@ -94,8 +113,8 @@ const Home = ({
                     <Text style={styles.text}>Enable 911 Services</Text>
                     <Switch
                         trackColor={{ true: Colors.theme.purple }}
-                        value={feature911Enabled}
-                        onValueChange={setFeature911Enabled}
+                        value={enabled911Feature}
+                        onValueChange={setEnable911Feature}
                     />
                 </View>
             </View>
@@ -166,17 +185,23 @@ Home.options = navOptions('Settings', false);
 
 const mapStateToProps = ({
     user: {
-        settings: { enableNotifications },
+        settings: { enableNotifications, enabled911Feature },
         permissions: { notification: notifPermission },
+        authToken,
+        profile,
     },
 }) => ({
     enableNotifications,
     notifPermission,
+    enabled911Feature,
+    authToken,
+    profile,
 });
 
 const mapDispatchToProps = {
     setNotificationsEnabled: userActions.setNotificationsEnabled,
     getNotificationPermission: userActions.getNotificationPermission,
+    set911Features: userActions.set911Features,
 };
 
 export default connect(
