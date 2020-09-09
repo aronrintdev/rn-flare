@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     },
     starryImg: {
         width: 200,
-        maxHeight: (SPACE_HEIGHT * 270) / 480,
+        maxHeight: (SPACE_HEIGHT * 290) / 480,
         resizeMode: 'contain',
     },
 });

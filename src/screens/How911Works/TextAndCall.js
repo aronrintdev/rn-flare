@@ -5,7 +5,6 @@ import {
     StyleSheet,
     Text,
     View,
-    Image,
     Dimensions,
 } from 'react-native';
 import { Navigation } from 'react-native-navigation';
@@ -15,7 +14,7 @@ import WhiteBar from '../Onboarding/WhiteBar';
 import Headline from '../Onboarding/Headline';
 import RoundedButton from '../../bits/RoundedButton';
 
-import TextAndCallPng from '../../assets/text-and-call.png';
+import TextAndCallSvg from '../../assets/text-and-call-bg.svg';
 
 const SPACE_HEIGHT = Dimensions.get('window').height - 322;
 
@@ -61,9 +60,8 @@ const styles = StyleSheet.create({
         marginLeft: 25,
     },
     noonlightCallingBox: {
-        width: 310,
-        height: (SPACE_HEIGHT * 300) / 480,
-        resizeMode: 'contain',
+        width: 318,
+        height: (SPACE_HEIGHT * 320) / 480,
     },
     content: {
         width: 307,
@@ -105,8 +103,7 @@ const TextAndCall = ({ componentId }) => {
                 communicate directly with the dispatcher—and your Crew—until
                 help arrives.
             </Text>
-            <Image
-                source={TextAndCallPng}
+            <TextAndCallSvg
                 style={styles.noonlightCallingBox}
                 accessible
                 accessibilityLabel="Text and Call Messaging"
