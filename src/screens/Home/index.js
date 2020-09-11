@@ -4,6 +4,7 @@ import React from 'react';
 import { AppState } from 'react-native';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import messaging from '@react-native-firebase/messaging';
 
 import { connect } from 'react-redux';
 import { Navigation } from 'react-native-navigation';
@@ -59,7 +60,6 @@ class Home extends React.Component {
         if (hasActiveFlare) {
             dispatch(changeAppRoot('secure-active-event'));
         }
-
         // Contacts are not stored on the server. It takes a while to fetch them locally, so we
         // start that process now before users need to view them.
         if (permissions.contacts) {
@@ -104,6 +104,7 @@ class Home extends React.Component {
         /**
          * Handle transitions in flare state: reset intervals for fetching data
          */
+        this.requestUserPermission();
         if (hasActiveFlare !== prevProps.hasActiveFlare) {
             this.setSyncTiming();
             BackgroundTimer.stop();
@@ -136,6 +137,7 @@ class Home extends React.Component {
 
     componentWillUnmount() {
         this.shuttingDown = true;
+        this.unsubscribe = null;
         BackgroundTimer.stopBackgroundTimer();
         AppState.removeEventListener('change', this.handleAppStateChange);
         RNBluetoothInfo.removeEventListener(
@@ -162,6 +164,27 @@ class Home extends React.Component {
                     }
                 });
             });
+        }
+    };
+
+    requestUserPermission = async () => {
+        const authStatus = await messaging().requestPermission();
+        const enabled =
+            authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+            authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+
+        if (enabled) {
+            this.getFcmToken();
+            console.log('Authorization status:', authStatus);
+        }
+    };
+
+    getFcmToken = async () => {
+        const fcmToken = await messaging().getToken();
+        if (fcmToken) {
+            console.log('Your Firebase Token is:', fcmToken);
+        } else {
+            console.log('Failed', 'No token received');
         }
     };
 
