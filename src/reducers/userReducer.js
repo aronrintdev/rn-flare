@@ -527,6 +527,12 @@ export function user(state = initialState.user, action = {}) {
             return state.set('show911FeatureError', true);
         case types.HIDE_911_FEATURE_FAILURE_ALERT:
             return state.set('show911FeatureError', false);
+
+        case types.USER_SET_CREW_ENABLED:
+            return state.setIn(
+                ['settings', 'crewEnabled'],
+                !state.settings.crewEnabled
+            );
         default:
             return state;
     }

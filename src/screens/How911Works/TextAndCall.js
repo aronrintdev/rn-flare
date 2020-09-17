@@ -13,6 +13,7 @@ import Colors from '../../bits/Colors';
 import WhiteBar from '../Onboarding/WhiteBar';
 import Headline from '../Onboarding/Headline';
 import RoundedButton from '../../bits/RoundedButton';
+import Strings from '../../locales/en';
 
 import TextAndCallSvg from '../../assets/text-and-call-bg.svg';
 
@@ -93,15 +94,12 @@ const TextAndCall = ({ componentId }) => {
             <StatusBar barStyle="dark-content" />
             <WhiteBar showBack showLogo={false} black goBack={close} />
             <Headline style={styles.headline}>
-                {`A Text, And\n A Call`}
+                {Strings.feature911.textAndCall.title}
             </Headline>
             <View style={styles.shrink} />
             <View style={styles.line} />
             <Text style={styles.subhead}>
-                The dispatcher will text and call you within 60 seconds to
-                confirm your safety. If you are able to text or talk, you can
-                communicate directly with the dispatcher—and your Crew—until
-                help arrives.
+                {Strings.feature911.textAndCall.subtext}
             </Text>
             <TextAndCallSvg
                 style={styles.noonlightCallingBox}

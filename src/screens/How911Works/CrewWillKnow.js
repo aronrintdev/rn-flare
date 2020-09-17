@@ -13,6 +13,7 @@ import Colors from '../../bits/Colors';
 import WhiteBar from '../Onboarding/WhiteBar';
 import Headline from '../Onboarding/Headline';
 import RoundedButton from '../../bits/RoundedButton';
+import Strings from '../../locales/en';
 
 import CrewWillKnowSvg from '../../assets/crew-will-know.svg';
 
@@ -91,13 +92,12 @@ const CrewWillKnow = ({ componentId }) => {
             <StatusBar barStyle="dark-content" />
             <WhiteBar showBack showLogo={false} black goBack={close} />
             <Headline style={styles.headline}>
-                {`Your Crew Will\n Know, Too`}
+                {Strings.feature911.crewWillKnow.title}
             </Headline>
             <View style={styles.shrink} />
             <View style={styles.line} />
             <Text style={styles.subhead}>
-                If you have a Crew, they will be still notified that you are in
-                a situation.
+                {Strings.feature911.crewWillKnow.subtext}
             </Text>
             <CrewWillKnowSvg
                 style={styles.mapboxImg}

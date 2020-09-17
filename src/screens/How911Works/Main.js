@@ -14,6 +14,7 @@ import Colors from '../../bits/Colors';
 import WhiteBar from '../Onboarding/WhiteBar';
 import Headline from '../Onboarding/Headline';
 import RoundedButton from '../../bits/RoundedButton';
+import Strings from '../../locales/en';
 
 import StarryLocationImg from '../../assets/starry-location.png';
 
@@ -87,12 +88,12 @@ const How911Works = ({ componentId }) => {
             <StatusBar barStyle="dark-content" />
             <WhiteBar showBack showLogo={false} black goBack={close} />
             <Headline style={styles.headline}>
-                How Flare Works With 911
+                {Strings.feature911.main.title}
             </Headline>
             <View style={styles.shrink} />
             <View style={styles.line} />
             <Text style={styles.subhead}>
-                {`Flare will send your GPS location to 911 and your Crew—even if you don’t know where you are or can’t speak.\nThe dispatcher will be able to view your live location on their screen.`}
+                {Strings.feature911.main.subtext}
             </Text>
             <Image
                 style={styles.starryImg}
