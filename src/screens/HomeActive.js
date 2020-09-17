@@ -106,23 +106,30 @@ class HomeActive extends React.Component {
         // It's possible for users to cancel their flares using other devices. If we
         // show up on this screen and the user no longer has an active flare, go back to
         // inactive home screen.
-        if (!this.props.hasActiveFlare) {
-            this.props.dispatch(changeAppRoot('secure'));
+        const {
+            hasActiveFlare,
+            permissions,
+            hardware,
+            dispatch,
+            analyticsToken,
+        } = this.props;
+        if (!hasActiveFlare) {
+            dispatch(changeAppRoot('secure'));
         }
 
-        if (!this.props.permissions.location) {
-            this.props.dispatch(getPermission(PERMISSIONS.IOS.LOCATION_ALWAYS));
+        if (!permissions.location) {
+            dispatch(getPermission(PERMISSIONS.IOS.LOCATION_ALWAYS));
         }
 
-        if (!this.props.hardware || !this.props.hardware.bleListening) {
-            this.props.dispatch(startBleListening());
+        if (!hardware || !hardware.bleListening) {
+            dispatch(startBleListening());
         }
 
         // Users may have modified their accounts on other devices or on the web. Keep this device
         // in sync by fetching server-stored data.
-        this.props.dispatch(
+        dispatch(
             syncAccountDetails({
-                analyticsToken: this.props.analyticsToken,
+                analyticsToken,
             })
         );
 
@@ -167,7 +174,8 @@ class HomeActive extends React.Component {
      * timing. All times are set in the environment configuration.
      */
     setSyncTiming() {
-        if (this.props.hasActiveFlare) {
+        const { hasActiveFlare } = this.props;
+        if (hasActiveFlare) {
             this.accountSyncTimeInMs = ACCOUNT_SYNC_INTERVAL_FLARE;
         } else if (CONFIG_DEV) {
             this.accountSyncTimeInMs = ACCOUNT_SYNC_INTERVAL_DEV;
@@ -176,22 +184,75 @@ class HomeActive extends React.Component {
         }
     }
 
-    toggleSideMenu() {
-        const { showSideMenu } = this.state;
-        const newSideMenuState = !showSideMenu;
+    cancelFlare = () => {
+        const { dispatch, authToken } = this.props;
+        dispatch(cancelActiveFlare(authToken));
+    };
 
-        Navigation.mergeOptions(this.props.componentId, {
-            sideMenu: {
-                left: {
-                    visible: newSideMenuState,
-                },
+    goToPushedView = () => {
+        const { componentId } = this.props;
+        Navigation.push(componentId, {
+            component: {
+                name: 'com.flarejewelry.app.HomeActive',
             },
         });
+    };
 
-        this.setState({
-            showSideMenu: newSideMenuState,
+    /**
+     * Submit user location and fetch any account updates.
+     */
+    syncAccount = () => {
+        const {
+            dispatch,
+            analyticsToken,
+            permissions,
+            hardware,
+            problemBeacons,
+            handleBeacon,
+            authToken,
+        } = this.props;
+        // Don't kick off a new async request if we're shutting down. This prevents an infinite loop of syncing
+        // status -> auth fail -> sign out.
+        if (this.shuttingDown) {
+            return;
+        }
+
+        // Transmit the current state and retrieve any updates from the server.
+        getCurrentPosition({
+            enableHighAccuracy: true,
+            timeout: ACCOUNT_SYNC_INTERVAL,
+        }).then(position => {
+            dispatch(
+                syncAccountDetails({
+                    analyticsToken,
+                    status: {
+                        timestamp: moment()
+                            .utc()
+                            .format('YYYY-MM-DD HH:mm:ss'),
+                        latitude: position.latitude,
+                        longitude: position.longitude,
+                        details: {
+                            permissions,
+                            hardware,
+                            position,
+                        },
+                    },
+                })
+            );
         });
-    }
+
+        // Process any beacon events that we tried (and failed) to submit earlier.
+        if (problemBeacons && problemBeacons.length > 0) {
+            dispatch(
+                processQueuedBeacons(handleBeacon, authToken, problemBeacons)
+            );
+        }
+    };
+
+    refreshTimeline = () => {
+        const { dispatch, authToken } = this.props;
+        dispatch(getCrewEventTimeline(authToken));
+    };
 
     navigationButtonPressed({ buttonId }) {
         switch (buttonId) {
@@ -204,67 +265,23 @@ class HomeActive extends React.Component {
         }
     }
 
-    goToPushedView = () => {
-        Navigation.push(this.props.componentId, {
-            component: {
-                name: 'com.flarejewelry.app.HomeActive',
+    toggleSideMenu() {
+        const { showSideMenu } = this.state;
+        const { componentId } = this.props;
+        const newSideMenuState = !showSideMenu;
+
+        Navigation.mergeOptions(componentId, {
+            sideMenu: {
+                left: {
+                    visible: newSideMenuState,
+                },
             },
         });
-    };
 
-    /**
-     * Submit user location and fetch any account updates.
-     */
-    syncAccount = () => {
-        // Don't kick off a new async request if we're shutting down. This prevents an infinite loop of syncing
-        // status -> auth fail -> sign out.
-        if (this.shuttingDown) {
-            return;
-        }
-
-        // Transmit the current state and retrieve any updates from the server.
-        getCurrentPosition({
-            enableHighAccuracy: true,
-            timeout: ACCOUNT_SYNC_INTERVAL,
-        }).then(position => {
-            this.props.dispatch(
-                syncAccountDetails({
-                    analyticsToken: this.props.analyticsToken,
-                    status: {
-                        timestamp: moment()
-                            .utc()
-                            .format('YYYY-MM-DD HH:mm:ss'),
-                        latitude: position.latitude,
-                        longitude: position.longitude,
-                        details: {
-                            permissions: this.props.permissions,
-                            hardware: this.props.hardware,
-                            position,
-                        },
-                    },
-                })
-            );
+        this.setState({
+            showSideMenu: newSideMenuState,
         });
-
-        // Process any beacon events that we tried (and failed) to submit earlier.
-        if (this.props.problemBeacons && this.props.problemBeacons.length > 0) {
-            this.props.dispatch(
-                processQueuedBeacons(
-                    this.props.handleBeacon,
-                    this.props.authToken,
-                    this.props.problemBeacons
-                )
-            );
-        }
-    };
-
-    refreshTimeline = () => {
-        this.props.dispatch(getCrewEventTimeline(this.props.authToken));
-    };
-
-    cancelFlare = () => {
-        this.props.dispatch(cancelActiveFlare(this.props.authToken));
-    };
+    }
 
     startTimelineRefreshInterval() {
         if (this.eventTimelineRefreshTimer !== null) {
@@ -281,17 +298,29 @@ class HomeActive extends React.Component {
     }
 
     render() {
+        const {
+            crewEventTimeline,
+            enabled911Feature,
+            crewEnabled,
+        } = this.props;
+        let headerText;
+        if (crewEnabled && enabled911Feature) {
+            headerText = Strings.crewEventTimeline.title.crewAndEms;
+        } else if (enabled911Feature) {
+            headerText = Strings.crewEventTimeline.title.ems;
+        } else if (crewEnabled) {
+            headerText = Strings.crewEventTimeline.title.crew;
+        }
+
         return (
             <SafeAreaView style={styles.container}>
                 <Aura source="aura-5" />
                 <View style={styles.header}>
                     <Image source={{ uri: 'logo-aura' }} style={styles.logo} />
-                    <Text style={styles.headerText}>
-                        {Strings.crewEventTimeline.title}
-                    </Text>
+                    <Text style={styles.headerText}>{headerText}</Text>
                 </View>
                 <CrewEventTimeline
-                    timeline={this.props.crewEventTimeline}
+                    timeline={crewEventTimeline}
                     onRefresh={this.refreshTimeline}
                     containerStyle={styles.crewTimelineContainer}
                 />
@@ -327,6 +356,8 @@ function mapStateToProps(state) {
         analyticsToken: state.user.analyticsToken,
         authToken: state.user.authToken,
         radioToken: state.user.radioToken,
+        enabled911Feature: state.user.settings.enabled911Feature,
+        crewEnabled: state.user.settings.crewEnabled,
     };
 }
 

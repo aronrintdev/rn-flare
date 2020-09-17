@@ -14,6 +14,7 @@ import WhiteBar from '../Onboarding/WhiteBar';
 import Headline from '../Onboarding/Headline';
 import RoundedButton from '../../bits/RoundedButton';
 import BlueMsgBox from '../../bits/BlueMsgBox';
+import Strings from '../../locales/en';
 
 import EmojisSvg from '../../assets/emojis.svg';
 
@@ -101,33 +102,30 @@ const TalkToDispatchers = ({ componentId }) => {
             <StatusBar barStyle="dark-content" />
             <WhiteBar showBack showLogo={false} black goBack={close} />
             <Headline style={styles.headline}>
-                {`Talk Directly To\nDispatchers`}
+                {Strings.feature911.talkToDispatchers.title}
             </Headline>
             <View style={styles.shrink} />
             <View style={styles.line} />
             <Text style={styles.subhead}>
-                If it was an accidental activation of the 911 feature, you can
-                easily cancel the alarm by responding to the dispatcher.
+                {Strings.feature911.talkToDispatchers.subtext}
             </Text>
             <View style={styles.content}>
                 <BlueMsgBox containerStyles={styles.blueMsgBox1}>
-                    Hi, this is Nikki from Noonlight. We received an alarm from
-                    your Flare device. What is your emergency?
+                    {Strings.feature911.talkToDispatchers.message1}
                 </BlueMsgBox>
                 <View style={styles.rightAligned}>
                     <BlueMsgBox
                         rightAligned
                         containerStyles={styles.blueMsgBox2}
                     >
-                        I’m just testing my Flare bracelet, no problem here.
-                        Thanks!
+                        {Strings.feature911.talkToDispatchers.message2}
                     </BlueMsgBox>
                     <View style={styles.emojis}>
                         <EmojisSvg width={60} height={20} />
                     </View>
                 </View>
                 <BlueMsgBox containerStyles={styles.blueMsgBox1}>
-                    Great. Glad you are safe. Have a good night.
+                    {Strings.feature911.talkToDispatchers.message3}
                 </BlueMsgBox>
             </View>
             <RoundedButton

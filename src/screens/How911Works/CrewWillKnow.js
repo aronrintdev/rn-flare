@@ -6,7 +6,6 @@ import {
     Text,
     View,
     Dimensions,
-    Image,
 } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 
@@ -14,8 +13,9 @@ import Colors from '../../bits/Colors';
 import WhiteBar from '../Onboarding/WhiteBar';
 import Headline from '../Onboarding/Headline';
 import RoundedButton from '../../bits/RoundedButton';
+import Strings from '../../locales/en';
 
-import CrewWillKnowPng from '../../assets/crew-will-know.png';
+import CrewWillKnowSvg from '../../assets/crew-will-know.svg';
 
 const SPACE_HEIGHT = Dimensions.get('window').height - 322;
 
@@ -58,8 +58,7 @@ const styles = StyleSheet.create({
     },
     mapboxImg: {
         width: 310,
-        maxHeight: (SPACE_HEIGHT * 460) / 480,
-        resizeMode: 'contain',
+        height: (SPACE_HEIGHT * 420) / 480,
     },
     messengerName: {
         fontSize: 14,
@@ -93,16 +92,14 @@ const CrewWillKnow = ({ componentId }) => {
             <StatusBar barStyle="dark-content" />
             <WhiteBar showBack showLogo={false} black goBack={close} />
             <Headline style={styles.headline}>
-                {`Your Crew Will\n Know, Too`}
+                {Strings.feature911.crewWillKnow.title}
             </Headline>
             <View style={styles.shrink} />
             <View style={styles.line} />
             <Text style={styles.subhead}>
-                If you have a Crew, they will be still notified that you are in
-                a situation.
+                {Strings.feature911.crewWillKnow.subtext}
             </Text>
-            <Image
-                source={CrewWillKnowPng}
+            <CrewWillKnowSvg
                 style={styles.mapboxImg}
                 accessible
                 accessibilityLabel="Crew Will Know Messaging"

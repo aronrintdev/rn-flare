@@ -12,6 +12,7 @@ import { Navigation } from 'react-native-navigation';
 import Colors from '../../bits/Colors';
 import CloseButton from '../CloseButton';
 import Headline from '../Onboarding/Headline';
+import Strings from '../../locales/en';
 
 import TwoHandsImg from '../../assets/two-hands.svg';
 
@@ -102,21 +103,25 @@ const Success = ({ componentId }) => {
         <SafeAreaView style={styles.container}>
             <StatusBar barStyle="dark-content" />
             <CloseButton black onPress={close} style={styles.closeBtnStyle} />
-            <Headline style={styles.headline}>Success</Headline>
+            <Headline style={styles.headline}>
+                {Strings.feature911.success.title}
+            </Headline>
             <TwoHandsImg style={styles.twoHandImg} />
             <Text style={styles.subhead}>
-                We encourage you to test the 911 feature! Since we go through a
-                third party, there is no need to worry about taking up emergency
-                service resources.
+                {Strings.feature911.success.subtext}
             </Text>
             <TouchableOpacity
                 onPress={onTry}
                 style={[styles.enableBtnView, styles.enableBtnContainer]}
             >
-                <Text style={styles.enableBtnText}>GIVE IT A TRY</Text>
+                <Text style={styles.enableBtnText}>
+                    {Strings.feature911.success.tryBtnText}
+                </Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.notNowButton} onPress={cancelTry}>
-                <Text style={styles.notNowButtonText}>NOT NOW</Text>
+                <Text style={styles.notNowButtonText}>
+                    {Strings.feature911.success.notNowBtnText}
+                </Text>
             </TouchableOpacity>
         </SafeAreaView>
     );

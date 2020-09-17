@@ -25,9 +25,11 @@ const Home = ({
     enableNotifications,
     notifPermission,
     enabled911Feature,
+    crewEnabled,
     authToken,
     profile,
     set911Features,
+    setCrewEnabled,
     setNotificationsEnabled,
     getNotificationPermission,
     show911FeatureError,
@@ -35,7 +37,6 @@ const Home = ({
 }) => {
     useSlideMenu(componentId);
 
-    const [crewEnabled, setCrewEnabled] = React.useState(false);
     const fullyEnabled = enableNotifications && notifPermission;
 
     const openCall = React.useCallback(() => {
@@ -185,7 +186,7 @@ Home.options = navOptions('Settings', false);
 
 const mapStateToProps = ({
     user: {
-        settings: { enableNotifications, enabled911Feature },
+        settings: { enableNotifications, enabled911Feature, crewEnabled },
         permissions: { notification: notifPermission },
         authToken,
         profile,
@@ -194,6 +195,7 @@ const mapStateToProps = ({
     enableNotifications,
     notifPermission,
     enabled911Feature,
+    crewEnabled,
     authToken,
     profile,
 });
@@ -202,6 +204,7 @@ const mapDispatchToProps = {
     setNotificationsEnabled: userActions.setNotificationsEnabled,
     getNotificationPermission: userActions.getNotificationPermission,
     set911Features: userActions.set911Features,
+    setCrewEnabled: userActions.setCrewEnabled,
 };
 
 export default connect(

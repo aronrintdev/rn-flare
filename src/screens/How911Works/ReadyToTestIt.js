@@ -14,6 +14,7 @@ import Colors from '../../bits/Colors';
 import Aura from '../../bits/Aura';
 import CloseButton from '../CloseButton';
 import Headline from '../Onboarding/Headline';
+import Strings from '../../locales/en';
 
 import AuraBg from '../../assets/aura-1519.jpg';
 import WatchPng from '../../assets/watch.png';
@@ -80,15 +81,12 @@ const ReadyToTestIt = ({ componentId }) => {
             <Aura source={AuraBg} />
             <CloseButton white onPress={close} style={styles.closeBtnStyle} />
             <Headline style={styles.headline}>
-                {`Ready to Test it?\nBe sure to follow up!`}
+                {Strings.feature911.readyToTest.title}
             </Headline>
             <View style={styles.shrink} />
             <View style={styles.line} />
             <Text style={styles.subhead}>
-                Holding the button on your cuff for 3 seconds and releasing will
-                kick off a signal to emergency dispatchers. They will text you
-                and call you. Be sure to indicate that you are safe and that you
-                are testing your Flare bracelet.
+                {Strings.feature911.readyToTest.subtext}
             </Text>
             <Image
                 source={WatchPng}

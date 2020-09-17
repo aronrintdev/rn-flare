@@ -5,7 +5,6 @@ import {
     StyleSheet,
     Text,
     View,
-    Image,
     Dimensions,
 } from 'react-native';
 import { Navigation } from 'react-native-navigation';
@@ -14,8 +13,9 @@ import Colors from '../../bits/Colors';
 import WhiteBar from '../Onboarding/WhiteBar';
 import Headline from '../Onboarding/Headline';
 import RoundedButton from '../../bits/RoundedButton';
+import Strings from '../../locales/en';
 
-import TextAndCallPng from '../../assets/text-and-call.png';
+import TextAndCallSvg from '../../assets/text-and-call-bg.svg';
 
 const SPACE_HEIGHT = Dimensions.get('window').height - 322;
 
@@ -61,9 +61,8 @@ const styles = StyleSheet.create({
         marginLeft: 25,
     },
     noonlightCallingBox: {
-        width: 310,
-        height: (SPACE_HEIGHT * 300) / 480,
-        resizeMode: 'contain',
+        width: 318,
+        height: (SPACE_HEIGHT * 320) / 480,
     },
     content: {
         width: 307,
@@ -95,18 +94,14 @@ const TextAndCall = ({ componentId }) => {
             <StatusBar barStyle="dark-content" />
             <WhiteBar showBack showLogo={false} black goBack={close} />
             <Headline style={styles.headline}>
-                {`A Text, And\n A Call`}
+                {Strings.feature911.textAndCall.title}
             </Headline>
             <View style={styles.shrink} />
             <View style={styles.line} />
             <Text style={styles.subhead}>
-                The dispatcher will text and call you within 60 seconds to
-                confirm your safety. If you are able to text or talk, you can
-                communicate directly with the dispatcher—and your Crew—until
-                help arrives.
+                {Strings.feature911.textAndCall.subtext}
             </Text>
-            <Image
-                source={TextAndCallPng}
+            <TextAndCallSvg
                 style={styles.noonlightCallingBox}
                 accessible
                 accessibilityLabel="Text and Call Messaging"

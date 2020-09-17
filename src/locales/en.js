@@ -29,7 +29,58 @@ const Strings = {
             expire: 'Your message expired.',
             unknown: '🤮 Something got mixed up on our end',
         },
-        title: 'You held down the button so we reached out to your crew.',
+        title: {
+            crew: 'You held down the button so we reached out to your crew.',
+            ems:
+                'You held down the button so we reached out to emergency services.',
+            crewAndEms:
+                'You held down the button so we reached out to your crew and emergency services.',
+        },
+    },
+    feature911: {
+        main: {
+            title: 'How Flare Works With 911',
+            subtext: `Flare will send your GPS location to 911 and your Crew—even if you don’t know where you are or can’t speak.\nThe dispatcher will be able to view your live location on their screen.`,
+        },
+        textAndCall: {
+            title: `A Text, And\n A Call`,
+            subtext:
+                'The dispatcher will text and call you within 60 seconds to confirm your safety. If you are able to text or talk, you can communicate directly with the dispatcher—and your Crew—until help arrives.',
+        },
+        talkToDispatchers: {
+            title: `Talk Directly To\nDispatchers`,
+            subtext:
+                'If it was an accidental activation of the 911 feature, you can easily cancel the alarm by responding to the dispatcher.',
+            message1:
+                'Hi, this is Nikki from Noonlight. We received an alarm from your Flare device. What is your emergency?',
+            message2:
+                'I’m just testing my Flare bracelet, no problem here. Thanks!',
+            message3: 'Great. Glad you are safe. Have a good night.',
+        },
+        success: {
+            title: 'Success',
+            subtext:
+                'We encourage you to test the 911 feature! Since we go through a third party, there is no need to worry about taking up emergency service resources.',
+            tryBtnText: 'GIVE IT A TRY',
+            notNowBtnText: 'NOT NOW',
+        },
+        readyToTest: {
+            title: `Ready to Test it?\nBe sure to follow up!`,
+            subtext:
+                'Holding the button on your cuff for 3 seconds and releasing will kick off a signal to emergency dispatchers. They will text you and call you. Be sure to indicate that you are safe and that you are testing your Flare bracelet.',
+        },
+        gotYourBack: {
+            title: `We’ve Got Your\n Back.`,
+            subtext:
+                'If you are not able to respond, the dispatcher will send emergency first responders to your location.',
+            enableBtnText: 'ENABLE 911',
+            notNowBtnText: 'NOT NOW',
+        },
+        crewWillKnow: {
+            title: `Your Crew Will\n Know, Too`,
+            subtext:
+                'If you have a Crew, they will be still notified that you are in a situation.',
+        },
     },
     dev: {
         sendTestFlare: 'Flare',

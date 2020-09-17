@@ -430,3 +430,7 @@ export function set911Features(token, userId) {
             });
     };
 }
+
+export const setCrewEnabled = () => ({
+    type: types.USER_SET_CREW_ENABLED,
+});

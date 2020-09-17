@@ -18,6 +18,7 @@ import WhiteBar from '../Onboarding/WhiteBar';
 import Headline from '../Onboarding/Headline';
 import BlueRoundedBox from '../../bits/BlueRoundedBox';
 import * as userActions from '../../actions/userActions';
+import Strings from '../../locales/en';
 
 import MapSvg from '../../assets/map.svg';
 import StarMarkImg from '../../assets/star-mark.svg';
@@ -61,7 +62,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(105,120,246, 0.75)',
     },
     content: {
-        width: 307,
+        width: 300,
         position: 'relative',
         justifyContent: 'center',
     },
@@ -155,13 +156,12 @@ const GotYourBack = ({
             <StatusBar barStyle="dark-content" />
             <WhiteBar showBack showLogo={false} black goBack={close} />
             <Headline style={styles.headline}>
-                {`We’ve Got Your\n Back.`}
+                {Strings.feature911.gotYourBack.title}
             </Headline>
             <View style={styles.shrink} />
             <View style={styles.line} />
             <Text style={styles.subhead}>
-                If you are not able to respond, the dispatcher will send
-                emergency first responders to your location.
+                {Strings.feature911.gotYourBack.subtext}
             </Text>
             <View style={styles.content}>
                 <BlueRoundedBox>
@@ -188,11 +188,15 @@ const GotYourBack = ({
                     locations={[0, 1]}
                     colors={['#F9885E', '#B9475F']}
                 >
-                    <Text style={styles.enableBtnText}>ENABLE 911</Text>
+                    <Text style={styles.enableBtnText}>
+                        {Strings.feature911.gotYourBack.enableBtnText}
+                    </Text>
                 </LinearGradient>
             </TouchableOpacity>
             <TouchableOpacity style={styles.notNowButton} onPress={cancel911}>
-                <Text style={styles.notNowButtonText}>NOT NOW</Text>
+                <Text style={styles.notNowButtonText}>
+                    {Strings.feature911.gotYourBack.notNowBtnText}
+                </Text>
             </TouchableOpacity>
         </SafeAreaView>
     );

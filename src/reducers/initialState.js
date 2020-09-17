@@ -36,6 +36,7 @@ export const initialState = Immutable({
             enableNotifications: true,
             analyticsEnabled: true,
             enabled911Feature: false,
+            crewEnabled: true,
         },
         reg: {
             name: null,
