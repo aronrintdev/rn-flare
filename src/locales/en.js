@@ -29,11 +29,15 @@ const Strings = {
             expire: 'Your message expired.',
             unknown: '🤮 Something got mixed up on our end',
         },
-        title: 'You held down the button so we reached out to your crew.',
+        title: {
+            crew: 'You held down the button so we reached out to your crew.',
+            ems:
+                'You held down the button so we reached out to emergency services.',
+            crewAndEms:
+                'You held down the button so we reached out to your crew and emergency services.',
+        },
     },
     feature911: {
-        title:
-            'You held down the button so we reached out to emergency services.',
         main: {
             title: 'How Flare Works With 911',
             subtext: `Flare will send your GPS location to 911 and your Crew—even if you don’t know where you are or can’t speak.\nThe dispatcher will be able to view your live location on their screen.`,
@@ -77,10 +81,6 @@ const Strings = {
             subtext:
                 'If you have a Crew, they will be still notified that you are in a situation.',
         },
-    },
-    crewEventTimelineAndfeature911: {
-        title:
-            'You held down the button so we reached out to your crew and emergency services.',
     },
     dev: {
         sendTestFlare: 'Flare',

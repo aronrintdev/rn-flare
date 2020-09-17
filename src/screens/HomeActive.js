@@ -305,11 +305,11 @@ class HomeActive extends React.Component {
         } = this.props;
         let headerText;
         if (crewEnabled && enabled911Feature) {
-            headerText = Strings.crewEventTimelineAndfeature911.title;
+            headerText = Strings.crewEventTimeline.title.crewAndEms;
         } else if (enabled911Feature) {
-            headerText = Strings.feature911.title;
+            headerText = Strings.crewEventTimeline.title.ems;
         } else if (crewEnabled) {
-            headerText = Strings.crewEventTimeline.title;
+            headerText = Strings.crewEventTimeline.title.crew;
         }
 
         return (
