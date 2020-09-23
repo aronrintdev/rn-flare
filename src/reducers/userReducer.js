@@ -524,15 +524,18 @@ export function user(state = initialState.user, action = {}) {
                 action.ems_services
             );
         case types.USER_SET_911_FEATURE_FAILURE:
-            return state.set('show911FeatureError', true);
+            return state.set('showFlareServiceError', true);
         case types.HIDE_911_FEATURE_FAILURE_ALERT:
-            return state.set('show911FeatureError', false);
+            return state.set('showFlareServiceError', false);
 
-        case types.USER_SET_CREW_ENABLED:
+        case types.USER_SET_CREW_ENABLE_SUCCESS:
             return state.setIn(
                 ['settings', 'crewEnabled'],
-                !state.settings.crewEnabled
+                action.crew_services
             );
+        case types.USER_SET_CREW_ENABLE_FAILURE:
+            return state.set('showFlareServiceError', true);
+
         default:
             return state;
     }
