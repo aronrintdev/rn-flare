@@ -20,6 +20,57 @@ export const initialState = Immutable({
         crews: [],
         devices: [],
         hasActiveFlare: false,
+        crewEventTimeline: [
+            {
+                name: 'Flare',
+                message:
+                    'Hey there, looks like you’re testing your Flare!  Holding down the button for 3 seconds is how we know to text the designated friend(s) in your Crew. 👯',
+                timestamp: new Date(),
+                action_type: 2,
+            },
+            {
+                name: 'Flare',
+                message:
+                    'Choose contacts to add to your Crew so you’ll always have trusty friends by your side.',
+                timestamp: new Date(),
+                action_type: 2,
+            },
+            {
+                name: 'Flare',
+                message:
+                    'Flare can also message 911 first responders and ask them to come to your location; you can enable this feature later in your settings.',
+                timestamp: new Date(),
+                action_type: 2,
+            },
+            {
+                name: 'Flare',
+                message:
+                    'Text responses from your Crew will appear in the app like this. You won’t get texts on your phone so that it doesn’t start buzzing out of the blue.',
+                timestamp: new Date(),
+                action_type: 2,
+            },
+            {
+                name: 'Flare',
+                message:
+                    'Instead, you’ll get a notification from flare as a way of knowing that your message was sent. You can customize the notification so that it’s stealthy.',
+                timestamp: new Date(),
+                action_type: 2,
+            },
+            {
+                name: 'Flare',
+                message:
+                    'If you have the 911 feature enabled, emergency dispatchers will call and text you.',
+                timestamp: new Date(),
+                action_type: 2,
+            },
+            {
+                name: 'Flare',
+                message:
+                    'Press ‘I’m Okay’ when you’ve left the situation and we’ll let you’re Crew know. Try it now to continue,',
+                timestamp: new Date(),
+                action_type: 2,
+            },
+        ],
         permissions: {
             bluetooth: false,
             contacts: false,

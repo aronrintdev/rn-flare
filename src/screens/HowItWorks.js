@@ -2,27 +2,25 @@ import * as React from 'react';
 import {
     Image,
     SafeAreaView,
-    ScrollView,
     StatusBar,
     StyleSheet,
     Text,
     View,
 } from 'react-native';
 import { Navigation } from 'react-native-navigation';
+import Carousel, { Pagination } from 'react-native-snap-carousel';
 
 import Colors from '../bits/Colors';
 import CloseButton from './CloseButton';
 import Headline from './Onboarding/Headline';
-import GoldenRules from './Scenarios/GoldenRules';
-import RoundedButton from '../bits/RoundedButton';
-
-import incomingCall from '../assets/incoming-flare-call.png';
+import LongPressGif from '../assets/LongPressGif3Seconds.gif';
+import PeriwinkleButton from '../assets/PeriwinkleButtonPress.gif';
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'column',
-        backgroundColor: Colors.theme.cream,
+        backgroundColor: Colors.theme.white,
         alignItems: 'center',
     },
     shrink: {
@@ -33,7 +31,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         textAlign: 'center',
         color: Colors.black,
-        marginBottom: 0,
+        marginBottom: 10,
     },
     line: {
         height: 1,
@@ -47,7 +45,7 @@ const styles = StyleSheet.create({
         fontSize: 15,
         fontFamily: 'Nocturno Display Std',
         textAlign: 'center',
-        marginBottom: 48,
+        marginVertical: 20,
     },
     l: {
         alignSelf: 'flex-start',
@@ -92,58 +90,81 @@ const styles = StyleSheet.create({
         marginTop: 16,
         marginBottom: 24,
     },
+    slide: {
+        flex: 1,
+        backgroundColor: 'white',
+    },
+    slideImage: {
+        width: '100%',
+        resizeMode: 'contain',
+        flex: 1,
+    },
 });
 
+const subTitles = ['Tap for a call', 'Hold for your crew'];
+
 const HowItWorks = ({ componentId }) => {
-    const [golden, setGolden] = React.useState(false);
+    const [subtitleText, setSubtitleText] = React.useState(subTitles[0]);
+    const [activeSlide, setActiveSlide] = React.useState(0);
     const close = React.useCallback(() => {
         Navigation.dismissModal(componentId);
     }, [componentId]);
-    const showGolden = React.useCallback(() => {
-        setGolden(true);
-    }, []);
 
-    if (golden) {
-        return <GoldenRules finishUp={close} />;
-    }
+    const entries = [
+        {
+            image: LongPressGif,
+        },
+        {
+            image: PeriwinkleButton,
+        },
+    ];
+
+    const renderItem = ({ item, index }) => {
+        return (
+            <View style={styles.slide} key={index}>
+                <Image style={styles.slideImage} source={item.image} />
+            </View>
+        );
+    };
+
+    const onChangeItem = index => {
+        setActiveSlide(index);
+        setSubtitleText(subTitles[index]);
+    };
 
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar barStyle="dark-content" />
             <CloseButton black onPress={close} />
             <View style={styles.shrink} />
-            <Headline style={styles.headline}>How Flare Works</Headline>
+            <Headline style={styles.headline}>How It Works</Headline>
             <View style={styles.line} />
-            <Text style={styles.subhead}>The basics.</Text>
-            <ScrollView style={styles.grow} alwaysBounceVertical={false}>
-                <Text style={[styles.l, styles.sectionhead]}>
-                    Press for a call.
-                </Text>
-                <Image
-                    style={[styles.l, styles.incomingCall]}
-                    source={incomingCall}
-                />
-                <Text style={[styles.r, styles.sectionhead]}>
-                    Hold for a friend.
-                </Text>
-                <View style={[styles.r, styles.chatItem]}>
-                    <Text style={styles.chatItemText}>
-                        Are any of you with Nicky?
-                    </Text>
-                </View>
-                <View style={[styles.r, styles.chatItem]}>
-                    <Text style={styles.chatItemText}>
-                        We just talked. She’s all good! Just needed an excuse to
-                        leave.
-                    </Text>
-                </View>
-                <Text style={[styles.r, styles.emojis]}>👌✨💛</Text>
-            </ScrollView>
-            <RoundedButton
-                onPress={showGolden}
-                wrapperStyle={styles.button}
-                text="Read More"
-                width={240}
+            <Text style={styles.subhead}>{subtitleText}</Text>
+            <Carousel
+                data={entries}
+                renderItem={renderItem}
+                sliderWidth={310}
+                itemWidth={310}
+                onSnapToItem={onChangeItem}
+                pagingEnabled
+            />
+            <Pagination
+                dotsLength={entries.length}
+                activeDotIndex={activeSlide}
+                dotStyle={{
+                    width: 10,
+                    height: 10,
+                    borderRadius: 5,
+                    marginHorizontal: 4,
+                    backgroundColor: Colors.black,
+                    borderWidth: 1,
+                    borderColor: Colors.black,
+                }}
+                inactiveDotStyle={{
+                    backgroundColor: Colors.white,
+                }}
+                inactiveDotOpacity={0.4}
+                inactiveDotScale={1}
             />
         </SafeAreaView>
     );
