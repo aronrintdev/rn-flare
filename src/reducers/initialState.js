@@ -24,7 +24,7 @@ export const initialState = Immutable({
             {
                 name: 'Flare',
                 message:
-                    'Hey there, looks like you’re testing your Flare!  Holding down the button for 3 seconds is how we know to text the designated friend(s) in your Crew. 👯',
+                    'Hey there, looks like you’re testing your flare! Holding down the button for 3 seconds is how we know to text the designated friend(s) in your Crew. 👯',
                 timestamp: new Date(),
                 action_type: 2,
             },
@@ -52,7 +52,7 @@ export const initialState = Immutable({
             {
                 name: 'Flare',
                 message:
-                    'Instead, you’ll get a notification from flare as a way of knowing that your message was sent. You can customize the notification so that it’s stealthy.',
+                    'Instead, you’ll get a notification from Flare as a way of knowing that your message was sent. You can customize the notification so that it’s stealthy.',
                 timestamp: new Date(),
                 action_type: 2,
             },
@@ -66,7 +66,7 @@ export const initialState = Immutable({
             {
                 name: 'Flare',
                 message:
-                    'Press ‘I’m Okay’ when you’ve left the situation and we’ll let you’re Crew know. Try it now to continue,',
+                    'Press ‘I’m Okay’ when you’ve left the situation and we’ll let your Crew know. Try it now to continue.',
                 timestamp: new Date(),
                 action_type: 2,
             },

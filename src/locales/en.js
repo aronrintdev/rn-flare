@@ -79,7 +79,7 @@ const Strings = {
         crewWillKnow: {
             title: `Your Crew Will\n Know, Too`,
             subtext:
-                'If you have a Crew, they will be still notified that you are in a situation.',
+                'If you have a Crew, they will still be notified that you are in a situation.',
         },
     },
     dev: {
