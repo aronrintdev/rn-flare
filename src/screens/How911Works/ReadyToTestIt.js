@@ -9,12 +9,14 @@ import {
     Dimensions,
 } from 'react-native';
 import { Navigation } from 'react-native-navigation';
+import AnimatedLottieView from 'lottie-react-native';
 
 import Colors from '../../bits/Colors';
 import Aura from '../../bits/Aura';
 import CloseButton from '../CloseButton';
 import Headline from '../Onboarding/Headline';
 import Strings from '../../locales/en';
+import pressAndHold from '../../assets/lotties/press-and-hold';
 
 import AuraBg from '../../assets/aura-1519.jpg';
 import WatchPng from '../../assets/watch.png';
@@ -61,12 +63,24 @@ const styles = StyleSheet.create({
         width: 84,
         height: 52,
     },
-    watchImg: {
+    watchImgContainer: {
         marginTop: (SPACE_HEIGHT * 30) / 480,
-        width: 240,
-        height: 210,
+        position: 'relative',
+        width: 241,
+        height: 215,
+    },
+    watchImg: {
+        width: 241,
+        height: 215,
         resizeMode: 'contain',
         alignSelf: 'center',
+    },
+    watchImgAnimation: {
+        position: 'absolute',
+        left: 19.5,
+        top: -7,
+        width: 128,
+        height: 96,
     },
 });
 
@@ -74,6 +88,7 @@ const ReadyToTestIt = ({ componentId }) => {
     const close = React.useCallback(() => {
         Navigation.dismissModal(componentId);
     }, [componentId]);
+    const animationRef = React.useRef();
 
     return (
         <SafeAreaView style={styles.container}>
@@ -88,12 +103,21 @@ const ReadyToTestIt = ({ componentId }) => {
             <Text style={styles.subhead}>
                 {Strings.feature911.readyToTest.subtext}
             </Text>
-            <Image
-                source={WatchPng}
-                style={styles.watchImg}
-                accessible
-                accessibilityLabel="Watch Image"
-            />
+            <View style={styles.watchImgContainer}>
+                <Image
+                    source={WatchPng}
+                    style={styles.watchImg}
+                    accessible
+                    accessibilityLabel="Watch Image"
+                />
+                <AnimatedLottieView
+                    ref={animationRef}
+                    source={pressAndHold}
+                    style={styles.watchImgAnimation}
+                    autoPlay
+                    loop
+                />
+            </View>
         </SafeAreaView>
     );
 };
