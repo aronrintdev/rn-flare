@@ -112,7 +112,7 @@ export const fetchContacts = () => async dispatch => {
     }
 };
 
-export function getCrewEventTimeline(token) {
+export function getEventTimeline(token) {
     return function getTimeline(dispatch) {
         dispatch({
             type: types.GET_FLARE_TIMELINE_REQUEST,

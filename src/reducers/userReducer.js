@@ -98,7 +98,7 @@ export function user(state = initialState.user, action = {}) {
                 activatingFlareState: 'success',
                 hasActiveFlare: true,
                 crewEvents: action.data.crewEvents,
-                crewEventTimeline: [],
+                eventTimeline: [],
             });
 
         case types.ACTIVATE_FLARE_FAILURE:
@@ -118,7 +118,7 @@ export function user(state = initialState.user, action = {}) {
                 hasActiveFlare: false,
                 cancelingActiveFlare: false,
                 cancelActiveFlareState: 'success',
-                crewEventTimeline: [],
+                eventTimeline: [],
             });
 
         case types.CANCEL_ACTIVE_FLARE_FAILURE:
@@ -321,18 +321,18 @@ export function user(state = initialState.user, action = {}) {
          */
         case types.GET_FLARE_TIMELINE_REQUEST:
             return state.merge({
-                crewEventTimelineState: 'requested',
+                eventTimelineState: 'requested',
             });
 
         case types.GET_FLARE_TIMELINE_SUCCESS:
             return state.merge({
-                crewEventTimelineState: 'succeeded',
-                crewEventTimeline: action.data.actions,
+                eventTimelineState: 'succeeded',
+                eventTimeline: action.data.actions,
             });
 
         case types.GET_FLARE_TIMELINE_FAILURE:
             return state.merge({
-                crewEventTimelineState: 'failed',
+                eventTimelineState: 'failed',
             });
 
         /**

@@ -3,6 +3,7 @@ import { FlatList, StyleSheet, Text, View } from 'react-native';
 
 import Colors from './Colors';
 import CrewActionTypes from '../constants/CrewActionConstants';
+import { EVENT_TIMLINE_SETTING_CREW } from '../constants/EventTimelineSettings';
 import FlareDate from './FlareDate';
 import Strings from '../locales/en';
 import Spacing from './Spacing';
@@ -85,7 +86,7 @@ const CrewMessage = ({
     </View>
 );
 
-const CrewStatus = ({ type, event: { name, timestamp } }) => (
+const CrewStatus = ({ type, event: { name, timestamp }, settingStatus }) => (
     <View
         style={[
             styles.commonEvent,
@@ -97,9 +98,13 @@ const CrewStatus = ({ type, event: { name, timestamp } }) => (
             {type !== CrewActionTypes.Join && (
                 <Text style={styles.statusHeading}>
                     {[
-                        Strings.crewEventTimeline.headings[
-                            CrewActionConstantToStringToken[type]
-                        ],
+                        settingStatus
+                            ? Strings.eventTimeline.headings[settingStatus][
+                                  CrewActionConstantToStringToken[type]
+                              ]
+                            : Strings.eventTimeline.headings[
+                                  CrewActionConstantToStringToken[type]
+                              ],
                         name,
                         name ? '.' : undefined,
                     ].join('')}
@@ -107,7 +112,7 @@ const CrewStatus = ({ type, event: { name, timestamp } }) => (
             )}
             {type === CrewActionTypes.Join && (
                 <Text style={styles.statusHeading}>
-                    {[name, Strings.crewEventTimeline.headings.join].join(' ')}
+                    {[name, Strings.eventTimeline.headings.join].join(' ')}
                 </Text>
             )}
         </View>
@@ -119,16 +124,32 @@ const CrewStatus = ({ type, event: { name, timestamp } }) => (
     </View>
 );
 
-const CrewEvent = ({ event }) => {
+const CrewEvent = ({ event, settingStatus }) => {
     switch (event.action_type) {
         case CrewActionTypes.Notification:
         case CrewActionTypes.Cancel:
-        case CrewActionTypes.Create:
         case CrewActionTypes.Join:
         case CrewActionTypes.Expire:
+            return <CrewStatus type={event.action_type} event={event} />;
+        case CrewActionTypes.Create:
+            return (
+                <CrewStatus
+                    type={event.action_type}
+                    event={event}
+                    settingStatus={settingStatus}
+                />
+            );
         case CrewActionTypes.SentToNoonlight:
         case CrewActionTypes.NoonlightSuccess:
-            return <CrewStatus type={event.action_type} event={event} />;
+            return (
+                settingStatus !== EVENT_TIMLINE_SETTING_CREW && (
+                    <CrewStatus
+                        type={event.action_type}
+                        event={event}
+                        settingStatus={settingStatus}
+                    />
+                )
+            );
         case CrewActionTypes.Response:
             return <CrewMessage event={event} />;
         default:
@@ -137,9 +158,16 @@ const CrewEvent = ({ event }) => {
 };
 
 const keyExtractor = event => `${event.timestamp}-${event.id}`;
-const renderItem = ({ item }) => <CrewEvent event={item} />;
+const renderItem = ({ item, settingStatus }) => (
+    <CrewEvent event={item} settingStatus={settingStatus} />
+);
 
-const CrewEventTimeline = ({ containerStyle, timeline, onRefresh }) => {
+const EventTimeline = ({
+    containerStyle,
+    timeline,
+    onRefresh,
+    settingStatus,
+}) => {
     const flatListRef = React.useRef();
 
     const haveTimeline = timeline?.length > 0;
@@ -151,18 +179,22 @@ const CrewEventTimeline = ({ containerStyle, timeline, onRefresh }) => {
 
     return (
         <View style={containerStyle}>
-            <FlatList
-                data={timeline}
-                renderItem={renderItem}
-                keyExtractor={keyExtractor}
-                refreshing={false}
-                onRefresh={onRefresh}
-                ref={flatListRef}
-                onContentSizeChange={scrollToEnd}
-                onLayout={scrollToEnd}
-            />
+            {settingStatus && (
+                <FlatList
+                    data={timeline}
+                    renderItem={({ item }) =>
+                        renderItem({ item, settingStatus })
+                    }
+                    keyExtractor={keyExtractor}
+                    refreshing={false}
+                    onRefresh={onRefresh}
+                    ref={flatListRef}
+                    onContentSizeChange={scrollToEnd}
+                    onLayout={scrollToEnd}
+                />
+            )}
         </View>
     );
 };
 
-export default CrewEventTimeline;
+export default EventTimeline;

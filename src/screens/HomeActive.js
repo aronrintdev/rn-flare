@@ -14,18 +14,23 @@ import {
     FLARE_TIMELINE_REFRESH_INTERVAL,
     CONFIG_DEV,
 } from '../constants/Config';
+import {
+    EVENT_TIMLINE_SETTING_CREW,
+    EVENT_TIMLINE_SETTING_CREW_EMS,
+    EVENT_TIMLINE_SETTING_EMS,
+} from '../constants/EventTimelineSettings';
 
 import { syncAccountDetails, changeAppRoot } from '../actions/index';
 import {
     processQueuedBeacons,
     cancelActiveFlare,
 } from '../actions/beaconActions';
-import { getCrewEventTimeline, getPermission } from '../actions/userActions';
+import { getEventTimeline, getPermission } from '../actions/userActions';
 import { startBleListening } from '../actions/hardwareActions';
 import Aura from '../bits/Aura';
 import Button from '../bits/Button';
 import Colors from '../bits/Colors';
-import CrewEventTimeline from '../bits/CrewEventTimeline';
+import EventTimeline from '../bits/EventTimeline';
 import getCurrentPosition from '../helpers/location';
 import Spacing from '../bits/Spacing';
 import Strings from '../locales/en';
@@ -251,7 +256,7 @@ class HomeActive extends React.Component {
 
     refreshTimeline = () => {
         const { dispatch, authToken } = this.props;
-        dispatch(getCrewEventTimeline(authToken));
+        dispatch(getEventTimeline(authToken));
     };
 
     navigationButtonPressed({ buttonId }) {
@@ -298,18 +303,18 @@ class HomeActive extends React.Component {
     }
 
     render() {
-        const {
-            crewEventTimeline,
-            enabled911Feature,
-            crewEnabled,
-        } = this.props;
+        const { eventTimeline, enabled911Feature, crewEnabled } = this.props;
         let headerText;
+        let eventTimelineSetting;
         if (crewEnabled && enabled911Feature) {
-            headerText = Strings.crewEventTimeline.title.crewAndEms;
+            headerText = Strings.eventTimeline.title.crewAndEms;
+            eventTimelineSetting = EVENT_TIMLINE_SETTING_CREW_EMS;
         } else if (enabled911Feature) {
-            headerText = Strings.crewEventTimeline.title.ems;
+            headerText = Strings.eventTimeline.title.ems;
+            eventTimelineSetting = EVENT_TIMLINE_SETTING_EMS;
         } else if (crewEnabled) {
-            headerText = Strings.crewEventTimeline.title.crew;
+            headerText = Strings.eventTimeline.title.crew;
+            eventTimelineSetting = EVENT_TIMLINE_SETTING_CREW;
         }
 
         return (
@@ -319,8 +324,9 @@ class HomeActive extends React.Component {
                     <Image source={{ uri: 'logo-aura' }} style={styles.logo} />
                     <Text style={styles.headerText}>{headerText}</Text>
                 </View>
-                <CrewEventTimeline
-                    timeline={crewEventTimeline}
+                <EventTimeline
+                    timeline={eventTimeline}
+                    settingStatus={eventTimelineSetting}
                     onRefresh={this.refreshTimeline}
                     containerStyle={styles.crewTimelineContainer}
                 />
@@ -344,8 +350,8 @@ function mapStateToProps(state) {
         claimingDeviceFailure: state.user.claimingDeviceFailure,
         crewEventNotificationMessage: state.user.settings.promptMessage,
         crewEvents: state.user.crewEvents,
-        crewEventTimeline: state.user.crewEventTimeline,
-        crewEventTimelineState: state.user.crewEventTimelineState,
+        eventTimeline: state.user.eventTimeline,
+        eventTimelineState: state.user.eventTimelineState,
         crews: state.user.crews,
         devices: state.user.devices,
         hardware: state.hardware,
