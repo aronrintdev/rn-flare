@@ -32,8 +32,8 @@ const Home = ({
     setCrewEnabled,
     setNotificationsEnabled,
     getNotificationPermission,
-    show911FeatureError,
-    hide911FeaturesErrorAlert,
+    showFlareServiceError,
+    hideFlareServiceErrorAlert,
 }) => {
     useSlideMenu(componentId);
 
@@ -71,16 +71,20 @@ const Home = ({
     );
 
     useEffect(() => {
-        if (show911FeatureError) {
+        if (showFlareServiceError) {
             Alert.alert(
                 `Sorry, we are unable to connect to Flare to toggle your settings. Please try again later, or contact us at help@getflare.com if this issue persists.`
             );
-            hide911FeaturesErrorAlert();
+            hideFlareServiceErrorAlert();
         }
-    }, [show911FeatureError, hide911FeaturesErrorAlert, profile]);
+    }, [showFlareServiceError, hideFlareServiceErrorAlert, profile]);
 
     const setEnable911Feature = () => {
         set911Features(authToken, profile.id);
+    };
+
+    const changeCrewEnable = () => {
+        setCrewEnabled(authToken, profile.id);
     };
 
     return (
@@ -125,7 +129,7 @@ const Home = ({
                     <Switch
                         trackColor={{ true: Colors.theme.purple }}
                         value={crewEnabled}
-                        onValueChange={setCrewEnabled}
+                        onValueChange={changeCrewEnable}
                     />
                 </View>
             </View>
@@ -190,6 +194,7 @@ const mapStateToProps = ({
         permissions: { notification: notifPermission },
         authToken,
         profile,
+        showFlareServiceError,
     },
 }) => ({
     enableNotifications,
@@ -198,6 +203,7 @@ const mapStateToProps = ({
     crewEnabled,
     authToken,
     profile,
+    showFlareServiceError,
 });
 
 const mapDispatchToProps = {
@@ -205,6 +211,7 @@ const mapDispatchToProps = {
     getNotificationPermission: userActions.getNotificationPermission,
     set911Features: userActions.set911Features,
     setCrewEnabled: userActions.setCrewEnabled,
+    hideFlareServiceErrorAlert: userActions.hideFlareServiceErrorAlert,
 };
 
 export default connect(

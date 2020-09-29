@@ -32,9 +32,9 @@ const Strings = {
         title: {
             crew: 'You held down the button so we reached out to your crew.',
             ems:
-                'You held down the button so we reached out to emergency services.',
+                'You held down the button so we reached out to 911 dispatchers.',
             crewAndEms:
-                'You held down the button so we reached out to your crew and emergency services.',
+                'You held down the button so we reached out to your crew and 911 dispatchers.',
         },
     },
     feature911: {
@@ -45,7 +45,7 @@ const Strings = {
         textAndCall: {
             title: `A Text, And\n A Call`,
             subtext:
-                'The dispatcher will text and call you within 60 seconds to confirm your safety. If you are able to text or talk, you can communicate directly with the dispatcher—and your Crew—until help arrives.',
+                'The dispatcher will text and call you within 60 seconds to confirm your safety. If you are able to text or talk you can communicate directly with them until help arrives.',
         },
         talkToDispatchers: {
             title: `Talk Directly To\nDispatchers`,
@@ -65,21 +65,21 @@ const Strings = {
             notNowBtnText: 'NOT NOW',
         },
         readyToTest: {
-            title: `Ready to Test it?\nBe sure to follow up!`,
+            title: `Ready to Test It?`,
             subtext:
-                'Holding the button on your cuff for 3 seconds and releasing will kick off a signal to emergency dispatchers. They will text you and call you. Be sure to indicate that you are safe and that you are testing your Flare bracelet.',
+                'Hold the button on your cuff for 3 seconds and release it. A representative from Noonlight will text you and call you. Noonlight is an intermediary who will then reach out to 911 dispatchers, so you don’t have to worry about tying up valuable resources. Be sure to indicate that you are safe and testing your Flare bracelet.',
         },
         gotYourBack: {
             title: `We’ve Got Your\n Back.`,
             subtext:
-                'If you are not able to respond, the dispatcher will send emergency first responders to your location.',
+                'If you have a Crew, they will still be notified that you are in a situation.',
             enableBtnText: 'ENABLE 911',
             notNowBtnText: 'NOT NOW',
         },
         crewWillKnow: {
             title: `Your Crew Will\n Know, Too`,
             subtext:
-                'If you have a Crew, they will be still notified that you are in a situation.',
+                'If you have a Crew, they will still be notified that you are in a situation.',
         },
     },
     dev: {

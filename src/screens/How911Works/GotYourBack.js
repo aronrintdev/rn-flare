@@ -113,7 +113,7 @@ const GotYourBack = ({
     profile,
     authToken,
     set911Features,
-    show911FeatureError,
+    showFlareServiceError,
     hide911FeaturesErrorAlert,
 }) => {
     const close = React.useCallback(() => {
@@ -137,7 +137,7 @@ const GotYourBack = ({
             });
             Navigation.popToRoot(componentId);
         }
-        if (show911FeatureError) {
+        if (showFlareServiceError) {
             Alert.alert(
                 `Sorry, we are unable to connect to Flare to toggle your settings. Please try again later, or contact us at help@getflare.com if this issue persists.`
             );
@@ -145,7 +145,7 @@ const GotYourBack = ({
         }
     }, [
         enabled911Feature,
-        show911FeatureError,
+        showFlareServiceError,
         componentId,
         hide911FeaturesErrorAlert,
         profile,
@@ -206,7 +206,7 @@ const mapStateToProps = state => ({
     enabled911Feature: state.user.settings.enabled911Feature,
     profile: state.user.profile,
     authToken: state.user.authToken,
-    show911FeatureError: state.user.show911FeatureError,
+    showFlareServiceError: state.user.showFlareServiceError,
 });
 
 const mapDispatchToProps = {

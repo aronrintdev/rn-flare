@@ -404,8 +404,8 @@ export const textFriendsResponse = response => ({
     response,
 });
 
-export const hide911FeaturesErrorAlert = () => ({
-    type: types.HIDE_911_FEATURE_FAILURE_ALERT,
+export const hideFlareServiceErrorAlert = () => ({
+    type: types.HIDE_FLARE_SERVICE_FAILURE_ALERT,
 });
 
 export function set911Features(token, userId) {
@@ -431,6 +431,25 @@ export function set911Features(token, userId) {
     };
 }
 
-export const setCrewEnabled = () => ({
-    type: types.USER_SET_CREW_ENABLED,
-});
+export function setCrewEnabled(token, userId) {
+    return function setEnabled(dispatch) {
+        dispatch({
+            type: types.USER_SET_CREW_ENABLE_REQUEST,
+        });
+        ProtectedAPICall(token, API_URL, `/config/user/${userId}/toggle_crew`, {
+            method: 'POST',
+        })
+            .then(response => {
+                dispatch({
+                    type: types.USER_SET_CREW_ENABLE_SUCCESS,
+                    crew_services: response.data.crew_services,
+                });
+            })
+            .catch(error => {
+                dispatch({
+                    type: types.USER_SET_CREW_ENABLE_FAILURE,
+                    error,
+                });
+            });
+    };
+}

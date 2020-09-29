@@ -110,15 +110,14 @@ const Entry = ({ text, timestamp = 'Just now', style }) => (
     </Animated.View>
 );
 
-// WOMAN STANDING emoji is available only on iOS 13.2+ (and Android 10.0+),
-// don't use it on older versions of the platform.
-const womanStanding = haveEmoji12() ? '🧍‍♀️' : '';
-
 const messages = [
-    `Heyhey! Looks like you’re testing your Flare! 💕 Holding down your Flare button for 3 seconds is how we know to text your designated friend(s). ${womanStanding}👨‍👨‍👧‍👧👯`,
-    'Text responses from your Crew will appear like this in the app. But you won’t get texts on your phone (so it won’t start buzzing out of nowhere.) 🐝',
+    'Hey there, looks like you’re testing your flare! Holding down the button for 3 seconds is how we know to text the designated friend(s) in your Crew. 👯',
     'Choose contacts to add to your Crew so you’ll always have trusty friends by your side.',
-    'Press ‘I’m okay’ when you’ve left the situation and we’ll let your Crew know. Try it now to continue.',
+    'Flare can also message 911 first responders and ask them to come to your location; you can enable this feature later in your settings.',
+    'Text responses from your Crew will appear in the app like this. You won’t get texts on your phone so that it doesn’t start buzzing out of the blue.',
+    'Instead, you’ll get a notification from Flare as a way of knowing that your message was sent. You can customize the notification so that it’s stealthy.',
+    'If you have the 911 feature enabled, emergency dispatchers will call and text you.',
+    'Press ‘I’m Okay’ when you’ve left the situation and we’ll let your Crew know. Try it now to continue.',
 ];
 
 const TextSimulator = ({ onSuccess }) => {
