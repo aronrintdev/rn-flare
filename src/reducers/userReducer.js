@@ -327,9 +327,7 @@ export function user(state = initialState.user, action = {}) {
         case types.GET_FLARE_TIMELINE_SUCCESS:
             return state.merge({
                 crewEventTimelineState: 'succeeded',
-                crewEventTimeline: state.crewEventTimeline.concat(
-                    action.data.actions
-                ),
+                crewEventTimeline: action.data.actions,
             });
 
         case types.GET_FLARE_TIMELINE_FAILURE:
