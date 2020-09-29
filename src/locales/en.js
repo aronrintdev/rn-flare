@@ -81,6 +81,13 @@ const Strings = {
             subtext:
                 'If you have a Crew, they will still be notified that you are in a situation.',
         },
+        eventTimeline: {
+            create: '🚨 You activated the 911 feature.',
+            sentToNoonlight:
+                '📍 Flare shared your location with 911 dispatchers.',
+            noonlightSuccess:
+                'Noonlight will contact you; be sure to respond if you can.',
+        },
     },
     dev: {
         sendTestFlare: 'Flare',

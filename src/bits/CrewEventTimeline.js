@@ -49,6 +49,8 @@ const typeSpecificColors = [
     Colors.theme.black, // create
     Colors.theme.pink, // join
     Colors.theme.purple, // expire
+    Colors.theme.black, // sentToNoonlight
+    Colors.theme.black, // noonlightSuccess
 ];
 
 const CrewActionConstantToStringToken = [
@@ -59,6 +61,8 @@ const CrewActionConstantToStringToken = [
     'create',
     'join',
     'expire',
+    'sentToNoonlight',
+    'noonlightSuccess',
 ];
 
 const CrewMessage = ({
@@ -122,6 +126,8 @@ const CrewEvent = ({ event }) => {
         case CrewActionTypes.Create:
         case CrewActionTypes.Join:
         case CrewActionTypes.Expire:
+        case CrewActionTypes.SentToNoonlight:
+        case CrewActionTypes.NoonlightSuccess:
             return <CrewStatus type={event.action_type} event={event} />;
         case CrewActionTypes.Response:
             return <CrewMessage event={event} />;
