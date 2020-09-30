@@ -78,9 +78,6 @@ export function user(state = initialState.user, action = {}) {
                 crewEvents: action.data.crew_events,
                 crews: action.data.crews,
                 devices: action.data.devices,
-                hasActiveFlare:
-                    action.data.crew_events &&
-                    action.data.crew_events.length > 0,
                 profile: action.data.profile,
                 referralKey: action.data.referral_key,
             });
