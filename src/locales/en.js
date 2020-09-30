@@ -22,23 +22,21 @@ const Strings = {
     },
     eventTimeline: {
         headings: {
+            create: '📣 You started a message.',
             cancel: '🚫 You canceled the message.',
             join: 'is available.',
             notify: '💌 We reached out to ',
             expire: 'Your message expired.',
             unknown: '🤮 Something got mixed up on our end',
-            crew: {
-                create: '📣 You started a message.',
-            },
             ems: {
-                create: '🚨 You activated the 911 feature.',
+                noonlightCreated: '🚨 You activated the 911 feature.',
                 sentToNoonlight:
                     '📍 Flare shared your location with 911 dispatchers.',
                 noonlightSuccess:
                     'Noonlight will contact you; be sure to respond if you can.',
             },
             crewAndEms: {
-                create: '🚨 You activated the 911 feature.',
+                noonlightCreated: '🚨 You activated the 911 feature.',
                 sentToNoonlight:
                     '📍 Flare shared your location with 911 dispatchers.',
                 noonlightSuccess:

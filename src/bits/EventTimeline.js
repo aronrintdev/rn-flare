@@ -62,6 +62,7 @@ const CrewActionConstantToStringToken = [
     'create',
     'join',
     'expire',
+    'noonlightCreated',
     'sentToNoonlight',
     'noonlightSuccess',
 ];
@@ -126,19 +127,13 @@ const CrewStatus = ({ type, event: { name, timestamp }, settingStatus }) => (
 
 const CrewEvent = ({ event, settingStatus }) => {
     switch (event.action_type) {
+        case CrewActionTypes.Create:
         case CrewActionTypes.Notification:
         case CrewActionTypes.Cancel:
         case CrewActionTypes.Join:
         case CrewActionTypes.Expire:
             return <CrewStatus type={event.action_type} event={event} />;
-        case CrewActionTypes.Create:
-            return (
-                <CrewStatus
-                    type={event.action_type}
-                    event={event}
-                    settingStatus={settingStatus}
-                />
-            );
+        case CrewActionTypes.NoonlightCreated:
         case CrewActionTypes.SentToNoonlight:
         case CrewActionTypes.NoonlightSuccess:
             return (
