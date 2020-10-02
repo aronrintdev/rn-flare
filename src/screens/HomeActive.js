@@ -305,6 +305,7 @@ class HomeActive extends React.Component {
     render() {
         const { eventTimeline, enabled911Feature, crewEnabled } = this.props;
         let headerText;
+        let cancelFlareTitle = Strings.home.cancelActiveFlare;
         let eventTimelineSetting;
         if (crewEnabled && enabled911Feature) {
             headerText = Strings.eventTimeline.title.crewAndEms;
@@ -312,6 +313,7 @@ class HomeActive extends React.Component {
         } else if (enabled911Feature) {
             headerText = Strings.eventTimeline.title.ems;
             eventTimelineSetting = EVENT_TIMLINE_SETTING_EMS;
+            cancelFlareTitle = Strings.home.cancelActiveFlareFor911;
         } else if (crewEnabled) {
             headerText = Strings.eventTimeline.title.crew;
             eventTimelineSetting = EVENT_TIMLINE_SETTING_CREW;
@@ -335,7 +337,7 @@ class HomeActive extends React.Component {
                         dark
                         primary
                         onPress={this.cancelFlare}
-                        title={Strings.home.cancelActiveFlare}
+                        title={cancelFlareTitle}
                     />
                 </View>
             </SafeAreaView>

@@ -96,7 +96,7 @@ const ShareDialog = ({ componentId }) => {
             <View style={styles.line} />
             <Text style={styles.subhead}>
                 Invite your friends to join the movement. They can get $20 off
-                and celebrate Flare’s launch 🎉
+                with your referral code.
             </Text>
             <View style={styles.imageContainer}>
                 <Image source={cardCrew} style={styles.image} />

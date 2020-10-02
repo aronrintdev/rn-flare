@@ -123,8 +123,8 @@ const Home = ({
                     />
                 </View>
             </View>
-            <View style={styles.itemContainer}>
-                <View style={styles.item}>
+            <View style={[styles.itemContainer, styles.lastItemContainer]}>
+                <View style={[styles.item, styles.lastItem]}>
                     <Text style={styles.text}>Enable Crew</Text>
                     <Switch
                         trackColor={{ true: Colors.theme.purple }}
@@ -133,7 +133,17 @@ const Home = ({
                     />
                 </View>
             </View>
-            <View style={[styles.itemContainer, styles.lastItemContainer]}>
+            <Text style={[styles.explain, { marginBottom: 18 }]}>
+                Decide what you would like to happen. Flare can share your
+                location with 911, your Crew, or both.
+            </Text>
+            <View
+                style={[
+                    styles.itemContainer,
+                    styles.firstItemContainer,
+                    styles.lastItemContainer,
+                ]}
+            >
                 <TouchableOpacity
                     style={[styles.item, styles.lastItem]}
                     onPress={editCrew}

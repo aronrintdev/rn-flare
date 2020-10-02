@@ -55,9 +55,9 @@ const GoldenRules = ({ finishUp, buttonText = 'Got it. Let’s go!' }) => {
                         receive your location. Keep location services “always”
                         allowed.
                     </HelpSection>
-                    <HelpSection emoji="👯" title="10 feet or less.">
-                        Your phone needs to be within 10 feet of your bracelet
-                        to get the signal.
+                    <HelpSection emoji="👯" title="10 Feet Away Is Best">
+                        Your phone needs to be within range of your bracelet to
+                        get the signal.
                     </HelpSection>
                     <HelpSection emoji="💕" title="Love.">
                         Use Flare with love, thoughtfulness, honesty and good

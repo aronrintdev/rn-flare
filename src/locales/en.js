@@ -74,19 +74,19 @@ const Strings = {
         success: {
             title: 'Success',
             subtext:
-                'We encourage you to test the 911 feature! Since we go through a third party, there is no need to worry about taking up emergency service resources.',
+                'We encourage you to test the 911 feature!  Since we go through a third party called Noonlight, there is no need to worry about taking up emergency service resources.',
             tryBtnText: 'GIVE IT A TRY',
             notNowBtnText: 'NOT NOW',
         },
         readyToTest: {
-            title: `Ready to Test It?`,
+            title: `Ready to Test 911?`,
             subtext:
-                'Hold the button on your cuff for 3 seconds and release it. A representative from Noonlight will text you and call you. Noonlight is an intermediary who will then reach out to 911 dispatchers, so you don’t have to worry about tying up valuable resources. Be sure to indicate that you are safe and testing your Flare bracelet.',
+                'Let’s make this shorter. Try “Hold the button on your bracelet for 3 seconds and release. A Noonlight rep will text and call you. You don’t have to worry about tying up 911 resources since Noonlight is our intermediary. Be sure to indicate that you are safe and testing your Flare bracelet.',
         },
         gotYourBack: {
             title: `We’ve Got Your\n Back.`,
             subtext:
-                'If you have a Crew, they will still be notified that you are in a situation.',
+                'If you are not able to respond, the dispatcher will send emergency first responders to your location.',
             enableBtnText: 'ENABLE 911',
             notNowBtnText: 'NOT NOW',
         },
@@ -116,6 +116,7 @@ const Strings = {
         locationDisabledWarning:
             'Set location permission to Always in phone settings',
         cancelActiveFlare: 'I’m Okay',
+        cancelActiveFlareFor911: 'Dismiss',
         chooseLanguage: 'Choose language',
         contactsButtonLabelAdd: 'Choose Your Crew',
         contactsButtonLabelEdit: 'Edit Your Crew',

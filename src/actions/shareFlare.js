@@ -7,7 +7,7 @@ export const shareFlare = () => async (dispatch, getState) => {
     const {
         user: { referralKey },
     } = getState();
-    const message = `Here’s $20 off your first Flare bracelet to celebrate the company’s launch! Use my referral code ${referralKey} to purchase Flare and join the movement.`;
+    const message = `Here’s $20 off your first Flare bracelet! Use my referral code ${referralKey} to purchase Flare and join the movement.`;
 
     try {
         dispatch({ type: USER_WILL_SHARE });

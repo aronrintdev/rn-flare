@@ -135,7 +135,7 @@ const TextConfirm = ({ componentId }) => {
                 </Text>
                 <View style={styles.fakeTextContainer}>
                     <Text style={styles.fakeText}>
-                        Hey hey! {fullName} has added you to their Crew of
+                        Hi there! {fullName} has added you to their Crew of
                         friends in Flare (a new safety jewelry company) because
                         you always have their back.
                         {'\n\n'}

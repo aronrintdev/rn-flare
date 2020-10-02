@@ -18,8 +18,8 @@ const AboutPermissions = props => (
             other. And you need to have phone service.
         </HelpSection>
         <HelpSection icon={locationIcon} title="Location">
-            We need your location so that we can let your Crew know where you
-            are when you need backup.
+            We need your location so that we can let your Crew and/or 911 know
+            where you are when you need backup.
         </HelpSection>
         <HelpSection icon={contactsIcon} title="Contacts">
             So that you can add friends to your Crew directly from your phone
