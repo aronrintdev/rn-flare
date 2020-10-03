@@ -13,8 +13,11 @@ import Carousel, { Pagination } from 'react-native-snap-carousel';
 import Colors from '../bits/Colors';
 import CloseButton from './CloseButton';
 import Headline from './Onboarding/Headline';
+import RoundedButton from '../bits/RoundedButton';
+import GoldenRules from './Scenarios/GoldenRules';
 import LongPressGif from '../assets/LongPressGif3Seconds.gif';
 import PeriwinkleButton from '../assets/PeriwinkleButtonPress.gif';
+import ShortPressPeriwinkleButton from '../assets/FlareShortPressGIFPeriwinkle.gif';
 
 const styles = StyleSheet.create({
     container: {
@@ -93,6 +96,7 @@ const styles = StyleSheet.create({
     slide: {
         flex: 1,
         backgroundColor: 'white',
+        alignItems: 'center',
     },
     slideImage: {
         width: '100%',
@@ -101,23 +105,33 @@ const styles = StyleSheet.create({
     },
 });
 
-const subTitles = ['Tap for a call', 'Hold for your crew'];
+const entries = [
+    {
+        subtitle: 'There’s a hidden button on the side of your bracelet.',
+        image: PeriwinkleButton,
+    },
+    {
+        subtitle: 'Click once to get an automated call.',
+        image: ShortPressPeriwinkleButton,
+    },
+    {
+        subtitle:
+            'Hold for 3 seconds to share your location with your Crew and 911 (optional).',
+        image: LongPressGif,
+    },
+];
 
 const HowItWorks = ({ componentId }) => {
-    const [subtitleText, setSubtitleText] = React.useState(subTitles[0]);
+    const [golden, setGolden] = React.useState(false);
+    const [subtitleText, setSubtitleText] = React.useState(entries[0].subtitle);
     const [activeSlide, setActiveSlide] = React.useState(0);
+    const showGolden = React.useCallback(() => {
+        setGolden(true);
+    }, []);
+
     const close = React.useCallback(() => {
         Navigation.dismissModal(componentId);
     }, [componentId]);
-
-    const entries = [
-        {
-            image: LongPressGif,
-        },
-        {
-            image: PeriwinkleButton,
-        },
-    ];
 
     const renderItem = ({ item, index }) => {
         return (
@@ -129,8 +143,12 @@ const HowItWorks = ({ componentId }) => {
 
     const onChangeItem = index => {
         setActiveSlide(index);
-        setSubtitleText(subTitles[index]);
+        setSubtitleText(entries[index].subtitle);
     };
+
+    if (golden) {
+        return <GoldenRules finishUp={close} />;
+    }
 
     return (
         <SafeAreaView style={styles.container}>
@@ -165,6 +183,12 @@ const HowItWorks = ({ componentId }) => {
                 }}
                 inactiveDotOpacity={0.4}
                 inactiveDotScale={1}
+            />
+            <RoundedButton
+                onPress={showGolden}
+                wrapperStyle={styles.button}
+                text="Read More"
+                width={240}
             />
         </SafeAreaView>
     );
