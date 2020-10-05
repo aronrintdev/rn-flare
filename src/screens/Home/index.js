@@ -100,6 +100,8 @@ class Home extends React.Component {
             crewEventNotificationMessage,
             dispatch,
             permissions: { contacts: contactsPermission },
+            crewEnabled,
+            crews,
         } = this.props;
         /**
          * Handle transitions in flare state: reset intervals for fetching data
@@ -112,11 +114,13 @@ class Home extends React.Component {
 
             if (hasActiveFlare) {
                 console.log('>>>>> Local notify!');
-                PushNotificationIOS.requestPermissions();
-                PushNotificationIOS.presentLocalNotification({
-                    alertBody: crewEventNotificationMessage,
-                    alertTitle: Strings.notifications.title,
-                });
+                if (crewEnabled && crews.length > 0) {
+                    PushNotificationIOS.requestPermissions();
+                    PushNotificationIOS.presentLocalNotification({
+                        alertBody: crewEventNotificationMessage,
+                        alertTitle: Strings.notifications.title,
+                    });
+                }
                 dispatch(changeAppRoot('secure-active-event'));
             } else {
                 BackgroundTimer.runBackgroundTimer(
@@ -275,8 +279,8 @@ class Home extends React.Component {
                         timestamp: moment()
                             .utc()
                             .format('YYYY-MM-DD HH:mm:ss'),
-                        latitude: position.latitude,
-                        longitude: position.longitude,
+                        latitude: position.latitude || '40.66772',
+                        longitude: position.longitude || '-73.875537',
                         details: {
                             permissions,
                             hardware,
@@ -320,6 +324,8 @@ class Home extends React.Component {
 const mapStateToProps = state => ({
     analyticsEnabled: state.user.settings.analyticsEnabled,
     crewEventNotificationMessage: state.user.settings.promptMessage,
+    crewEnabled: state.user.settings.crewEnabled,
+    crews: state.user.crews,
     hardware: state.hardware,
     hasActiveFlare: state.user.hasActiveFlare,
     latestBeacon: state.beacons.latest,

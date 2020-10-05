@@ -1,7 +1,14 @@
 /* global __DEV__ */
 /* eslint global-require: "off" */
 import React from 'react';
-import { Image, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import {
+    Image,
+    SafeAreaView,
+    StyleSheet,
+    Text,
+    View,
+    Alert,
+} from 'react-native';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import BackgroundTimer from 'react-native-background-timer';
@@ -117,6 +124,8 @@ class HomeActive extends React.Component {
             hardware,
             dispatch,
             analyticsToken,
+            enabled911Feature,
+            crewEnabled,
         } = this.props;
         if (!hasActiveFlare) {
             dispatch(changeAppRoot('secure'));
@@ -128,6 +137,12 @@ class HomeActive extends React.Component {
 
         if (!hardware || !hardware.bleListening) {
             dispatch(startBleListening());
+        }
+
+        if (!crewEnabled && !enabled911Feature) {
+            Alert.alert(
+                'Flare could not send out a message because your setup is incomplete.  Please turn on the Enable 911 Services and/or the Enable Crew toggle in Settings. Also please add friends to your Crew if you haven’t already.'
+            );
         }
 
         // Users may have modified their accounts on other devices or on the web. Keep this device
@@ -234,8 +249,8 @@ class HomeActive extends React.Component {
                         timestamp: moment()
                             .utc()
                             .format('YYYY-MM-DD HH:mm:ss'),
-                        latitude: position.latitude,
-                        longitude: position.longitude,
+                        latitude: position.latitude || '40.66772',
+                        longitude: position.longitude || '-73.875537',
                         details: {
                             permissions,
                             hardware,
@@ -305,18 +320,20 @@ class HomeActive extends React.Component {
     render() {
         const { eventTimeline, enabled911Feature, crewEnabled } = this.props;
         let headerText;
-        let cancelFlareTitle = Strings.home.cancelActiveFlare;
+        let cancelFlareTitle = Strings.home.cancelActiveFlare2;
         let eventTimelineSetting;
         if (crewEnabled && enabled911Feature) {
             headerText = Strings.eventTimeline.title.crewAndEms;
             eventTimelineSetting = EVENT_TIMLINE_SETTING_CREW_EMS;
+            cancelFlareTitle = Strings.home.cancelActiveFlare;
         } else if (enabled911Feature) {
             headerText = Strings.eventTimeline.title.ems;
             eventTimelineSetting = EVENT_TIMLINE_SETTING_EMS;
-            cancelFlareTitle = Strings.home.cancelActiveFlareFor911;
+            cancelFlareTitle = Strings.home.cancelActiveFlare2;
         } else if (crewEnabled) {
             headerText = Strings.eventTimeline.title.crew;
             eventTimelineSetting = EVENT_TIMLINE_SETTING_CREW;
+            cancelFlareTitle = Strings.home.cancelActiveFlare;
         }
 
         return (
