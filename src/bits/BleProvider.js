@@ -108,6 +108,8 @@ export default class BleProvider {
             const crewValid = crew && crew.members && crew.members.length > 0;
             return hasCrew && crewValid;
         }, true);
+        const is911flare = this.store?.getState()?.user?.settings
+            ?.enabled911Feature;
 
         const deviceIDs = userDevices.map(d => d.id);
         const forCurrentUser =
@@ -139,6 +141,8 @@ export default class BleProvider {
                 let noop;
                 if (hasCompletedOnboarding) {
                     if (userHasCrew) {
+                        noop = undefined;
+                    } else if (is911flare) {
                         noop = undefined;
                     } else {
                         PushNotificationIOS.requestPermissions();
