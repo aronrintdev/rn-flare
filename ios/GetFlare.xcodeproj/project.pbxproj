@@ -13,7 +13,6 @@
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		1E90A08D24FDAF0A00F1E71B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1E90A08C24FDAF0A00F1E71B /* GoogleService-Info.plist */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -28,10 +27,10 @@
 		7403F1CAC5F84BB3A106602F /* NocturnoDisplayStd-RegularItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3ADA507556BD465DAF83FA9A /* NocturnoDisplayStd-RegularItalic.otf */; };
 		9FF666F7F4286DCEE19FB8D9 /* libPods-GetFlareTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BC6797956A441BE5A7782E9 /* libPods-GetFlareTests.a */; };
 		BECF1CA62346895C0010B9BC /* swift-bridge-hack.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECF1CA52346895C0010B9BC /* swift-bridge-hack.swift */; };
-		F1B880FF2423C01300E8593D /* Pods-GetFlare.staging.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F1B880FE2423C01300E8593D /* Pods-GetFlare.staging.xcconfig */; };
-		F1B881002423C01300E8593D /* Pods-GetFlare.staging.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F1B880FE2423C01300E8593D /* Pods-GetFlare.staging.xcconfig */; };
-		F1B881012423C01300E8593D /* Pods-GetFlare.staging.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F1B880FE2423C01300E8593D /* Pods-GetFlare.staging.xcconfig */; };
-		F1B881022423C01300E8593D /* Pods-GetFlare.staging.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F1B880FE2423C01300E8593D /* Pods-GetFlare.staging.xcconfig */; };
+		F1B880FF2423C01300E8593D /* Target Support Files/Pods-GetFlare/Pods-GetFlare.staging.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F1B880FE2423C01300E8593D /* Target Support Files/Pods-GetFlare/Pods-GetFlare.staging.xcconfig */; };
+		F1B881002423C01300E8593D /* Target Support Files/Pods-GetFlare/Pods-GetFlare.staging.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F1B880FE2423C01300E8593D /* Target Support Files/Pods-GetFlare/Pods-GetFlare.staging.xcconfig */; };
+		F1B881012423C01300E8593D /* Target Support Files/Pods-GetFlare/Pods-GetFlare.staging.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F1B880FE2423C01300E8593D /* Target Support Files/Pods-GetFlare/Pods-GetFlare.staging.xcconfig */; };
+		F1B881022423C01300E8593D /* Target Support Files/Pods-GetFlare/Pods-GetFlare.staging.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F1B880FE2423C01300E8593D /* Target Support Files/Pods-GetFlare/Pods-GetFlare.staging.xcconfig */; };
 		F1B881052423C57500E8593D /* GetFlare-debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F1B881042423C57500E8593D /* GetFlare-debug.xcconfig */; };
 		F1B881062423C57500E8593D /* GetFlare-debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F1B881042423C57500E8593D /* GetFlare-debug.xcconfig */; };
 		F1B881072423C57500E8593D /* GetFlare-debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F1B881042423C57500E8593D /* GetFlare-debug.xcconfig */; };
@@ -77,7 +76,6 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = GetFlare/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = GetFlare/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = GetFlare/main.m; sourceTree = "<group>"; };
-		1E90A08C24FDAF0A00F1E71B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2796FF36A93246D49BC98C5D /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = ../src/fonts/MaterialIcons.ttf; sourceTree = "<group>"; };
 		2BC6797956A441BE5A7782E9 /* libPods-GetFlareTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GetFlareTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E47B1E0B4A5D006451C7 /* GetFlare-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GetFlare-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -123,7 +121,7 @@
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		F145B9A6880F400086C7AA3B /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
-		F1B880FE2423C01300E8593D /* Pods-GetFlare.staging.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Target Support Files/Pods-GetFlare/Pods-GetFlare.staging.xcconfig"; sourceTree = "<group>"; };
+		F1B880FE2423C01300E8593D /* Target Support Files/Pods-GetFlare/Pods-GetFlare.staging.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Target Support Files/Pods-GetFlare/Pods-GetFlare.staging.xcconfig"; sourceTree = "<group>"; };
 		F1B881042423C57500E8593D /* GetFlare-debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "GetFlare-debug.xcconfig"; sourceTree = "<group>"; };
 		F1B881092423C58A00E8593D /* GetFlare-release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "GetFlare-release.xcconfig"; sourceTree = "<group>"; };
 		F1B8810E2423C59E00E8593D /* GetFlare-staging.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "GetFlare-staging.xcconfig"; sourceTree = "<group>"; };
@@ -220,7 +218,7 @@
 		756B69FB5126EFAED6C08E59 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				F1B880FE2423C01300E8593D /* Pods-GetFlare.staging.xcconfig */,
+				F1B880FE2423C01300E8593D /* Target Support Files/Pods-GetFlare/Pods-GetFlare.staging.xcconfig */,
 				ADE74B254C68192F3BDDA0C1 /* Pods-GetFlare.debug.xcconfig */,
 				CC7BA7151C8A8D6379E37B87 /* Pods-GetFlare.release.xcconfig */,
 				DA7BA64C9F1E86262F4BDDDA /* Pods-GetFlare-tvOS.debug.xcconfig */,
@@ -454,7 +452,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F1B881062423C57500E8593D /* GetFlare-debug.xcconfig in Resources */,
-				F1B881002423C01300E8593D /* Pods-GetFlare.staging.xcconfig in Resources */,
+				F1B881002423C01300E8593D /* Target Support Files/Pods-GetFlare/Pods-GetFlare.staging.xcconfig in Resources */,
 				F1B8810B2423C58A00E8593D /* GetFlare-release.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -470,7 +468,7 @@
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				F1B8810F2423C59E00E8593D /* GetFlare-staging.xcconfig in Resources */,
 				134EB2154FDD4620A0D6EC95 /* NocturnoDisplayStd-Regular.otf in Resources */,
-				F1B880FF2423C01300E8593D /* Pods-GetFlare.staging.xcconfig in Resources */,
+				F1B880FF2423C01300E8593D /* Target Support Files/Pods-GetFlare/Pods-GetFlare.staging.xcconfig in Resources */,
 				7403F1CAC5F84BB3A106602F /* NocturnoDisplayStd-RegularItalic.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -481,7 +479,7 @@
 			files = (
 				F1B8810C2423C58A00E8593D /* GetFlare-release.xcconfig in Resources */,
 				F1B881072423C57500E8593D /* GetFlare-debug.xcconfig in Resources */,
-				F1B881012423C01300E8593D /* Pods-GetFlare.staging.xcconfig in Resources */,
+				F1B881012423C01300E8593D /* Target Support Files/Pods-GetFlare/Pods-GetFlare.staging.xcconfig in Resources */,
 				2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -491,7 +489,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F1B881082423C57500E8593D /* GetFlare-debug.xcconfig in Resources */,
-				F1B881022423C01300E8593D /* Pods-GetFlare.staging.xcconfig in Resources */,
+				F1B881022423C01300E8593D /* Target Support Files/Pods-GetFlare/Pods-GetFlare.staging.xcconfig in Resources */,
 				F1B8810D2423C58A00E8593D /* GetFlare-release.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -836,7 +834,7 @@
 				CODE_SIGN_ENTITLEMENTS = "GetFlare/Get Flare.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 17;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = M8SR977JX7;
 				INFOPLIST_FILE = GetFlare/Info.plist;
@@ -868,7 +866,7 @@
 				CODE_SIGN_ENTITLEMENTS = "GetFlare/Get Flare.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_TEAM = M8SR977JX7;
 				INFOPLIST_FILE = GetFlare/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -1164,7 +1162,7 @@
 				CODE_SIGN_ENTITLEMENTS = "GetFlare/Get Flare.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 17;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = M8SR977JX7;
 				INFOPLIST_FILE = GetFlare/Info.plist;
