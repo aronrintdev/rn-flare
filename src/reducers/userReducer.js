@@ -51,6 +51,11 @@ export function user(state = initialState.user, action = {}) {
                 authState: 'succeeded',
                 role: action.data.role,
                 hasViewedTutorial: action.viewedTutorial,
+                settings: {
+                    ...state.settings,
+                    enabled911Feature: action.data.ems_services,
+                    crewEnabled: action.data.crew_services,
+                },
                 contactsCrewLookup: getContactsCrewLookup(firstCrew),
             });
         }
@@ -63,6 +68,11 @@ export function user(state = initialState.user, action = {}) {
                 role: null,
                 contactsCrewLookup: null,
                 authState: null,
+                settings: {
+                    ...state.settings,
+                    enabled911Feature: false,
+                    crewEnabled: false,
+                },
             });
         case types.USER_RESET:
             return initialState.user;

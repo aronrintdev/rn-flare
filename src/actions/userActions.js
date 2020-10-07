@@ -436,14 +436,20 @@ export function setCrewEnabled(token, userId) {
         dispatch({
             type: types.USER_SET_CREW_ENABLE_REQUEST,
         });
-        ProtectedAPICall(token, API_URL, `/config/user/${userId}/toggle_crew`, {
-            method: 'POST',
-        })
+        return ProtectedAPICall(
+            token,
+            API_URL,
+            `/config/user/${userId}/toggle_crew`,
+            {
+                method: 'POST',
+            }
+        )
             .then(response => {
                 dispatch({
                     type: types.USER_SET_CREW_ENABLE_SUCCESS,
                     crew_services: response.data.crew_services,
                 });
+                return response.data.crew_services;
             })
             .catch(error => {
                 dispatch({

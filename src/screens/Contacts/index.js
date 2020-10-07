@@ -135,10 +135,29 @@ class Contacts extends React.Component {
         }
     }
 
-    performSave = () => {
-        const { setCrewMembers, authToken } = this.props;
+    performSave = async () => {
+        const {
+            setCrewMembers,
+            authToken,
+            profile,
+            setCrewEnabled,
+            crewEnabled,
+        } = this.props;
         const { crew } = this.state;
-        setCrewMembers(authToken, crew.id || 0, crew.members);
+        try {
+            if (!crewEnabled) {
+                const resp = await setCrewEnabled(authToken, profile.id);
+                if (!resp) {
+                    const resp2 = await setCrewEnabled(authToken, profile.id);
+                    if (!resp2) {
+                        Alert.alert('Crew Enable Error!');
+                    }
+                }
+            }
+            setCrewMembers(authToken, crew.id || 0, crew.members);
+        } catch (error) {
+            Alert.alert(error.message);
+        }
     };
 
     handleContactPress = contact => {
@@ -291,6 +310,8 @@ const mapStateToProps = ({
         hasViewedTutorial,
         crewUpdateState,
         textFriends,
+        profile,
+        settings,
     },
 }) => {
     const crew = crews?.length > 0 ? crews[0] : { name: null, members: [] };
@@ -302,6 +323,8 @@ const mapStateToProps = ({
         crewUpdateState,
         loading: crewUpdateState === 'requested',
         textFriendsState: textFriends,
+        profile,
+        crewEnabled: settings.crewEnabled,
     };
 };
 
@@ -312,6 +335,7 @@ const mapDispatchToProps = {
     textFriendsRequest: userActions.textFriendsRequest,
     textFriendsReset: userActions.textFriendsReset,
     resetSetCrewMembers: userActions.resetSetCrewMembers,
+    setCrewEnabled: userActions.setCrewEnabled,
 };
 
 export default connect(
