@@ -532,7 +532,7 @@ export function user(state = initialState.user, action = {}) {
             );
         case types.USER_SET_911_FEATURE_FAILURE:
             return state.set('showFlareServiceError', true);
-        case types.HIDE_911_FEATURE_FAILURE_ALERT:
+        case types.HIDE_FLARE_SERVICE_FAILURE_ALERT:
             return state.set('showFlareServiceError', false);
 
         case types.USER_SET_CREW_ENABLE_SUCCESS:

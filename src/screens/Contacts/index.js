@@ -98,6 +98,7 @@ class Contacts extends React.Component {
             componentId,
             loading,
             crewUpdateState,
+            showFlareServiceError,
         } = this.props;
         const { dirty, addedMembers } = this.state;
         if (
@@ -127,6 +128,9 @@ class Contacts extends React.Component {
                 Navigation.pop(componentId);
             }
         }
+        if (showFlareServiceError) {
+            this.showEnableCrewErrorAlert();
+        }
     }
 
     componentWillUnmount() {
@@ -150,7 +154,7 @@ class Contacts extends React.Component {
                 if (!resp) {
                     const resp2 = await setCrewEnabled(authToken, profile.id);
                     if (!resp2) {
-                        Alert.alert('Crew Enable Error!');
+                        this.showEnableCrewErrorAlert();
                     }
                 }
             }
@@ -158,6 +162,14 @@ class Contacts extends React.Component {
         } catch (error) {
             Alert.alert(error.message);
         }
+    };
+
+    showEnableCrewErrorAlert = () => {
+        const { hideFlareServiceErrorAlert } = this.props;
+        Alert.alert(
+            `Sorry, we are unable to connect to Flare to toggle your settings. Please try again later, or contact us at help@getflare.com if this issue persists.`
+        );
+        hideFlareServiceErrorAlert();
     };
 
     handleContactPress = contact => {
@@ -312,6 +324,7 @@ const mapStateToProps = ({
         textFriends,
         profile,
         settings,
+        showFlareServiceError,
     },
 }) => {
     const crew = crews?.length > 0 ? crews[0] : { name: null, members: [] };
@@ -325,6 +338,7 @@ const mapStateToProps = ({
         textFriendsState: textFriends,
         profile,
         crewEnabled: settings.crewEnabled,
+        showFlareServiceError,
     };
 };
 
@@ -336,6 +350,7 @@ const mapDispatchToProps = {
     textFriendsReset: userActions.textFriendsReset,
     resetSetCrewMembers: userActions.resetSetCrewMembers,
     setCrewEnabled: userActions.setCrewEnabled,
+    hideFlareServiceErrorAlert: userActions.hideFlareServiceErrorAlert,
 };
 
 export default connect(

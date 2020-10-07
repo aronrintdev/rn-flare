@@ -445,11 +445,14 @@ export function setCrewEnabled(token, userId) {
             }
         )
             .then(response => {
-                dispatch({
-                    type: types.USER_SET_CREW_ENABLE_SUCCESS,
-                    crew_services: response.data.crew_services,
-                });
-                return response.data.crew_services;
+                if (response.data && typeof response.data === 'object') {
+                    dispatch({
+                        type: types.USER_SET_CREW_ENABLE_SUCCESS,
+                        crew_services: response.data.crew_services,
+                    });
+                    return response.data.crew_services;
+                }
+                throw new Error('Toggle Crew API Response is invalid');
             })
             .catch(error => {
                 dispatch({
