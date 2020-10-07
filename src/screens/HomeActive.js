@@ -123,7 +123,6 @@ class HomeActive extends React.Component {
             permissions,
             hardware,
             dispatch,
-            analyticsToken,
             enabled911Feature,
             crewEnabled,
         } = this.props;
@@ -144,14 +143,6 @@ class HomeActive extends React.Component {
                 'Flare could not send out a message because your setup is incomplete.  Please turn on the Enable 911 Services and/or the Enable Crew toggle in Settings. Also please add friends to your Crew if you haven’t already.'
             );
         }
-
-        // Users may have modified their accounts on other devices or on the web. Keep this device
-        // in sync by fetching server-stored data.
-        dispatch(
-            syncAccountDetails({
-                analyticsToken,
-            })
-        );
 
         // Periodically fetch account status to ensure auth and to observe account changes from other devices.
         if (this.eventTimelineRefreshTimer) {
@@ -240,7 +231,7 @@ class HomeActive extends React.Component {
         // Transmit the current state and retrieve any updates from the server.
         getCurrentPosition({
             enableHighAccuracy: true,
-            timeout: ACCOUNT_SYNC_INTERVAL,
+            timeout: this.accountSyncTimeInMs,
         }).then(position => {
             dispatch(
                 syncAccountDetails({
@@ -249,8 +240,8 @@ class HomeActive extends React.Component {
                         timestamp: moment()
                             .utc()
                             .format('YYYY-MM-DD HH:mm:ss'),
-                        latitude: position.latitude || '40.66772',
-                        longitude: position.longitude || '-73.875537',
+                        latitude: position.latitude,
+                        longitude: position.longitude,
                         details: {
                             permissions,
                             hardware,
