@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/jsx-one-expression-per-line */
 import React, { useEffect } from 'react';
 import {
@@ -34,10 +35,18 @@ const Home = ({
     getNotificationPermission,
     showFlareServiceError,
     hideFlareServiceErrorAlert,
+    fetchSettings,
+    showSettingsFetchError,
+    hideUserSettingsError,
 }) => {
     useSlideMenu(componentId);
 
     const fullyEnabled = enableNotifications && notifPermission;
+
+    useEffect(() => {
+        // Fetch settings status
+        fetchSettings(authToken, profile.id);
+    }, []);
 
     const openCall = React.useCallback(() => {
         Navigation.push(componentId, {
@@ -86,6 +95,13 @@ const Home = ({
     const changeCrewEnable = () => {
         setCrewEnabled(authToken, profile.id);
     };
+
+    if (showSettingsFetchError) {
+        Alert.alert(
+            `Sorry, we are unable to fetch your settings. Please try again later, or contact us at help@getflare.com if this issue persists.`
+        );
+        hideUserSettingsError();
+    }
 
     return (
         <SafeAreaView style={styles.container}>
@@ -205,6 +221,7 @@ const mapStateToProps = ({
         authToken,
         profile,
         showFlareServiceError,
+        showSettingsFetchError,
     },
 }) => ({
     enableNotifications,
@@ -214,6 +231,7 @@ const mapStateToProps = ({
     authToken,
     profile,
     showFlareServiceError,
+    showSettingsFetchError,
 });
 
 const mapDispatchToProps = {
@@ -222,6 +240,8 @@ const mapDispatchToProps = {
     set911Features: userActions.set911Features,
     setCrewEnabled: userActions.setCrewEnabled,
     hideFlareServiceErrorAlert: userActions.hideFlareServiceErrorAlert,
+    fetchSettings: userActions.fetchSettings,
+    hideUserSettingsError: userActions.hideUserSettingsError,
 };
 
 export default connect(

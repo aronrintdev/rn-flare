@@ -462,3 +462,30 @@ export function setCrewEnabled(token, userId) {
             });
     };
 }
+
+export function fetchSettings(token, userId) {
+    return function setEnabled(dispatch) {
+        dispatch({
+            type: types.USER_SET_SETTINGS_REQUEST,
+        });
+        ProtectedAPICall(token, API_URL, `/config/user/${userId}/settings`, {
+            method: 'GET',
+        })
+            .then(response => {
+                dispatch({
+                    type: types.USER_SET_SETTINGS_SUCCESS,
+                    data: response.data,
+                });
+            })
+            .catch(error => {
+                dispatch({
+                    type: types.USER_SET_SETTINGS_FAILURE,
+                    error,
+                });
+            });
+    };
+}
+
+export const hideUserSettingsError = () => ({
+    type: types.HIDE_USER_SETTINGS_ERROR,
+});

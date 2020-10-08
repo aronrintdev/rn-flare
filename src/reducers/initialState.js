@@ -14,6 +14,7 @@ export const initialState = Immutable({
         showFlareServiceError: false,
         didShare: false,
         fetchingCallScripts: false,
+        showSettingsFetchError: false,
         contacts: [],
         contactsCrewLookup: {},
         crewEvents: [],

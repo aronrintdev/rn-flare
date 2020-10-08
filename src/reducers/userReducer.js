@@ -542,7 +542,20 @@ export function user(state = initialState.user, action = {}) {
             );
         case types.USER_SET_CREW_ENABLE_FAILURE:
             return state.set('showFlareServiceError', true);
-
+        case types.HIDE_USER_SETTINGS_ERROR:
+            return state.set('showSettingsFetchError', false);
+        case types.USER_SET_SETTINGS_REQUEST:
+            return state.set('showSettingsFetchError', false);
+        case types.USER_SET_SETTINGS_SUCCESS:
+            return state.merge({
+                settings: {
+                    ...state.settings,
+                    ems_services: action.data.ems_services,
+                    crew_services: action.data.crew_services,
+                },
+            });
+        case types.USER_SET_SETTINGS_FAILURE:
+            return state.set('showSettingsFetchError', true);
         default:
             return state;
     }
