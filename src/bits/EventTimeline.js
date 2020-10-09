@@ -174,7 +174,7 @@ const EventTimeline = ({
 
     return (
         <View style={containerStyle}>
-            {settingStatus && (
+            {settingStatus && timeline && timeline.length > 0 && (
                 <FlatList
                     data={timeline}
                     renderItem={({ item }) =>
