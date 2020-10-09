@@ -5,6 +5,7 @@ import {
     StyleSheet,
     Text,
     View,
+    Image,
     ScrollView,
 } from 'react-native';
 import { Navigation } from 'react-native-navigation';
@@ -12,10 +13,10 @@ import Carousel, { Pagination } from 'react-native-snap-carousel';
 import VideoPlayer from 'react-native-video-controls';
 
 import Colors from '../bits/Colors';
-import CloseButton from './CloseButton';
 import Headline from './Onboarding/Headline';
 import RoundedButton from '../bits/RoundedButton';
 import GoldenRules from './Scenarios/GoldenRules--HowItWorks';
+import StarryLocation from '../assets/starry-location.png';
 
 const video1 = require('../assets/videos/product-demo-button-location.mp4');
 const video2 = require('../assets/videos/product-demo-short-press.mp4');
@@ -76,17 +77,6 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-end',
         marginRight: 32,
     },
-    chatItem: {
-        backgroundColor: Colors.white,
-        borderRadius: 30,
-        maxWidth: 240,
-        padding: 16,
-        marginTop: 16,
-    },
-    chatItemText: {
-        color: Colors.black,
-        fontSize: 14,
-    },
     emojis: {
         marginTop: -10,
         fontSize: 20,
@@ -102,69 +92,64 @@ const styles = StyleSheet.create({
     },
     slide: {
         flex: 1,
-        backgroundColor: 'white',
+        backgroundColor: Colors.theme.white,
         alignItems: 'center',
     },
     slideImage: {
-        width: '100%',
+        width: 240,
         resizeMode: 'contain',
         flex: 1,
     },
     videoPlayerStyle: {
-        backgroundColor: 'white',
+        backgroundColor: Colors.theme.white,
     },
 });
 
-const entries = [
-    {
-        subtitle: 'Flare’s Golden Rules',
-        showGolden: true,
-    },
-    {
-        subtitle: 'There’s a hidden button on the side of your bracelet.',
-        image: video1,
-    },
-    {
-        subtitle: 'Click once to get an automated call.',
-        image: video2,
-    },
-    {
-        subtitle:
-            'Hold for 3 seconds to share your location with your Crew and 911 (optional).',
-        image: video3,
-    },
-    // {
-    //     subtitle: 'Explore the 911 feature',
-    //     showExplore911: true,
-    //     image: starryLocation,
-    //     button: {
-    //         text: 'Learn More',
-    //         onPress: React.useCallback(
-    //             () =>
-    //                 Navigation.push(componentId, {
-    //                     component: {
-    //                         name: 'com.flarejewelry.how911works.main',
-    //                         options: {
-    //                             topBar: {
-    //                                 visible: false,
-    //                                 animate: false,
-    //                             },
-    //                         },
-    //                     },
-    //                 }),
-    //             [componentId]
-    //         ),
-    //     },
-    // },
-];
-
 const HowItWorks = ({ componentId }) => {
+    const entries = [
+        {
+            subtitle: 'Flare’s Golden Rules',
+            showGolden: true,
+        },
+        {
+            subtitle: 'There’s a hidden button on the side of your bracelet.',
+            video: video1,
+        },
+        {
+            subtitle: 'Click once to get an automated call.',
+            video: video2,
+        },
+        {
+            subtitle:
+                'Hold for 3 seconds to share your location with your Crew and 911 (optional).',
+            video: video3,
+        },
+        {
+            subtitle: 'Explore the 911 feature',
+            showExplore911: true,
+            image: StarryLocation,
+            button: {
+                text: 'Learn More',
+                onPress: React.useCallback(() => {
+                    Navigation.dismissModal(componentId);
+                    Navigation.push(componentId, {
+                        component: {
+                            name: 'com.flarejewelry.how911works.main',
+                            options: {
+                                topBar: {
+                                    visible: false,
+                                    animate: false,
+                                },
+                            },
+                        },
+                    });
+                }, [componentId]),
+            },
+        },
+    ];
+
     const [subtitleText, setSubtitleText] = React.useState(entries[0].subtitle);
     const [activeSlide, setActiveSlide] = React.useState(0);
-
-    const close = React.useCallback(() => {
-        Navigation.dismissModal(componentId);
-    }, [componentId]);
 
     const renderItem = ({ item, index }) => {
         if (item.showGolden) {
@@ -173,7 +158,7 @@ const HowItWorks = ({ componentId }) => {
                     style={{
                         flex: 1,
                         alignSelf: 'stretch',
-                        paddingHorizontal: 32,
+                        paddingHorizontal: 6,
                     }}
                     contentContinerStyle={{
                         flexDirection: 'column',
@@ -189,9 +174,9 @@ const HowItWorks = ({ componentId }) => {
 
         return (
             <View style={styles.slide} key={index}>
-                {index === activeSlide && (
+                {item.video && index === activeSlide && (
                     <VideoPlayer
-                        source={item.image}
+                        source={item.video}
                         disableFullscreen
                         disablePlayPause
                         disableSeekbar
@@ -204,9 +189,13 @@ const HowItWorks = ({ componentId }) => {
                         style={styles.videoPlayerStyle}
                     />
                 )}
+                {item.image && (
+                    <Image source={item.image} style={styles.slideImage} />
+                )}
                 {item.button && (
                     <RoundedButton
                         onPress={item.button.onPress}
+                        wrapperStyle={styles.button}
                         text={item.button.text}
                     />
                 )}
@@ -222,7 +211,6 @@ const HowItWorks = ({ componentId }) => {
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar barStyle="dark-content" />
-            <CloseButton black onPress={close} />
             <View style={styles.shrink} />
             <Headline style={styles.headline}>How It Works</Headline>
             <View style={styles.line} />

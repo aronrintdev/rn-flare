@@ -133,12 +133,6 @@ export default (store, Provider) => {
         () => AboutPermissions
     );
     Navigation.registerComponentWithRedux(
-        'com.flarejewelry.onboarding.911',
-        () => About911,
-        Provider,
-        store
-    );
-    Navigation.registerComponentWithRedux(
         'com.flarejewelry.scenarios',
         () => Scenarios,
         Provider,

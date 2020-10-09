@@ -2,7 +2,6 @@ import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
 import { SafeAreaProvider, useSafeArea } from 'react-native-safe-area-context';
-import { Navigation } from 'react-native-navigation';
 
 import * as actions from '../../actions';
 import Strings from '../../locales/en';
@@ -56,12 +55,8 @@ const LeftDrawer = ({ changeAppRoot, devices }) => {
     }, [devices]);
 
     const howFlareWorks = React.useCallback(() => {
-        Navigation.showModal({
-            component: {
-                name: 'com.flarejewelry.howitworks',
-            },
-        });
-    }, []);
+        changeAppRoot('secure-howitworks');
+    }, [changeAppRoot]);
 
     return (
         <View

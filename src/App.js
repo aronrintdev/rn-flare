@@ -56,7 +56,7 @@ const setDefaultOptions = () => {
     });
 };
 
-const setRootWithDefaults = (id, name) => {
+const setRootWithDefaults = (id, name, options = undefined) => {
     Navigation.setRoot({
         root: {
             sideMenu: {
@@ -70,7 +70,7 @@ const setRootWithDefaults = (id, name) => {
                         id,
                         children: [
                             {
-                                component: { name },
+                                component: { name, options },
                             },
                         ],
                     },
@@ -242,6 +242,28 @@ export default class App extends Component {
                 setRootWithDefaults(
                     'CREW_STACK',
                     'com.flarejewelry.app.settings.Crew'
+                );
+                break;
+            case 'secure-howitworks':
+                setRootWithDefaults(
+                    'MAIN_UI_STACK',
+                    'com.flarejewelry.howitworks',
+                    {
+                        topBar: {
+                            background: {
+                                color: 'transparent',
+                            },
+                            drawBehind: true,
+                            leftButtons: [
+                                {
+                                    id: 'menuButton',
+                                    icon: sandwichMenu,
+                                    color: Colors.black,
+                                },
+                            ],
+                            noBorder: true,
+                        },
+                    }
                 );
                 break;
             case 'secure-active-event':
