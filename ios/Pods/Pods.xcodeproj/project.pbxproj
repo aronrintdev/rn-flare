@@ -18702,31 +18702,6 @@
 			};
 			name = Staging;
 		};
-		4A7EAD976317B6494938B3B7BC163C4D /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6EC4EA0256CCBA95C25EB9F9CEC4A1C2 /* react-native-video.release.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				GCC_PREFIX_HEADER = "Target Support Files/react-native-video/react-native-video-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_MODULE_NAME = react_native_video;
-				PRODUCT_NAME = "react-native-video";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
 		4AF045C8ABC2DDC51543A30FA3CE7226 /* Staging */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 174236364BCC092F9B504BC0D83858D7 /* RNPermissions.debug.xcconfig */;
@@ -19217,6 +19192,29 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Staging;
+		};
+		6526A9587086832FDBDB38F08AE3384B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4150CD90B7FF23E464E43341763C7704 /* react-native-video.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				GCC_PREFIX_HEADER = "Target Support Files/react-native-video/react-native-video-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = react_native_video;
+				PRODUCT_NAME = "react-native-video";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
 		};
 		6592972843AABAA6B2C765F5A6B206FC /* Staging */ = {
 			isa = XCBuildConfiguration;
@@ -19918,6 +19916,30 @@
 			};
 			name = Staging;
 		};
+		89EB851F46229A571E6464E4DB44F7D6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6EC4EA0256CCBA95C25EB9F9CEC4A1C2 /* react-native-video.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				GCC_PREFIX_HEADER = "Target Support Files/react-native-video/react-native-video-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = react_native_video;
+				PRODUCT_NAME = "react-native-video";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		8CBFE4F5A7505E1C01B2A92EDBFAD628 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 50F683E40F7EED2663429B10AC865D10 /* lottie-react-native.debug.xcconfig */;
@@ -19957,30 +19979,6 @@
 				PRIVATE_HEADERS_FOLDER_PATH = "";
 				PRODUCT_MODULE_NAME = FirebaseCoreDiagnostics;
 				PRODUCT_NAME = FirebaseCoreDiagnostics;
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Staging;
-		};
-		8DF79F82B71CD34C59073E1519B853B3 /* Staging */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4150CD90B7FF23E464E43341763C7704 /* react-native-video.debug.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				GCC_PREFIX_HEADER = "Target Support Files/react-native-video/react-native-video-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_MODULE_NAME = react_native_video;
-				PRODUCT_NAME = "react-native-video";
 				PUBLIC_HEADERS_FOLDER_PATH = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -20258,6 +20256,29 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
+		};
+		95DEC4E970BB64DE4D4F4AC86BA1569F /* Staging */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4150CD90B7FF23E464E43341763C7704 /* react-native-video.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				GCC_PREFIX_HEADER = "Target Support Files/react-native-video/react-native-video-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = react_native_video;
+				PRODUCT_NAME = "react-native-video";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Staging;
 		};
 		97F927FF4865CE5E13C6E23C8ECD7371 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -21807,30 +21828,6 @@
 			};
 			name = Debug;
 		};
-		D75E70DFE26B9E8D74879B844472DFB5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4150CD90B7FF23E464E43341763C7704 /* react-native-video.debug.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				GCC_PREFIX_HEADER = "Target Support Files/react-native-video/react-native-video-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_MODULE_NAME = react_native_video;
-				PRODUCT_NAME = "react-native-video";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
 		D8096402E7C9315AC932191809899132 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 914F8FADFA5CCE104A9559F166E28453 /* react-native-netinfo.release.xcconfig */;
@@ -23168,9 +23165,9 @@
 		9CFC6BD3E2F441067F63AEC08FD08566 /* Build configuration list for PBXNativeTarget "react-native-video" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D75E70DFE26B9E8D74879B844472DFB5 /* Debug */,
-				4A7EAD976317B6494938B3B7BC163C4D /* Release */,
-				8DF79F82B71CD34C59073E1519B853B3 /* Staging */,
+				6526A9587086832FDBDB38F08AE3384B /* Debug */,
+				89EB851F46229A571E6464E4DB44F7D6 /* Release */,
+				95DEC4E970BB64DE4D4F4AC86BA1569F /* Staging */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
