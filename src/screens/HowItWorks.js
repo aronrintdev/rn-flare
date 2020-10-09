@@ -1,23 +1,18 @@
 import * as React from 'react';
-import {
-    Image,
-    SafeAreaView,
-    StatusBar,
-    StyleSheet,
-    Text,
-    View,
-} from 'react-native';
+import { SafeAreaView, StatusBar, StyleSheet, Text, View } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
+import VideoPlayer from 'react-native-video-controls';
 
 import Colors from '../bits/Colors';
 import CloseButton from './CloseButton';
 import Headline from './Onboarding/Headline';
 import RoundedButton from '../bits/RoundedButton';
 import GoldenRules from './Scenarios/GoldenRules';
-import LongPressGif from '../assets/LongPressGif3Seconds.gif';
-import PeriwinkleButton from '../assets/PeriwinkleButtonPress.gif';
-import ShortPressPeriwinkleButton from '../assets/FlareShortPressGIFPeriwinkle.gif';
+
+const video1 = require('../assets/videos/product-demo-button-location.mp4');
+const video2 = require('../assets/videos/product-demo-short-press.mp4');
+const video3 = require('../assets/videos/product-demo-long-press.mp4');
 
 const styles = StyleSheet.create({
     container: {
@@ -43,11 +38,16 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.black,
     },
     subhead: {
+        flex: 1,
         width: 300,
         color: Colors.black,
         fontSize: 15,
         fontFamily: 'Nocturno Display Std',
         textAlign: 'center',
+    },
+    subheadView: {
+        width: 300,
+        height: 40,
         marginVertical: 20,
     },
     l: {
@@ -103,21 +103,24 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
         flex: 1,
     },
+    videoPlayerStyle: {
+        backgroundColor: 'white',
+    },
 });
 
 const entries = [
     {
         subtitle: 'There’s a hidden button on the side of your bracelet.',
-        image: PeriwinkleButton,
+        image: video1,
     },
     {
         subtitle: 'Click once to get an automated call.',
-        image: ShortPressPeriwinkleButton,
+        image: video2,
     },
     {
         subtitle:
             'Hold for 3 seconds to share your location with your Crew and 911 (optional).',
-        image: LongPressGif,
+        image: video3,
     },
 ];
 
@@ -136,7 +139,21 @@ const HowItWorks = ({ componentId }) => {
     const renderItem = ({ item, index }) => {
         return (
             <View style={styles.slide} key={index}>
-                <Image style={styles.slideImage} source={item.image} />
+                {index === activeSlide && (
+                    <VideoPlayer
+                        source={item.image}
+                        disableFullscreen
+                        disablePlayPause
+                        disableSeekbar
+                        disableVolume
+                        disableTimer
+                        disableBack
+                        showOnStart={0}
+                        repeat
+                        resizeMode="contain"
+                        style={styles.videoPlayerStyle}
+                    />
+                )}
             </View>
         );
     };
@@ -157,7 +174,9 @@ const HowItWorks = ({ componentId }) => {
             <View style={styles.shrink} />
             <Headline style={styles.headline}>How It Works</Headline>
             <View style={styles.line} />
-            <Text style={styles.subhead}>{subtitleText}</Text>
+            <View style={styles.subheadView}>
+                <Text style={styles.subhead}>{subtitleText}</Text>
+            </View>
             <Carousel
                 data={entries}
                 renderItem={renderItem}
