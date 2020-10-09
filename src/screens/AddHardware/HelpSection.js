@@ -28,7 +28,7 @@ const sectionStyles = StyleSheet.create({
     },
 });
 
-const HelpSection = ({ emoji, icon, title, children }) => (
+const HelpSection = ({ emoji, icon, title, children, blackText }) => (
     <View style={sectionStyles.container}>
         {typeof emoji === 'string' ? (
             <Text style={[sectionStyles.icon, sectionStyles.emoji]}>
@@ -45,13 +45,15 @@ const HelpSection = ({ emoji, icon, title, children }) => (
             <Text
                 style={[
                     styles.subhead,
-                    styles.whiteText,
+                    blackText ? {} : styles.whiteText,
                     sectionStyles.nomargin,
                 ]}
             >
                 {title}
             </Text>
-            <Text style={[styles.helpText, styles.whiteText]}>{children}</Text>
+            <Text style={[styles.helpText, blackText ? {} : styles.whiteText]}>
+                {children}
+            </Text>
         </View>
     </View>
 );

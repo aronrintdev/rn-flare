@@ -1,5 +1,12 @@
 import * as React from 'react';
-import { SafeAreaView, StatusBar, StyleSheet, Text, View } from 'react-native';
+import {
+    SafeAreaView,
+    StatusBar,
+    StyleSheet,
+    Text,
+    View,
+    ScrollView,
+} from 'react-native';
 import { Navigation } from 'react-native-navigation';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import VideoPlayer from 'react-native-video-controls';
@@ -8,7 +15,7 @@ import Colors from '../bits/Colors';
 import CloseButton from './CloseButton';
 import Headline from './Onboarding/Headline';
 import RoundedButton from '../bits/RoundedButton';
-import GoldenRules from './Scenarios/GoldenRules';
+import GoldenRules from './Scenarios/GoldenRules--HowItWorks';
 
 const video1 = require('../assets/videos/product-demo-button-location.mp4');
 const video2 = require('../assets/videos/product-demo-short-press.mp4');
@@ -110,6 +117,10 @@ const styles = StyleSheet.create({
 
 const entries = [
     {
+        subtitle: 'Flare’s Golden Rules',
+        showGolden: true,
+    },
+    {
         subtitle: 'There’s a hidden button on the side of your bracelet.',
         image: video1,
     },
@@ -122,21 +133,60 @@ const entries = [
             'Hold for 3 seconds to share your location with your Crew and 911 (optional).',
         image: video3,
     },
+    // {
+    //     subtitle: 'Explore the 911 feature',
+    //     showExplore911: true,
+    //     image: starryLocation,
+    //     button: {
+    //         text: 'Learn More',
+    //         onPress: React.useCallback(
+    //             () =>
+    //                 Navigation.push(componentId, {
+    //                     component: {
+    //                         name: 'com.flarejewelry.how911works.main',
+    //                         options: {
+    //                             topBar: {
+    //                                 visible: false,
+    //                                 animate: false,
+    //                             },
+    //                         },
+    //                     },
+    //                 }),
+    //             [componentId]
+    //         ),
+    //     },
+    // },
 ];
 
 const HowItWorks = ({ componentId }) => {
-    const [golden, setGolden] = React.useState(false);
     const [subtitleText, setSubtitleText] = React.useState(entries[0].subtitle);
     const [activeSlide, setActiveSlide] = React.useState(0);
-    const showGolden = React.useCallback(() => {
-        setGolden(true);
-    }, []);
 
     const close = React.useCallback(() => {
         Navigation.dismissModal(componentId);
     }, [componentId]);
 
     const renderItem = ({ item, index }) => {
+        if (item.showGolden) {
+            return (
+                <ScrollView
+                    style={{
+                        flex: 1,
+                        alignSelf: 'stretch',
+                        paddingHorizontal: 32,
+                    }}
+                    contentContinerStyle={{
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                    }}
+                    alwaysBounceVertical={false}
+                    key={index}
+                >
+                    <GoldenRules />
+                </ScrollView>
+            );
+        }
+
         return (
             <View style={styles.slide} key={index}>
                 {index === activeSlide && (
@@ -154,6 +204,12 @@ const HowItWorks = ({ componentId }) => {
                         style={styles.videoPlayerStyle}
                     />
                 )}
+                {item.button && (
+                    <RoundedButton
+                        onPress={item.button.onPress}
+                        text={item.button.text}
+                    />
+                )}
             </View>
         );
     };
@@ -162,10 +218,6 @@ const HowItWorks = ({ componentId }) => {
         setActiveSlide(index);
         setSubtitleText(entries[index].subtitle);
     };
-
-    if (golden) {
-        return <GoldenRules finishUp={close} />;
-    }
 
     return (
         <SafeAreaView style={styles.container}>
@@ -202,12 +254,6 @@ const HowItWorks = ({ componentId }) => {
                 }}
                 inactiveDotOpacity={0.4}
                 inactiveDotScale={1}
-            />
-            <RoundedButton
-                onPress={showGolden}
-                wrapperStyle={styles.button}
-                text="Read More"
-                width={240}
             />
         </SafeAreaView>
     );
