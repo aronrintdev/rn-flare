@@ -472,10 +472,14 @@ export function fetchSettings(token, userId) {
             method: 'GET',
         })
             .then(response => {
-                dispatch({
-                    type: types.USER_SET_SETTINGS_SUCCESS,
-                    data: response.data,
-                });
+                if (response.data && typeof response.data === 'object') {
+                    dispatch({
+                        type: types.USER_SET_SETTINGS_SUCCESS,
+                        data: response.data,
+                    });
+                    return true;
+                }
+                throw new Error('Fetching Settings API Response is invalid');
             })
             .catch(error => {
                 dispatch({
