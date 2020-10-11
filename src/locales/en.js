@@ -81,7 +81,7 @@ const Strings = {
         readyToTest: {
             title: `Ready to Test 911?`,
             subtext:
-                'Let’s make this shorter. Try “Hold the button on your bracelet for 3 seconds and release. A Noonlight rep will text and call you. You don’t have to worry about tying up 911 resources since Noonlight is our intermediary. Be sure to indicate that you are safe and testing your Flare bracelet.',
+                'Hold the button on your bracelet for 3 seconds and release. A Noonlight rep will text and call you. You don’t have to worry about tying up 911 resources since Noonlight is our intermediary. Be sure to indicate that you are safe and testing your Flare bracelet.',
         },
         gotYourBack: {
             title: `We’ve Got Your\n Back.`,

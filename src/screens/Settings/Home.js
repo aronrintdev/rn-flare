@@ -164,7 +164,7 @@ const Home = ({
                     style={[styles.item, styles.lastItem]}
                     onPress={editCrew}
                 >
-                    <Text style={styles.text}>Add / Edit Crew</Text>
+                    <Text style={styles.text}>Add/Edit Crew Members</Text>
                     <Image
                         resizeMode="center"
                         source={chevron}
@@ -172,12 +172,8 @@ const Home = ({
                     />
                 </TouchableOpacity>
             </View>
-            <Text style={styles.explain}>
-                Choose who will be notified that you sent a flare when you
-                choose to text a friend with your bracelet.
-            </Text>
             <Text style={[styles.subhead, { marginTop: 48 }]}>
-                Crew notification settings
+                Notification Settings
             </Text>
             <View style={[styles.itemContainer, styles.firstItemContainer]}>
                 <View style={styles.item}>
@@ -205,8 +201,8 @@ const Home = ({
                 </TouchableOpacity>
             </View>
             <Text style={styles.explain}>
-                Choose how you are notified that a flare was sent to your crew
-                here.
+                Choose how you are notified that Flare messaged your Crew and/or
+                911.
             </Text>
         </SafeAreaView>
     );

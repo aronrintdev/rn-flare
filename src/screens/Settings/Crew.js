@@ -39,7 +39,7 @@ const Crew = ({ componentId }) => {
                     style={[styles.item, styles.lastItem]}
                     onPress={editCrew}
                 >
-                    <Text style={styles.text}>Add/Edit Crew</Text>
+                    <Text style={styles.text}>Add/Edit Crew Members</Text>
                     <Image
                         resizeMode="center"
                         source={chevron}
