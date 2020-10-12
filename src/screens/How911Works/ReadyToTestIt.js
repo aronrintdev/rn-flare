@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 import AnimatedLottieView from 'lottie-react-native';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Colors from '../../bits/Colors';
 import Aura from '../../bits/Aura';
@@ -17,6 +18,7 @@ import CloseButton from '../CloseButton';
 import Headline from '../Onboarding/Headline';
 import Strings from '../../locales/en';
 import pressAndHold from '../../assets/lotties/press-and-hold';
+import { resetLongPressFor911 } from '../../actions/userActions';
 
 import AuraBg from '../../assets/aura-1519.jpg';
 import WatchPng from '../../assets/watch.png';
@@ -85,10 +87,27 @@ const styles = StyleSheet.create({
 });
 
 const ReadyToTestIt = ({ componentId }) => {
+    const dispatch = useDispatch();
+    const hasLongPressFor911 = useSelector(
+        ({ user }) => user.hasLongPressFor911
+    );
+
     const close = React.useCallback(() => {
         Navigation.dismissModal(componentId);
     }, [componentId]);
     const animationRef = React.useRef();
+
+    React.useEffect(() => {
+        if (hasLongPressFor911) {
+            Navigation.showModal({
+                component: {
+                    name: 'com.flarejewelry.how911works.testsuccess',
+                },
+            });
+            dispatch(resetLongPressFor911());
+            Navigation.dismissModal(componentId);
+        }
+    }, [hasLongPressFor911, componentId, dispatch]);
 
     return (
         <SafeAreaView style={styles.container}>

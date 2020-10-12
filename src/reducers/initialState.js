@@ -15,6 +15,7 @@ export const initialState = Immutable({
         didShare: false,
         fetchingCallScripts: false,
         showSettingsFetchError: false,
+        hasLongPressFor911: false,
         contacts: [],
         contactsCrewLookup: {},
         crewEvents: [],

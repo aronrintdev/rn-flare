@@ -556,6 +556,10 @@ export function user(state = initialState.user, action = {}) {
             });
         case types.USER_SET_SETTINGS_FAILURE:
             return state.set('showSettingsFetchError', true);
+        case types.GOT_LONG_PRESS_FOR_911:
+            return state.set('hasLongPressFor911', true);
+        case types.RESET_LONG_PRESS_FOR_911:
+            return state.set('hasLongPressFor911', false);
         default:
             return state;
     }

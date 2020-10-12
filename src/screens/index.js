@@ -29,6 +29,7 @@ import {
     How911WorksGotYourBack,
     How911WorksSuccess,
     How911WorksReadyToTestIt,
+    How911WorksTestSuccess,
 } from './How911Works';
 
 export default (store, Provider) => {
@@ -188,8 +189,14 @@ export default (store, Provider) => {
         store
     );
     Navigation.registerComponentWithRedux(
+        'com.flarejewelry.how911works.testsuccess',
+        () => How911WorksTestSuccess
+    );
+    Navigation.registerComponentWithRedux(
         'com.flarejewelry.how911works.readytotestit',
-        () => How911WorksReadyToTestIt
+        () => How911WorksReadyToTestIt,
+        Provider,
+        store
     );
     if (MANUFACTURING_MODE_ENABLED) {
         Navigation.registerComponentWithRedux(
