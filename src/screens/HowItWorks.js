@@ -17,6 +17,7 @@ import Headline from './Onboarding/Headline';
 import RoundedButton from '../bits/RoundedButton';
 import GoldenRules from './Scenarios/GoldenRules--HowItWorks';
 import StarryLocation from '../assets/starry-location.png';
+import { useSlideMenu } from '../bits/useNavigationCallback';
 
 const video1 = require('../assets/videos/product-demo-button-location.mp4');
 const video2 = require('../assets/videos/product-demo-short-press.mp4');
@@ -150,6 +151,8 @@ const HowItWorks = ({ componentId }) => {
 
     const [subtitleText, setSubtitleText] = React.useState(entries[0].subtitle);
     const [activeSlide, setActiveSlide] = React.useState(0);
+
+    useSlideMenu(componentId);
 
     const renderItem = ({ item, index }) => {
         if (item.showGolden) {
