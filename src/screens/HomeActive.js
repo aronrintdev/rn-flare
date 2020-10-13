@@ -239,23 +239,23 @@ class HomeActive extends React.Component {
             timeout: this.accountSyncTimeInMs,
         })
             .then(position => {
-                dispatch(
-                    syncAccountDetails({
-                        analyticsToken,
-                        status: {
-                            timestamp: moment()
-                                .utc()
-                                .format('YYYY-MM-DD HH:mm:ss'),
-                            latitude: position.latitude,
-                            longitude: position.longitude,
-                            details: {
-                                permissions,
-                                hardware,
-                                position,
-                            },
+                const appStatus = {
+                    analyticsToken,
+                    status: {
+                        timestamp: moment()
+                            .utc()
+                            .format('YYYY-MM-DD HH:mm:ss'),
+                        latitude: position.latitude,
+                        longitude: position.longitude,
+                        details: {
+                            permissions,
+                            hardware,
+                            position,
                         },
-                    })
-                );
+                    },
+                };
+
+                dispatch(syncAccountDetails(appStatus));
             })
             .catch(locationError => {
                 Alert.alert(locationError);
