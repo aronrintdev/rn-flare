@@ -834,7 +834,7 @@
 				CODE_SIGN_ENTITLEMENTS = "GetFlare/Get Flare.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 22;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = M8SR977JX7;
 				INFOPLIST_FILE = GetFlare/Info.plist;
@@ -866,7 +866,7 @@
 				CODE_SIGN_ENTITLEMENTS = "GetFlare/Get Flare.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 22;
 				DEVELOPMENT_TEAM = M8SR977JX7;
 				INFOPLIST_FILE = GetFlare/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -1162,7 +1162,7 @@
 				CODE_SIGN_ENTITLEMENTS = "GetFlare/Get Flare.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 22;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = M8SR977JX7;
 				INFOPLIST_FILE = GetFlare/Info.plist;
