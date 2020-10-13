@@ -47,7 +47,7 @@ export const ACCOUNT_SYNC_INTERVAL_FLARE = 12000;
 /**
  * Interval in ms for syncing account details with server during development.
  */
-export const ACCOUNT_SYNC_INTERVAL_DEV = 120000;
+export const ACCOUNT_SYNC_INTERVAL_DEV = 12000;
 
 /**
  * Interval in ms for refreshing active flare timeline

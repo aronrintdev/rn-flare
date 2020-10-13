@@ -140,7 +140,7 @@ class HomeActive extends React.Component {
 
         if (!crewEnabled && !enabled911Feature) {
             Alert.alert(
-                'Flare could not send out a message because your setup is incomplete.  Please turn on the Enable 911 Services and/or the Enable Crew toggle in Settings. Also please add friends to your Crew if you haven’t already.'
+                'Flare could not send out a message because your setup is incomplete. Please turn on the Enable 911 Services and/or the Enable Crew toggle in Settings. Also please add friends to your Crew if you haven’t already.'
             );
         }
 
@@ -149,6 +149,7 @@ class HomeActive extends React.Component {
             clearInterval(this.eventTimelineRefreshTimer);
             this.eventTimelineRefreshTimer = null;
         }
+
         BackgroundTimer.stopBackgroundTimer();
         BackgroundTimer.runBackgroundTimer(
             this.syncAccount,
@@ -232,9 +233,9 @@ class HomeActive extends React.Component {
         getCurrentPosition({
             enableHighAccuracy: true,
             timeout: this.accountSyncTimeInMs,
-        }).then(position => {
-            dispatch(
-                syncAccountDetails({
+        })
+            .then(position => {
+                const appStatus = {
                     analyticsToken,
                     status: {
                         timestamp: moment()
@@ -248,9 +249,13 @@ class HomeActive extends React.Component {
                             position,
                         },
                     },
-                })
-            );
-        });
+                };
+
+                dispatch(syncAccountDetails(appStatus));
+            })
+            .catch(locationError => {
+                Alert.alert(locationError);
+            });
 
         // Process any beacon events that we tried (and failed) to submit earlier.
         if (problemBeacons && problemBeacons.length > 0) {
