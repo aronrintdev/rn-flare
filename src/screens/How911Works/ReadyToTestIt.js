@@ -17,6 +17,7 @@ import CloseButton from '../CloseButton';
 import Headline from '../Onboarding/Headline';
 import Strings from '../../locales/en';
 import pressAndHold from '../../assets/lotties/press-and-hold';
+import RoundedButton from '../../bits/RoundedButton';
 
 import AuraBg from '../../assets/aura-1519.jpg';
 import WatchPng from '../../assets/watch.png';
@@ -82,6 +83,11 @@ const styles = StyleSheet.create({
         width: 128,
         height: 96,
     },
+    button: {
+        position: 'absolute',
+        height: (SPACE_HEIGHT * 48) / 480,
+        bottom: (SPACE_HEIGHT * 64) / 480,
+    },
 });
 
 const ReadyToTestIt = ({ componentId }) => {
@@ -118,6 +124,13 @@ const ReadyToTestIt = ({ componentId }) => {
                     loop
                 />
             </View>
+            <RoundedButton
+                onPress={close}
+                wrapperStyle={styles.button}
+                text="DONE"
+                width={240}
+                fontSize={12}
+            />
         </SafeAreaView>
     );
 };
