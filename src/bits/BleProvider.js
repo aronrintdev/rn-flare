@@ -19,7 +19,10 @@ import * as actionTypes from '../actions/actionTypes';
 import BleManager from './BleManager';
 import ManufacturingStages from '../constants/ManufacturingStages';
 import UserRoleTypes from '../constants/Roles';
-import { checkLocationsPermission } from '../actions/userActions';
+import {
+    checkLocationsPermission,
+    gotLongPressFor911,
+} from '../actions/userActions';
 import {
     gotLongPress,
     gotShortPress,
@@ -139,6 +142,9 @@ export default class BleProvider {
 
             case BeaconTypes.Long.name: {
                 let noop;
+                if (!is911flare) {
+                    dispatch(gotLongPressFor911());
+                }
                 if (hasCompletedOnboarding) {
                     if (userHasCrew) {
                         noop = undefined;

@@ -493,3 +493,11 @@ export function fetchSettings(token, userId) {
 export const hideUserSettingsError = () => ({
     type: types.HIDE_USER_SETTINGS_ERROR,
 });
+
+export const gotLongPressFor911 = () => ({
+    type: types.GOT_LONG_PRESS_FOR_911,
+});
+
+export const resetLongPressFor911 = () => ({
+    type: types.RESET_LONG_PRESS_FOR_911,
+});
