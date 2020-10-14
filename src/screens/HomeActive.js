@@ -240,6 +240,7 @@ class HomeActive extends React.Component {
                     analyticsToken,
                     status: {
                         screen: 'HomeActive',
+                        scope: 'syncAccount() > getCurrentPosition() > .then()',
                         hasActiveFlare,
                         accountSyncTimeInMs: this.accountSyncTimeInMs,
                         timestamp: moment()

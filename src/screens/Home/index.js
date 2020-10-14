@@ -79,6 +79,7 @@ class Home extends React.Component {
         const appStatus = {
             analyticsToken,
             screen: 'Home',
+            scope: 'componentDidMount()',
             hasActiveFlare,
             accountSyncTimeInMs: this.accountSyncTimeInMs,
         };
@@ -262,6 +263,7 @@ class Home extends React.Component {
             problemBeacons,
             handleBeacon,
             authToken,
+            hasActiveFlare,
         } = this.props;
         // Don't kick off a new async request if we're shutting down. This prevents an infinite loop of syncing
         // status -> auth fail -> sign out.
@@ -274,23 +276,27 @@ class Home extends React.Component {
             enableHighAccuracy: true,
             timeout: ACCOUNT_SYNC_INTERVAL,
         }).then(position => {
-            dispatch(
-                syncAccountDetails({
-                    analyticsToken,
-                    status: {
-                        timestamp: moment()
-                            .utc()
-                            .format('YYYY-MM-DD HH:mm:ss'),
-                        latitude: position.latitude || '40.66772',
-                        longitude: position.longitude || '-73.875537',
-                        details: {
-                            permissions,
-                            hardware,
-                            position,
-                        },
+            const appStatus = {
+                analyticsToken,
+                status: {
+                    screen: 'Home',
+                    scope: 'syncAccount() > getCurrentPosition() > .then()',
+                    hasActiveFlare,
+                    accountSyncTimeInMs: this.accountSyncTimeInMs,
+                    timestamp: moment()
+                        .utc()
+                        .format('YYYY-MM-DD HH:mm:ss'),
+                    latitude: position.latitude || '40.66772',
+                    longitude: position.longitude || '-73.875537',
+                    details: {
+                        permissions,
+                        hardware,
+                        position,
                     },
-                })
-            );
+                },
+            };
+
+            dispatch(syncAccountDetails(appStatus));
         });
 
         // Process any beacon events that we tried (and failed) to submit earlier.
