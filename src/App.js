@@ -164,6 +164,8 @@ export default class App extends Component {
 
     // eslint-disable-next-line class-methods-use-this
     startApp(root) {
+        // root = 'secure-active-event';
+
         // eslint-disable-next-line no-console
         console.info(`Starting root ${root}.`);
         switch (root) {
