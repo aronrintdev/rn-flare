@@ -12,6 +12,7 @@ import moment from 'moment';
 import BackgroundTimer from 'react-native-background-timer';
 import { PERMISSIONS } from 'react-native-permissions';
 
+import RNBluetoothInfo from '@bitfly/react-native-bluetooth-info';
 import {
     ACCOUNT_SYNC_INTERVAL,
     ACCOUNT_SYNC_INTERVAL_FLARE,
@@ -30,7 +31,6 @@ import { startBleListening } from '../../actions/hardwareActions';
 import getCurrentPosition from '../../helpers/location';
 import Strings from '../../locales/en';
 import SoftLand from './SoftLand';
-import RNBluetoothInfo from '@bitfly/react-native-bluetooth-info';
 
 export { default as PermissionsReminder } from './PermissionsReminder';
 
@@ -76,11 +76,13 @@ class Home extends React.Component {
 
         // Users may have modified their accounts on other devices or on the web. Keep this device
         // in sync by fetching server-stored data.
-        dispatch(
-            syncAccountDetails({
-                analyticsToken,
-            })
-        );
+        const appStatus = {
+            analyticsToken,
+            screen: 'Home',
+            hasActiveFlare,
+            accountSyncTimeInMs: this.accountSyncTimeInMs,
+        };
+        dispatch(syncAccountDetails(appStatus));
 
         BackgroundTimer.stopBackgroundTimer();
         BackgroundTimer.runBackgroundTimer(
@@ -151,7 +153,7 @@ class Home extends React.Component {
     }
 
     bluetoothEnabledListener = resp => {
-        const connectionState = resp.type.connectionState;
+        const { connectionState } = resp.type;
         if (connectionState === 'off') {
             PushNotificationIOS.requestPermissions();
             PushNotificationIOS.presentLocalNotification({

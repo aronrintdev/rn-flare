@@ -226,6 +226,7 @@ class HomeActive extends React.Component {
             problemBeacons,
             handleBeacon,
             authToken,
+            hasActiveFlare,
         } = this.props;
         // Don't kick off a new async request if we're shutting down. This prevents an infinite loop of syncing
         // status -> auth fail -> sign out.
@@ -242,6 +243,9 @@ class HomeActive extends React.Component {
                 const appStatus = {
                     analyticsToken,
                     status: {
+                        screen: 'HomeActive',
+                        hasActiveFlare,
+                        accountSyncTimeInMs: this.accountSyncTimeInMs,
                         timestamp: moment()
                             .utc()
                             .format('YYYY-MM-DD HH:mm:ss'),
