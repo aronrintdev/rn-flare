@@ -214,6 +214,8 @@ class HomeActive extends React.Component {
      * Submit user location and fetch any account updates.
      */
     syncAccount = () => {
+        console.log('HomeActive > syncAccount');
+
         const {
             dispatch,
             analyticsToken,

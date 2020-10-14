@@ -254,6 +254,8 @@ class Home extends React.Component {
      * Submit user location and fetch any account updates.
      */
     syncAccount = () => {
+        console.log('Home > syncAccount');
+
         const {
             analyticsEnabled,
             dispatch,
