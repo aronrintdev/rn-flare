@@ -78,10 +78,6 @@ class Home extends React.Component {
         // in sync by fetching server-stored data.
         const appStatus = {
             analyticsToken,
-            screen: 'Home',
-            scope: 'componentDidMount()',
-            hasActiveFlare,
-            accountSyncTimeInMs: this.accountSyncTimeInMs,
         };
         dispatch(syncAccountDetails(appStatus));
 
@@ -253,8 +249,6 @@ class Home extends React.Component {
      * Submit user location and fetch any account updates.
      */
     syncAccount = () => {
-        console.log('Home > syncAccount');
-
         const {
             analyticsEnabled,
             dispatch,
@@ -264,7 +258,6 @@ class Home extends React.Component {
             problemBeacons,
             handleBeacon,
             authToken,
-            hasActiveFlare,
         } = this.props;
         // Don't kick off a new async request if we're shutting down. This prevents an infinite loop of syncing
         // status -> auth fail -> sign out.
@@ -280,10 +273,6 @@ class Home extends React.Component {
             const appStatus = {
                 analyticsToken,
                 status: {
-                    screen: 'Home',
-                    scope: 'syncAccount() > getCurrentPosition() > .then()',
-                    hasActiveFlare,
-                    accountSyncTimeInMs: this.accountSyncTimeInMs,
                     timestamp: moment()
                         .utc()
                         .format('YYYY-MM-DD HH:mm:ss'),
