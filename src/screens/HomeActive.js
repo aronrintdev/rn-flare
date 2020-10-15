@@ -167,7 +167,6 @@ class HomeActive extends React.Component {
          * Handle transitions from active to inactive flare
          */
         if (prevHasActiveFlare && !hasActiveFlare) {
-            BackgroundTimer.stop();
             BackgroundTimer.stopBackgroundTimer();
             dispatch(changeAppRoot('secure'));
         }

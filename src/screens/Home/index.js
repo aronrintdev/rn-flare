@@ -112,7 +112,6 @@ class Home extends React.Component {
         this.requestUserPermission();
         if (hasActiveFlare !== prevProps.hasActiveFlare) {
             this.setSyncTiming();
-            BackgroundTimer.stop();
             BackgroundTimer.stopBackgroundTimer();
 
             if (hasActiveFlare) {
