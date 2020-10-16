@@ -41,6 +41,7 @@ class Home extends React.Component {
         this.shuttingDown = false;
         this.setSyncTiming();
         Navigation.events().bindComponent(this);
+        this.appStatusSync = null;
 
         this.state = {
             showSideMenu: false,
@@ -81,8 +82,8 @@ class Home extends React.Component {
         };
         dispatch(syncAccountDetails(appStatus));
 
-        BackgroundTimer.stopBackgroundTimer();
-        BackgroundTimer.runBackgroundTimer(
+        BackgroundTimer.clearInterval(this.appStatusSync);
+        this.appStatusSync = BackgroundTimer.setInterval(
             this.syncAccount,
             this.accountSyncTimeInMs
         );
@@ -108,7 +109,7 @@ class Home extends React.Component {
         this.requestUserPermission();
         if (hasActiveFlare !== prevProps.hasActiveFlare) {
             this.setSyncTiming();
-            BackgroundTimer.stopBackgroundTimer();
+            BackgroundTimer.clearInterval(this.appStatusSync);
 
             if (hasActiveFlare) {
                 console.log('>>>>> Local notify!');
@@ -121,7 +122,7 @@ class Home extends React.Component {
                 }
                 dispatch(changeAppRoot('secure-active-event'));
             } else {
-                BackgroundTimer.runBackgroundTimer(
+                this.appStatusSync = BackgroundTimer.setInterval(
                     () => this.syncAccount(),
                     this.accountSyncTimeInMs
                 );
@@ -140,7 +141,7 @@ class Home extends React.Component {
     componentWillUnmount() {
         this.shuttingDown = true;
         this.unsubscribe = null;
-        BackgroundTimer.stopBackgroundTimer();
+        BackgroundTimer.clearInterval(this.appStatusSync);
         AppState.removeEventListener('change', this.handleAppStateChange);
         RNBluetoothInfo.removeEventListener(
             'change',

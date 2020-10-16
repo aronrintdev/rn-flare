@@ -100,6 +100,7 @@ class HomeActive extends React.Component {
         this.shuttingDown = false;
         this.setSyncTiming();
         Navigation.events().bindComponent(this);
+        this.appStatusSync = null;
 
         this.eventTimelineRefreshTimer = null;
         if (props.hasActiveFlare) {
@@ -150,8 +151,8 @@ class HomeActive extends React.Component {
             this.eventTimelineRefreshTimer = null;
         }
 
-        BackgroundTimer.stopBackgroundTimer();
-        BackgroundTimer.runBackgroundTimer(
+        BackgroundTimer.clearInterval(this.appStatusSync);
+        this.appStatusSync = BackgroundTimer.setInterval(
             this.syncAccount,
             this.accountSyncTimeInMs
         );
@@ -167,14 +168,14 @@ class HomeActive extends React.Component {
          * Handle transitions from active to inactive flare
          */
         if (prevHasActiveFlare && !hasActiveFlare) {
-            BackgroundTimer.stopBackgroundTimer();
+            BackgroundTimer.clearInterval(this.appStatusSync);
             dispatch(changeAppRoot('secure'));
         }
     }
 
     componentWillUnmount() {
         this.shuttingDown = true;
-        BackgroundTimer.stopBackgroundTimer();
+        BackgroundTimer.clearInterval(this.appStatusSync);
         clearInterval(this.eventTimelineRefreshTimer);
         this.eventTimelineRefreshTimer = null;
     }
