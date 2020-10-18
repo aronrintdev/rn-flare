@@ -41,6 +41,11 @@ class Home extends React.Component {
         this.shuttingDown = false;
         this.setSyncTiming();
         Navigation.events().bindComponent(this);
+        this.screenEventListener = Navigation.events().registerComponentDidDisappearListener(
+            () => {
+                this.setState({ showSideMenu: false });
+            }
+        );
 
         this.state = {
             showSideMenu: false,
@@ -145,6 +150,7 @@ class Home extends React.Component {
     componentWillUnmount() {
         this.shuttingDown = true;
         this.unsubscribe = null;
+        this.screenEventListener.remove();
         BackgroundTimer.stopBackgroundTimer();
         AppState.removeEventListener('change', this.handleAppStateChange);
         RNBluetoothInfo.removeEventListener(

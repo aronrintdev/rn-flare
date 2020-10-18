@@ -108,6 +108,11 @@ class HomeActive extends React.Component {
                 FLARE_TIMELINE_REFRESH_INTERVAL
             );
         }
+        this.screenEventListener = Navigation.events().registerComponentDidDisappearListener(
+            () => {
+                this.setState({ showSideMenu: false });
+            }
+        );
         this.state = {
             showSideMenu: false,
         };
@@ -178,6 +183,7 @@ class HomeActive extends React.Component {
         BackgroundTimer.stopBackgroundTimer();
         clearInterval(this.eventTimelineRefreshTimer);
         this.eventTimelineRefreshTimer = null;
+        this.screenEventListener.remove();
     }
 
     /**

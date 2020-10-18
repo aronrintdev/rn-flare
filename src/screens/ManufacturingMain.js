@@ -59,20 +59,40 @@ class ManufacturingMain extends React.Component {
     constructor(props) {
         super(props);
         Navigation.events().bindComponent(this);
+        this.screenEventListener = Navigation.events().registerComponentDidDisappearListener(
+            () => {
+                this.setState({ showSideMenu: false });
+            }
+        );
         this.state = {
             showSideMenu: false,
         };
     }
 
     componentDidMount() {
-        this.props.dispatch(getDeviceCounts(this.props.authToken));
+        const { dispatch, authToken } = this.props;
+        dispatch(getDeviceCounts(authToken));
     }
+
+    componentWillUnmount() {
+        this.screenEventListener.remove();
+    }
+
+    goToPushedView = () => {
+        const { componentId } = this.props;
+        Navigation.push(componentId, {
+            component: {
+                name: 'com.flarejewelry.manufacturing.main',
+            },
+        });
+    };
 
     toggleSideMenu() {
         const { showSideMenu } = this.state;
+        const { componentId } = this.props;
         const newSideMenuState = !showSideMenu;
 
-        Navigation.mergeOptions(this.props.componentId, {
+        Navigation.mergeOptions(componentId, {
             sideMenu: {
                 left: {
                     visible: newSideMenuState,
@@ -87,46 +107,47 @@ class ManufacturingMain extends React.Component {
 
     navigationButtonPressed({ buttonId }) {
         switch (buttonId) {
-        case 'menuButton':
-            this.toggleSideMenu();
-            break;
-        default:
-            console.warn('Unhandled button press in home screen.');
-            break;
+            case 'menuButton':
+                this.toggleSideMenu();
+                break;
+            default:
+                console.warn('Unhandled button press in home screen.');
+                break;
         }
     }
 
     handleSignOut() {
-        this.props.dispatch(signOut());
+        const { dispatch } = this.props;
+        dispatch(signOut());
     }
 
-    goToPushedView = () => {
-        Navigation.push(this.props.componentId, {
-            component: {
-                name: 'com.flarejewelry.manufacturing.main',
-            },
-        });
-    };
-
     render() {
+        const { manufacturingLoading, deviceCounts } = this.props;
         return (
             <View style={styles.container}>
                 <View style={styles.header}>
                     <View style={styles.logoArea}>
-                        <Image source={{ uri: 'logo-aura' }} style={styles.logoImage} />
+                        <Image
+                            source={{ uri: 'logo-aura' }}
+                            style={styles.logoImage}
+                        />
                     </View>
                     <View style={styles.brandArea}>
                         <Text>{Strings.manufacturing.title}</Text>
                     </View>
                     <View style={styles.headerActions}>
-                        {this.props.manufacturingLoading && <ActivityIndicator />}
-                        <Button outline onPress={() => this.handleSignOut()} title={Strings.generic.signOut} />
+                        {manufacturingLoading && <ActivityIndicator />}
+                        <Button
+                            outline
+                            onPress={() => this.handleSignOut()}
+                            title={Strings.generic.signOut}
+                        />
                     </View>
                 </View>
                 <View style={styles.body}>
                     <DeviceStages
                         stages={Object.keys(Strings.manufacturing.stages)}
-                        deviceCounts={this.props.deviceCounts}
+                        deviceCounts={deviceCounts}
                     />
                 </View>
             </View>
