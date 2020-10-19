@@ -100,6 +100,7 @@ class HomeActive extends React.Component {
         this.shuttingDown = false;
         this.setSyncTiming();
         Navigation.events().bindComponent(this);
+        this.appStatusSync = null;
 
         this.eventTimelineRefreshTimer = null;
         if (props.hasActiveFlare) {
@@ -155,8 +156,8 @@ class HomeActive extends React.Component {
             this.eventTimelineRefreshTimer = null;
         }
 
-        BackgroundTimer.stopBackgroundTimer();
-        BackgroundTimer.runBackgroundTimer(
+        BackgroundTimer.clearInterval(this.appStatusSync);
+        this.appStatusSync = BackgroundTimer.setInterval(
             this.syncAccount,
             this.accountSyncTimeInMs
         );
@@ -172,15 +173,14 @@ class HomeActive extends React.Component {
          * Handle transitions from active to inactive flare
          */
         if (prevHasActiveFlare && !hasActiveFlare) {
-            BackgroundTimer.stop();
-            BackgroundTimer.stopBackgroundTimer();
+            BackgroundTimer.clearInterval(this.appStatusSync);
             dispatch(changeAppRoot('secure'));
         }
     }
 
     componentWillUnmount() {
         this.shuttingDown = true;
-        BackgroundTimer.stopBackgroundTimer();
+        BackgroundTimer.clearInterval(this.appStatusSync);
         clearInterval(this.eventTimelineRefreshTimer);
         this.eventTimelineRefreshTimer = null;
         this.screenEventListener.remove();
@@ -220,8 +220,6 @@ class HomeActive extends React.Component {
      * Submit user location and fetch any account updates.
      */
     syncAccount = () => {
-        console.log('HomeActive > syncAccount');
-
         const {
             dispatch,
             analyticsToken,
@@ -230,7 +228,6 @@ class HomeActive extends React.Component {
             problemBeacons,
             handleBeacon,
             authToken,
-            hasActiveFlare,
         } = this.props;
         // Don't kick off a new async request if we're shutting down. This prevents an infinite loop of syncing
         // status -> auth fail -> sign out.
@@ -247,10 +244,6 @@ class HomeActive extends React.Component {
                 const appStatus = {
                     analyticsToken,
                     status: {
-                        screen: 'HomeActive',
-                        scope: 'syncAccount() > getCurrentPosition() > .then()',
-                        hasActiveFlare,
-                        accountSyncTimeInMs: this.accountSyncTimeInMs,
                         timestamp: moment()
                             .utc()
                             .format('YYYY-MM-DD HH:mm:ss'),
@@ -329,20 +322,17 @@ class HomeActive extends React.Component {
     render() {
         const { eventTimeline, enabled911Feature, crewEnabled } = this.props;
         let headerText;
-        let cancelFlareTitle = Strings.home.cancelActiveFlare2;
+        const cancelFlareTitle = Strings.home.cancelActiveFlare;
         let eventTimelineSetting;
         if (crewEnabled && enabled911Feature) {
             headerText = Strings.eventTimeline.title.crewAndEms;
             eventTimelineSetting = EVENT_TIMLINE_SETTING_CREW_EMS;
-            cancelFlareTitle = Strings.home.cancelActiveFlare;
         } else if (enabled911Feature) {
             headerText = Strings.eventTimeline.title.ems;
             eventTimelineSetting = EVENT_TIMLINE_SETTING_EMS;
-            cancelFlareTitle = Strings.home.cancelActiveFlare2;
         } else if (crewEnabled) {
             headerText = Strings.eventTimeline.title.crew;
             eventTimelineSetting = EVENT_TIMLINE_SETTING_CREW;
-            cancelFlareTitle = Strings.home.cancelActiveFlare;
         }
 
         return (

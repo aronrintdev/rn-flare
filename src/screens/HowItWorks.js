@@ -7,6 +7,7 @@ import {
     View,
     Image,
     ScrollView,
+    Dimensions,
 } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
@@ -23,6 +24,8 @@ const video1 = require('../assets/videos/product-demo-button-location.mp4');
 const video2 = require('../assets/videos/product-demo-short-press.mp4');
 const video3 = require('../assets/videos/product-demo-long-press.mp4');
 
+const SPACE_HEIGHT = Dimensions.get('window').height - 100;
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -31,14 +34,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     shrink: {
-        height: 32,
+        height: (SPACE_HEIGHT * 16) / 670,
         flexShrink: 1,
     },
     headline: {
         alignSelf: 'center',
         textAlign: 'center',
         color: Colors.black,
-        marginBottom: 10,
+        marginBottom: (SPACE_HEIGHT * 10) / 670,
     },
     line: {
         height: 1,
@@ -57,7 +60,7 @@ const styles = StyleSheet.create({
     subheadView: {
         width: 300,
         height: 40,
-        marginVertical: 20,
+        marginVertical: (SPACE_HEIGHT * 10) / 670,
     },
     l: {
         alignSelf: 'flex-start',
@@ -97,7 +100,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     slideImage: {
-        width: 240,
+        width: (SPACE_HEIGHT * 230) / 670,
         resizeMode: 'contain',
         flex: 1,
     },

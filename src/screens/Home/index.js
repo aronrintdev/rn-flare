@@ -40,6 +40,8 @@ class Home extends React.Component {
 
         this.shuttingDown = false;
         this.setSyncTiming();
+        this.appStatusSync = null;
+
         Navigation.events().bindComponent(this);
         this.screenEventListener = Navigation.events().registerComponentDidDisappearListener(
             () => {
@@ -83,15 +85,11 @@ class Home extends React.Component {
         // in sync by fetching server-stored data.
         const appStatus = {
             analyticsToken,
-            screen: 'Home',
-            scope: 'componentDidMount()',
-            hasActiveFlare,
-            accountSyncTimeInMs: this.accountSyncTimeInMs,
         };
         dispatch(syncAccountDetails(appStatus));
 
-        BackgroundTimer.stopBackgroundTimer();
-        BackgroundTimer.runBackgroundTimer(
+        BackgroundTimer.clearInterval(this.appStatusSync);
+        this.appStatusSync = BackgroundTimer.setInterval(
             this.syncAccount,
             this.accountSyncTimeInMs
         );
@@ -117,8 +115,7 @@ class Home extends React.Component {
         this.requestUserPermission();
         if (hasActiveFlare !== prevProps.hasActiveFlare) {
             this.setSyncTiming();
-            BackgroundTimer.stop();
-            BackgroundTimer.stopBackgroundTimer();
+            BackgroundTimer.clearInterval(this.appStatusSync);
 
             if (hasActiveFlare) {
                 console.log('>>>>> Local notify!');
@@ -131,7 +128,7 @@ class Home extends React.Component {
                 }
                 dispatch(changeAppRoot('secure-active-event'));
             } else {
-                BackgroundTimer.runBackgroundTimer(
+                this.appStatusSync = BackgroundTimer.setInterval(
                     () => this.syncAccount(),
                     this.accountSyncTimeInMs
                 );
@@ -151,7 +148,8 @@ class Home extends React.Component {
         this.shuttingDown = true;
         this.unsubscribe = null;
         this.screenEventListener.remove();
-        BackgroundTimer.stopBackgroundTimer();
+
+        BackgroundTimer.clearInterval(this.appStatusSync);
         AppState.removeEventListener('change', this.handleAppStateChange);
         RNBluetoothInfo.removeEventListener(
             'change',
@@ -260,8 +258,6 @@ class Home extends React.Component {
      * Submit user location and fetch any account updates.
      */
     syncAccount = () => {
-        console.log('Home > syncAccount');
-
         const {
             analyticsEnabled,
             dispatch,
@@ -271,7 +267,6 @@ class Home extends React.Component {
             problemBeacons,
             handleBeacon,
             authToken,
-            hasActiveFlare,
         } = this.props;
         // Don't kick off a new async request if we're shutting down. This prevents an infinite loop of syncing
         // status -> auth fail -> sign out.
@@ -287,10 +282,6 @@ class Home extends React.Component {
             const appStatus = {
                 analyticsToken,
                 status: {
-                    screen: 'Home',
-                    scope: 'syncAccount() > getCurrentPosition() > .then()',
-                    hasActiveFlare,
-                    accountSyncTimeInMs: this.accountSyncTimeInMs,
                     timestamp: moment()
                         .utc()
                         .format('YYYY-MM-DD HH:mm:ss'),

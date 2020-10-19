@@ -116,7 +116,6 @@ const Strings = {
         locationDisabledWarning:
             'Set location permission to Always in phone settings',
         cancelActiveFlare: 'I’m Okay',
-        cancelActiveFlare2: 'Dismiss',
         chooseLanguage: 'Choose language',
         contactsButtonLabelAdd: 'Choose Your Crew',
         contactsButtonLabelEdit: 'Edit Your Crew',

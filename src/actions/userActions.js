@@ -57,8 +57,6 @@ export const checkLocationsPermission = () => async dispatch => {
 };
 
 export function syncAccountDetails(args) {
-    console.log('syncAccountDetails');
-
     return function startSyncingAccountDetails(dispatch) {
         dispatch({
             type: types.ACCOUNT_DETAILS_REQUEST,
