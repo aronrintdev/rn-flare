@@ -6,6 +6,7 @@
         "postinstall": "patch-package",
         "android": "react-native run-android",
         "ios": "react-native run-ios",
+        "ios-legacy": "react-native run-ios --simulator=\"iPhone SE (2nd generation)\"",
         "start": "react-native start",
         "test": "jest",
         "postversion": "react-native-version -A"
