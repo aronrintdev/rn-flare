@@ -316,20 +316,17 @@ class HomeActive extends React.Component {
     render() {
         const { eventTimeline, enabled911Feature, crewEnabled } = this.props;
         let headerText;
-        let cancelFlareTitle = Strings.home.cancelActiveFlare2;
+        const cancelFlareTitle = Strings.home.cancelActiveFlare;
         let eventTimelineSetting;
         if (crewEnabled && enabled911Feature) {
             headerText = Strings.eventTimeline.title.crewAndEms;
             eventTimelineSetting = EVENT_TIMLINE_SETTING_CREW_EMS;
-            cancelFlareTitle = Strings.home.cancelActiveFlare;
         } else if (enabled911Feature) {
             headerText = Strings.eventTimeline.title.ems;
             eventTimelineSetting = EVENT_TIMLINE_SETTING_EMS;
-            cancelFlareTitle = Strings.home.cancelActiveFlare2;
         } else if (crewEnabled) {
             headerText = Strings.eventTimeline.title.crew;
             eventTimelineSetting = EVENT_TIMLINE_SETTING_CREW;
-            cancelFlareTitle = Strings.home.cancelActiveFlare;
         }
 
         return (
