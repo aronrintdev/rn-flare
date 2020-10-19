@@ -13,6 +13,17 @@ export const useNavigationButtonCallback = (callback, deps) => {
     }, deps);
 };
 
+export const useNavigationDisappearCallback = (callback, deps) => {
+    React.useEffect(() => {
+        const disappearSubscription = Navigation.events().registerComponentDidDisappearListener(
+            callback
+        );
+        return () => {
+            disappearSubscription.remove();
+        };
+    }, deps);
+};
+
 export const useSlideMenu = componentId => {
     const [showSideMenu, setShowSideMenu] = React.useState(false);
 
@@ -31,4 +42,7 @@ export const useSlideMenu = componentId => {
         },
         [componentId, showSideMenu]
     );
+    useNavigationDisappearCallback(() => {
+        setShowSideMenu(false);
+    });
 };
