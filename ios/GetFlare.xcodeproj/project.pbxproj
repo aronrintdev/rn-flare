@@ -834,6 +834,7 @@
 				CODE_SIGN_ENTITLEMENTS = "GetFlare/Get Flare.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CONFIG_API_URL = "https:/$()/app2.flarejewelry.co/";
 				CURRENT_PROJECT_VERSION = 0;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = M8SR977JX7;
@@ -1174,8 +1175,8 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.flarejewelry.app;
-				PRODUCT_NAME = "Get Flare";
+				PRODUCT_BUNDLE_IDENTIFIER = com.flarejewelry.app.development;
+				PRODUCT_NAME = "Get Flare Development";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "GetFlare-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
