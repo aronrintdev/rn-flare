@@ -104,6 +104,11 @@ const ReadyToTestIt = ({ componentId }) => {
     const animationRef = React.useRef();
 
     React.useEffect(() => {
+        dispatch(resetLongPressFor911());
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    React.useEffect(() => {
         if (hasLongPressFor911) {
             Navigation.showModal({
                 component: {
