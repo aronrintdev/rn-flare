@@ -173,3 +173,27 @@ export const USER_SCENARIO_ADDED_TO_CONTACTS =
 export const USER_TEXT_FRIENDS_RESET = 'flare.app.user.textFriends.RESET';
 export const USER_TEXT_FRIENDS_REQUEST = 'flare.app.user.textFriends.REQUEST';
 export const USER_TEXT_FRIENDS_RESPONSE = 'flare.app.user.textFriends.RESPONSE';
+
+export const USER_SET_911_FEATURE_FAILURE =
+    'flare.app.USER_SET_911_FEATURE_FAILURE';
+export const USER_SET_911_FEATURE_REQUEST =
+    'flare.app.USER_SET_911_FEATURE_REQUEST';
+export const USER_SET_911_FEATURE_SUCCESS =
+    'flare.app.USER_SET_911_FEATURE_SUCCESS';
+
+export const HIDE_FLARE_SERVICE_FAILURE_ALERT =
+    'flare.app.HIDE_FLARE_SERVICE_FAILURE_ALERT';
+
+export const USER_SET_CREW_ENABLE_FAILURE =
+    'flare.app.USER_SET_CREW_ENABLE_FAILURE';
+export const USER_SET_CREW_ENABLE_REQUEST =
+    'flare.app.USER_SET_CREW_ENABLE_REQUEST';
+export const USER_SET_CREW_ENABLE_SUCCESS =
+    'flare.app.USER_SET_CREW_ENABLE_SUCCESS';
+
+export const USER_SET_SETTINGS_REQUEST = 'flare.app.USER_SET_SETTINGS_REQUEST';
+export const USER_SET_SETTINGS_SUCCESS = 'flare.app.USER_SET_SETTINGS_SUCCESS';
+export const USER_SET_SETTINGS_FAILURE = 'flare.app.USER_SET_SETTINGS_FAILURE';
+export const HIDE_USER_SETTINGS_ERROR = 'flare.app.HIDE_USER_SETTINGS_ERROR';
+export const GOT_LONG_PRESS_FOR_911 = 'flare.app.GOT_LONG_PRESS_FOR_911';
+export const RESET_LONG_PRESS_FOR_911 = 'flare.app.RESET_LONG_PRESS_FOR_911';

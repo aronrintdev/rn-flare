@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Navigation } from 'react-native-navigation';
 
 import { openContactsScreen } from '../Contacts';
-import { shareFlare } from '../../actions';
 import addToContacts from '../AddToContacts';
 
 import cardCrew from '../../assets/card-crew.png';
@@ -12,8 +11,17 @@ import cardPermissions from '../../assets/card-permissions.png';
 import cardShare from '../../assets/card-share.png';
 import cardAddcontacts from '../../assets/card-addcontacts.png';
 import { showShareDialog } from '../ShareDialog';
+import card911 from '../../assets/starry-911.png';
 
 const ITEM_TEMPLATES = [
+    {
+        key: 'how911works',
+        image: { source: card911, width: 68, height: 90 },
+        title: 'Explore our new \n911 feature',
+        body:
+            'Optionally enable the 911 feature to connect with 911 dispatchers',
+        done: ({ settings }) => settings.enabled911Feature,
+    },
     {
         key: 'permissions',
         image: { source: cardPermissions, width: 119, height: 77 },
@@ -67,6 +75,11 @@ const ITEM_TEMPLATES = [
 
 export const useCards = ({ componentId, selector, dispatch }) => {
     const callbacks = {
+        about911: React.useCallback(() => {
+            Navigation.push(componentId, {
+                component: { name: 'com.flarejewelry.onboarding.911' },
+            });
+        }, [componentId]),
         permissions: React.useCallback(() => {
             Navigation.showModal({
                 component: { name: 'com.flarejewelry.app.PermissionsReminder' },
@@ -91,6 +104,19 @@ export const useCards = ({ componentId, selector, dispatch }) => {
             addToContacts(dispatch);
         }, [dispatch]),
         share: showShareDialog,
+        how911works: React.useCallback(() => {
+            Navigation.push(componentId, {
+                component: {
+                    name: 'com.flarejewelry.how911works.main',
+                    options: {
+                        topBar: {
+                            visible: false,
+                            animate: false,
+                        },
+                    },
+                },
+            });
+        }, [componentId]),
     };
 
     return ITEM_TEMPLATES.map(({ done, key, ...rest }) => ({

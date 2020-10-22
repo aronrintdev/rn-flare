@@ -112,7 +112,7 @@ export const fetchContacts = () => async dispatch => {
     }
 };
 
-export function getCrewEventTimeline(token) {
+export function getEventTimeline(token) {
     return function getTimeline(dispatch) {
         dispatch({
             type: types.GET_FLARE_TIMELINE_REQUEST,
@@ -402,4 +402,102 @@ export const textFriendsRequest = () => ({
 export const textFriendsResponse = response => ({
     type: types.USER_TEXT_FRIENDS_RESPONSE,
     response,
+});
+
+export const hideFlareServiceErrorAlert = () => ({
+    type: types.HIDE_FLARE_SERVICE_FAILURE_ALERT,
+});
+
+export function set911Features(token, userId) {
+    return function setEnabled(dispatch) {
+        dispatch({
+            type: types.USER_SET_911_FEATURE_REQUEST,
+        });
+        ProtectedAPICall(token, API_URL, `/config/user/${userId}/toggle_ems`, {
+            method: 'POST',
+        })
+            .then(response => {
+                dispatch({
+                    type: types.USER_SET_911_FEATURE_SUCCESS,
+                    ems_services: response.data.ems_services,
+                });
+            })
+            .catch(error => {
+                dispatch({
+                    type: types.USER_SET_911_FEATURE_FAILURE,
+                    error,
+                });
+            });
+    };
+}
+
+export function setCrewEnabled(token, userId) {
+    return function setEnabled(dispatch) {
+        dispatch({
+            type: types.USER_SET_CREW_ENABLE_REQUEST,
+        });
+        return ProtectedAPICall(
+            token,
+            API_URL,
+            `/config/user/${userId}/toggle_crew`,
+            {
+                method: 'POST',
+            }
+        )
+            .then(response => {
+                if (response.data && typeof response.data === 'object') {
+                    dispatch({
+                        type: types.USER_SET_CREW_ENABLE_SUCCESS,
+                        crew_services: response.data.crew_services,
+                    });
+                    return response.data.crew_services;
+                }
+                throw new Error('Toggle Crew API Response is invalid');
+            })
+            .catch(error => {
+                dispatch({
+                    type: types.USER_SET_CREW_ENABLE_FAILURE,
+                    error,
+                });
+            });
+    };
+}
+
+export function fetchSettings(token, userId) {
+    return function setEnabled(dispatch) {
+        dispatch({
+            type: types.USER_SET_SETTINGS_REQUEST,
+        });
+        ProtectedAPICall(token, API_URL, `/config/user/${userId}/settings`, {
+            method: 'GET',
+        })
+            .then(response => {
+                if (response.data && typeof response.data === 'object') {
+                    dispatch({
+                        type: types.USER_SET_SETTINGS_SUCCESS,
+                        data: response.data,
+                    });
+                    return true;
+                }
+                throw new Error('Fetching Settings API Response is invalid');
+            })
+            .catch(error => {
+                dispatch({
+                    type: types.USER_SET_SETTINGS_FAILURE,
+                    error,
+                });
+            });
+    };
+}
+
+export const hideUserSettingsError = () => ({
+    type: types.HIDE_USER_SETTINGS_ERROR,
+});
+
+export const gotLongPressFor911 = () => ({
+    type: types.GOT_LONG_PRESS_FOR_911,
+});
+
+export const resetLongPressFor911 = () => ({
+    type: types.RESET_LONG_PRESS_FOR_911,
 });

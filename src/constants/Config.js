@@ -37,17 +37,19 @@ export const REDUX_LOGGING = false;
  * Interval in ms for syncing account details with server.
  * Default is 300000 (5 mins).
  */
-export const ACCOUNT_SYNC_INTERVAL = 300000;
-
-/**
- * Interval in ms for syncing account details with server during active flare event.
- */
-export const ACCOUNT_SYNC_INTERVAL_FLARE = 12000;
+export const ACCOUNT_SYNC_INTERVAL = 300000; // 5 minutes
+// export const ACCOUNT_SYNC_INTERVAL = 60000; // 1 minute
 
 /**
  * Interval in ms for syncing account details with server during development.
  */
-export const ACCOUNT_SYNC_INTERVAL_DEV = 120000;
+// export const ACCOUNT_SYNC_INTERVAL_DEV = 300000; // 5 minutes
+export const ACCOUNT_SYNC_INTERVAL_DEV = 30000; // 30 seconds
+
+/**
+ * Interval in ms for syncing account details with server during active flare event (911 or Crew)
+ */
+export const ACCOUNT_SYNC_INTERVAL_FLARE = 12000; // 12 seconds
 
 /**
  * Interval in ms for refreshing active flare timeline

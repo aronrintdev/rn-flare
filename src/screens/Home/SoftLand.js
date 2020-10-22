@@ -113,6 +113,7 @@ const mapState = ({
         sawNotifSettings,
         addedToContacts,
         didShare,
+        settings,
     },
 }) => ({
     authToken,
@@ -131,6 +132,7 @@ const mapState = ({
     sawNotifSettings,
     addedToContacts,
     didShare,
+    settings,
 });
 
 const SoftLand = ({ componentId }) => {
@@ -189,7 +191,7 @@ const SoftLand = ({ componentId }) => {
         <View style={[styles.container, { paddingTop: insets.top }]}>
             <StatusBar barStyle="light-content" />
             <Aura source={aura1528} />
-            <Text style={styles.headline}>Your Setup</Text>
+            <Text style={styles.headline}>Customize your Flare</Text>
             <Constellation count={doneCount} />
             <FlatList
                 style={styles.list}

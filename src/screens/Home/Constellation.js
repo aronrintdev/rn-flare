@@ -38,9 +38,10 @@ const images = [
     constellation4,
     constellation5,
     constellation6,
+    constellation6,
 ];
 
-const Constellation = ({ count, maxCount = 6 }) => {
+const Constellation = ({ count, maxCount = 7 }) => {
     const image = images[count];
 
     return (

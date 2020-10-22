@@ -16,6 +16,38 @@ PODS:
     - React-Core (= 0.61.5)
     - React-jsi (= 0.61.5)
     - ReactCommon/turbomodule/core (= 0.61.5)
+  - Firebase/CoreOnly (6.30.0):
+    - FirebaseCore (= 6.10.0)
+  - Firebase/Messaging (6.30.0):
+    - Firebase/CoreOnly
+    - FirebaseMessaging (~> 4.6.1)
+  - FirebaseCore (6.10.0):
+    - FirebaseCoreDiagnostics (~> 1.3)
+    - GoogleUtilities/Environment (~> 6.7)
+    - GoogleUtilities/Logger (~> 6.7)
+  - FirebaseCoreDiagnostics (1.6.0):
+    - GoogleDataTransport (~> 7.2)
+    - GoogleUtilities/Environment (~> 6.7)
+    - GoogleUtilities/Logger (~> 6.7)
+    - nanopb (~> 1.30906.0)
+  - FirebaseInstallations (1.7.0):
+    - FirebaseCore (~> 6.10)
+    - GoogleUtilities/Environment (~> 6.7)
+    - GoogleUtilities/UserDefaults (~> 6.7)
+    - PromisesObjC (~> 1.2)
+  - FirebaseInstanceID (4.6.0):
+    - FirebaseCore (~> 6.10)
+    - FirebaseInstallations (~> 1.6)
+    - GoogleUtilities/Environment (~> 6.7)
+    - GoogleUtilities/UserDefaults (~> 6.7)
+  - FirebaseMessaging (4.6.2):
+    - FirebaseCore (~> 6.10)
+    - FirebaseInstanceID (~> 4.6)
+    - GoogleUtilities/AppDelegateSwizzler (~> 6.7)
+    - GoogleUtilities/Environment (~> 6.7)
+    - GoogleUtilities/Reachability (~> 6.7)
+    - GoogleUtilities/UserDefaults (~> 6.7)
+    - Protobuf (>= 3.9.2, ~> 3.9)
   - Folly (2018.10.22.00):
     - boost-for-react-native
     - DoubleConversion
@@ -26,10 +58,34 @@ PODS:
     - DoubleConversion
     - glog
   - glog (0.3.5)
+  - GoogleDataTransport (7.3.0):
+    - nanopb (~> 1.30906.0)
+  - GoogleUtilities/AppDelegateSwizzler (6.7.2):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
+  - GoogleUtilities/Environment (6.7.2):
+    - PromisesObjC (~> 1.2)
+  - GoogleUtilities/Logger (6.7.2):
+    - GoogleUtilities/Environment
+  - GoogleUtilities/Network (6.7.2):
+    - GoogleUtilities/Logger
+    - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Reachability
+  - "GoogleUtilities/NSData+zlib (6.7.2)"
+  - GoogleUtilities/Reachability (6.7.2):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/UserDefaults (6.7.2):
+    - GoogleUtilities/Logger
   - lottie-ios (3.1.3)
   - lottie-react-native (3.3.2):
     - lottie-ios (~> 3.1.3)
     - React
+  - nanopb (1.30906.0):
+    - nanopb/decode (= 1.30906.0)
+    - nanopb/encode (= 1.30906.0)
+  - nanopb/decode (1.30906.0)
+  - nanopb/encode (1.30906.0)
   - Permission-Contacts (2.0.8):
     - RNPermissions
   - Permission-LocationAlways (2.0.8):
@@ -38,6 +94,8 @@ PODS:
     - RNPermissions
   - Permission-Notifications (2.0.8):
     - RNPermissions
+  - PromisesObjC (1.2.10)
+  - Protobuf (3.13.0)
   - RCTRequired (0.61.5)
   - RCTTypeSafety (0.61.5):
     - FBLazyVector (= 0.61.5)
@@ -221,10 +279,10 @@ PODS:
     - React
   - react-native-version-number (0.3.6):
     - React
-  - react-native-video (5.0.2):
+  - react-native-video (5.1.0-alpha8):
     - React
-    - react-native-video/Video (= 5.0.2)
-  - react-native-video/Video (5.0.2):
+    - react-native-video/Video (= 5.1.0-alpha8)
+  - react-native-video/Video (5.1.0-alpha8):
     - React
   - react-native-viewpager (3.2.0):
     - React
@@ -275,16 +333,25 @@ PODS:
     - React
   - RNConfigReader (1.0.0):
     - React
-  - RNCPushNotificationIOS (1.0.2):
+  - RNCPushNotificationIOS (1.5.0):
     - React
-  - RNDeviceInfo (5.5.3):
+  - RNDeviceInfo (5.6.5):
     - React
+  - RNFBApp (8.4.1):
+    - Firebase/CoreOnly (~> 6.30.0)
+    - React
+  - RNFBMessaging (7.8.4):
+    - Firebase/Messaging (~> 6.30.0)
+    - React
+    - RNFBApp
   - RNPermissions (2.0.8):
     - React
   - RNSound (0.11.0):
     - React
     - RNSound/Core (= 0.11.0)
   - RNSound/Core (0.11.0):
+    - React
+  - RNSVG (12.1.0):
     - React
   - RNVectorIcons (6.6.0):
     - React
@@ -346,14 +413,28 @@ DEPENDENCIES:
   - RNConfigReader (from `../node_modules/react-native-config-reader`)
   - "RNCPushNotificationIOS (from `../node_modules/@react-native-community/push-notification-ios`)"
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
+  - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
+  - "RNFBMessaging (from `../node_modules/@react-native-firebase/messaging`)"
   - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNSound (from `../node_modules/react-native-sound`)
+  - RNSVG (from `../node_modules/react-native-svg`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
   trunk:
     - boost-for-react-native
+    - Firebase
+    - FirebaseCore
+    - FirebaseCoreDiagnostics
+    - FirebaseInstallations
+    - FirebaseInstanceID
+    - FirebaseMessaging
+    - GoogleDataTransport
+    - GoogleUtilities
+    - nanopb
+    - PromisesObjC
+    - Protobuf
 
 EXTERNAL SOURCES:
   BugsnagReactNative:
@@ -460,10 +541,16 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/push-notification-ios"
   RNDeviceInfo:
     :path: "../node_modules/react-native-device-info"
+  RNFBApp:
+    :path: "../node_modules/@react-native-firebase/app"
+  RNFBMessaging:
+    :path: "../node_modules/@react-native-firebase/messaging"
   RNPermissions:
     :path: "../node_modules/react-native-permissions"
   RNSound:
     :path: "../node_modules/react-native-sound"
+  RNSVG:
+    :path: "../node_modules/react-native-svg"
   RNVectorIcons:
     :path: "../node_modules/react-native-vector-icons"
   Yoga:
@@ -476,14 +563,25 @@ SPEC CHECKSUMS:
   DoubleConversion: 5805e889d232975c086db112ece9ed034df7a0b2
   FBLazyVector: aaeaf388755e4f29cd74acbc9e3b8da6d807c37f
   FBReactNativeSpec: 118d0d177724c2d67f08a59136eb29ef5943ec75
+  Firebase: 210f41ca352067d83b1ba4fd2e7fb49a0c017397
+  FirebaseCore: 9a41e2de78fef10f63cee30ab10e2945266bc1fc
+  FirebaseCoreDiagnostics: 7415bfb3883b3500c5a95c42b6ba66baae78f600
+  FirebaseInstallations: 466c7b4d1f58fe16707693091da253726a731ed2
+  FirebaseInstanceID: 84f5f5762f1bee94ca2254f693bbf5aec6666504
+  FirebaseMessaging: 82d75b3770a78bbce470769a6980429608b4c407
   Folly: 30e7936e1c45c08d884aa59369ed951a8e68cf51
   glog: 1f3da668190260b06b429bb211bfbee5cd790c28
+  GoogleDataTransport: e85fb700c9b027079ce182c3d08e12e0f9618bb4
+  GoogleUtilities: 7f2f5a07f888cdb145101d6042bc4422f57e70b3
   lottie-ios: 496ac5cea1bbf1a7bd1f1f472f3232eb1b8d744b
   lottie-react-native: 2a1a82bb326ae51331a5520de0cf706733c6db69
+  nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
   Permission-Contacts: 89963431010c6f001849e3c4ef47661809407083
   Permission-LocationAlways: b04c806e399a4a2f5b2c37b1a88b0428afe77122
   Permission-LocationWhenInUse: 0d4763b950baa5442e09f6ffc4d991db8d1d5662
   Permission-Notifications: 0722c1cd783b86d2ae77a1a0c925d525f9170e7d
+  PromisesObjC: b14b1c6b68e306650688599de8a45e49fae81151
+  Protobuf: 3dac39b34a08151c6d949560efe3f86134a3f748
   RCTRequired: b153add4da6e7dbc44aebf93f3cf4fcae392ddf1
   RCTTypeSafety: 9aa1b91d7f9310fc6eadc3cf95126ffe818af320
   React: b6a59ef847b2b40bb6e0180a97d0ca716969ac78
@@ -503,7 +601,7 @@ SPEC CHECKSUMS:
   react-native-splash-screen: 200d11d188e2e78cea3ad319964f6142b6384865
   react-native-udp: 33df202da784dcdbd0915e4bdb2ef7b3c9aeffe3
   react-native-version-number: b415bbec6a13f2df62bf978e85bc0d699462f37f
-  react-native-video: d01ed7ff1e38fa7dcc6c15c94cf505e661b7bfd0
+  react-native-video: dbb8df4f0bbdf80de6797c90fcad8bc12b19401d
   react-native-viewpager: 0cb7a533ce6e9ef0a48a5a7c8b3e3e3e345ae298
   React-RCTActionSheet: 600b4d10e3aea0913b5a92256d2719c0cdd26d76
   React-RCTAnimation: 791a87558389c80908ed06cc5dfc5e7920dfa360
@@ -521,13 +619,16 @@ SPEC CHECKSUMS:
   RNCAsyncStorage: 60a80e72d95bf02a01cace55d3697d9724f0d77f
   RNCMaskedView: a88953beefbd347a29072d9eba90e42945fe291e
   RNConfigReader: 396da6a6444182a76e8ae0930b9436c7575045cb
-  RNCPushNotificationIOS: 0b8d06ff190d84627dd17501bfb96652375970e4
-  RNDeviceInfo: 310c1f43d418d950a193c7650de2f9559c906048
+  RNCPushNotificationIOS: ef00b111c849a9bb5dbc86d40cf91acb8b262772
+  RNDeviceInfo: c5f8f3a456adcbba405ace475254b08febc4c095
+  RNFBApp: e4321cad5dd23b43b3b4f0ca060300b9f85cb7a4
+  RNFBMessaging: f28096dc79edf6b0a094e95c265c7224122d051d
   RNPermissions: 923c1506d0bde387fbcfc18a8f87945806d03c19
   RNSound: da030221e6ac7e8290c6b43f2b5f2133a8e225b0
+  RNSVG: ce9d996113475209013317e48b05c21ee988d42e
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
 
-PODFILE CHECKSUM: 486353390051e1ef999a125f0b802146e4ad7a05
+PODFILE CHECKSUM: 2d922473424b74fc3796083391a4b69fbd05ca9e
 
 COCOAPODS: 1.9.3

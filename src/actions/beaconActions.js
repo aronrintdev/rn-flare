@@ -115,7 +115,7 @@ export const cancelActiveFlare = token => dispatch => {
             dispatch({
                 type: types.CANCEL_ACTIVE_FLARE_SUCCESS,
                 data: {
-                    crewEvents: response.crew_events,
+                    crewEvents: response.crew_events || [],
                 },
             });
         })

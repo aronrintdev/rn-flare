@@ -37,7 +37,6 @@ export function user(state = initialState.user, action = {}) {
                 action.data.crews.length
                     ? action.data.crews[0]
                     : { id: 0, members: [] };
-
             return state.merge({
                 analyticsToken: action.data.analytics_token,
                 authToken: action.data.auth_token,
@@ -52,6 +51,11 @@ export function user(state = initialState.user, action = {}) {
                 authState: 'succeeded',
                 role: action.data.role,
                 hasViewedTutorial: action.viewedTutorial,
+                settings: {
+                    ...state.settings,
+                    enabled911Feature: action.data.ems_services,
+                    crewEnabled: action.data.crew_services,
+                },
                 contactsCrewLookup: getContactsCrewLookup(firstCrew),
             });
         }
@@ -64,6 +68,11 @@ export function user(state = initialState.user, action = {}) {
                 role: null,
                 contactsCrewLookup: null,
                 authState: null,
+                settings: {
+                    ...state.settings,
+                    enabled911Feature: false,
+                    crewEnabled: false,
+                },
             });
         case types.USER_RESET:
             return initialState.user;
@@ -79,9 +88,6 @@ export function user(state = initialState.user, action = {}) {
                 crewEvents: action.data.crew_events,
                 crews: action.data.crews,
                 devices: action.data.devices,
-                hasActiveFlare:
-                    action.data.crew_events &&
-                    action.data.crew_events.length > 0,
                 profile: action.data.profile,
                 referralKey: action.data.referral_key,
             });
@@ -99,7 +105,7 @@ export function user(state = initialState.user, action = {}) {
                 activatingFlareState: 'success',
                 hasActiveFlare: true,
                 crewEvents: action.data.crewEvents,
-                crewEventTimeline: [],
+                eventTimeline: [],
             });
 
         case types.ACTIVATE_FLARE_FAILURE:
@@ -119,7 +125,7 @@ export function user(state = initialState.user, action = {}) {
                 hasActiveFlare: false,
                 cancelingActiveFlare: false,
                 cancelActiveFlareState: 'success',
-                crewEventTimeline: [],
+                eventTimeline: [],
             });
 
         case types.CANCEL_ACTIVE_FLARE_FAILURE:
@@ -322,18 +328,18 @@ export function user(state = initialState.user, action = {}) {
          */
         case types.GET_FLARE_TIMELINE_REQUEST:
             return state.merge({
-                crewEventTimelineState: 'requested',
+                eventTimelineState: 'requested',
             });
 
         case types.GET_FLARE_TIMELINE_SUCCESS:
             return state.merge({
-                crewEventTimelineState: 'succeeded',
-                crewEventTimeline: action.data.actions,
+                eventTimelineState: 'succeeded',
+                eventTimeline: action.data.actions,
             });
 
         case types.GET_FLARE_TIMELINE_FAILURE:
             return state.merge({
-                crewEventTimelineState: 'failed',
+                eventTimelineState: 'failed',
             });
 
         /**
@@ -519,6 +525,41 @@ export function user(state = initialState.user, action = {}) {
         case types.USER_TEXT_FRIENDS_RESPONSE:
             return state.set('textFriends', action.response);
 
+        case types.USER_SET_911_FEATURE_SUCCESS:
+            return state.setIn(
+                ['settings', 'enabled911Feature'],
+                action.ems_services
+            );
+        case types.USER_SET_911_FEATURE_FAILURE:
+            return state.set('showFlareServiceError', true);
+        case types.HIDE_FLARE_SERVICE_FAILURE_ALERT:
+            return state.set('showFlareServiceError', false);
+
+        case types.USER_SET_CREW_ENABLE_SUCCESS:
+            return state.setIn(
+                ['settings', 'crewEnabled'],
+                action.crew_services
+            );
+        case types.USER_SET_CREW_ENABLE_FAILURE:
+            return state.set('showFlareServiceError', true);
+        case types.HIDE_USER_SETTINGS_ERROR:
+            return state.set('showSettingsFetchError', false);
+        case types.USER_SET_SETTINGS_REQUEST:
+            return state.set('showSettingsFetchError', false);
+        case types.USER_SET_SETTINGS_SUCCESS:
+            return state.merge({
+                settings: {
+                    ...state.settings,
+                    ems_services: action.data.ems_services,
+                    crew_services: action.data.crew_services,
+                },
+            });
+        case types.USER_SET_SETTINGS_FAILURE:
+            return state.set('showSettingsFetchError', true);
+        case types.GOT_LONG_PRESS_FOR_911:
+            return state.set('hasLongPressFor911', true);
+        case types.RESET_LONG_PRESS_FOR_911:
+            return state.set('hasLongPressFor911', false);
         default:
             return state;
     }

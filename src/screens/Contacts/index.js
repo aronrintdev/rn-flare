@@ -98,6 +98,7 @@ class Contacts extends React.Component {
             componentId,
             loading,
             crewUpdateState,
+            showFlareServiceError,
         } = this.props;
         const { dirty, addedMembers } = this.state;
         if (
@@ -127,6 +128,9 @@ class Contacts extends React.Component {
                 Navigation.pop(componentId);
             }
         }
+        if (showFlareServiceError) {
+            this.showEnableCrewErrorAlert();
+        }
     }
 
     componentWillUnmount() {
@@ -135,10 +139,37 @@ class Contacts extends React.Component {
         }
     }
 
-    performSave = () => {
-        const { setCrewMembers, authToken } = this.props;
+    performSave = async () => {
+        const {
+            setCrewMembers,
+            authToken,
+            profile,
+            setCrewEnabled,
+            crewEnabled,
+        } = this.props;
         const { crew } = this.state;
-        setCrewMembers(authToken, crew.id || 0, crew.members);
+        try {
+            if (!crewEnabled) {
+                const resp = await setCrewEnabled(authToken, profile.id);
+                if (!resp) {
+                    const resp2 = await setCrewEnabled(authToken, profile.id);
+                    if (!resp2) {
+                        this.showEnableCrewErrorAlert();
+                    }
+                }
+            }
+            setCrewMembers(authToken, crew.id || 0, crew.members);
+        } catch (error) {
+            Alert.alert(error.message);
+        }
+    };
+
+    showEnableCrewErrorAlert = () => {
+        const { hideFlareServiceErrorAlert } = this.props;
+        Alert.alert(
+            `Sorry, we are unable to connect to Flare to toggle your settings. Please try again later, or contact us at help@getflare.com if this issue persists.`
+        );
+        hideFlareServiceErrorAlert();
     };
 
     handleContactPress = contact => {
@@ -291,6 +322,9 @@ const mapStateToProps = ({
         hasViewedTutorial,
         crewUpdateState,
         textFriends,
+        profile,
+        settings,
+        showFlareServiceError,
     },
 }) => {
     const crew = crews?.length > 0 ? crews[0] : { name: null, members: [] };
@@ -302,6 +336,9 @@ const mapStateToProps = ({
         crewUpdateState,
         loading: crewUpdateState === 'requested',
         textFriendsState: textFriends,
+        profile,
+        crewEnabled: settings.crewEnabled,
+        showFlareServiceError,
     };
 };
 
@@ -312,6 +349,8 @@ const mapDispatchToProps = {
     textFriendsRequest: userActions.textFriendsRequest,
     textFriendsReset: userActions.textFriendsReset,
     resetSetCrewMembers: userActions.resetSetCrewMembers,
+    setCrewEnabled: userActions.setCrewEnabled,
+    hideFlareServiceErrorAlert: userActions.hideFlareServiceErrorAlert,
 };
 
 export default connect(

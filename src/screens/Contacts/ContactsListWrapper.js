@@ -124,6 +124,7 @@ const ContactsListWrapper = ({ handleContactPress }) => {
                                 onChangeText={setFilter}
                                 keyboardType="default"
                                 value={filter}
+                                color={Colors.black}
                             />
                             <TouchableOpacity onPress={clearSearch}>
                                 <Icon name="circle-with-cross" size={24} />

@@ -67,6 +67,9 @@ const styles = StyleSheet.create({
     scroller: {
         flex: 1,
     },
+    fakeLink: {
+        textDecorationLine: 'underline',
+    },
 });
 
 const generateFullName = (first, last) => {
@@ -135,15 +138,27 @@ const TextConfirm = ({ componentId }) => {
                 </Text>
                 <View style={styles.fakeTextContainer}>
                     <Text style={styles.fakeText}>
-                        Hey hey! {fullName} has added you to their Crew of
-                        friends in Flare (a new safety jewelry company) because
-                        you always have their back.
+                        <Text>
+                            Hi there! {fullName} has added you to their Crew of
+                            friends in Flare (a new safety jewelry company)
+                            because you always have their back. You will receive
+                            messages when {fullName} presses the hidden button
+                            on their bracelet to indicate that they’re in an
+                            iffy situation and want you to check up on them.
+                            Learn more at
+                        </Text>
+                        <Text style={styles.fakeLink}>
+                            http://bit.ly/FlareCrew
+                        </Text>
                         {'\n\n'}
-                        You will receive messages when {fullName} presses the
-                        hidden button on their bracelet to indicate that they’re
-                        in an iffy situation and want you to check up on them.
-                        {'\n\n'}
-                        Learn more at http://bit.ly/FlareCrew.
+                        <Text>
+                            Get your Flare and join the movement! Use {fullName}
+                            ’s referral link
+                        </Text>
+                        <Text style={styles.fakeLink}>
+                            https://getflare.com/discount/fl-h5ppzk
+                        </Text>
+                        <Text> to get $20 off your purchase!</Text>
                     </Text>
                 </View>
             </ScrollView>

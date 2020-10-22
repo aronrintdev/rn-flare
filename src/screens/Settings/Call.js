@@ -53,6 +53,8 @@ const SettingsCall = ({
     }, []);
 
     const saveCallScript = React.useCallback(() => {
+        if (currentSoundClip !== undefined) currentSoundClip.stop();
+        setCurrentlyPlaying();
         setCallScript(authToken, currentCallScript);
         setDirty(false);
         setDidSave(true);

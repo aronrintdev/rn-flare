@@ -28,9 +28,18 @@ const Crew = ({ componentId }) => {
         <SafeAreaView style={styles.container}>
             <StatusBar barStyle="dark-content" />
             <Text style={styles.subhead}>Manage my crew</Text>
-            <View style={styles.itemContainer}>
-                <TouchableOpacity style={styles.item} onPress={editCrew}>
-                    <Text style={styles.text}>Add/Edit Crew</Text>
+            <View
+                style={[
+                    styles.itemContainer,
+                    styles.firstItemContainer,
+                    styles.lastItemContainer,
+                ]}
+            >
+                <TouchableOpacity
+                    style={[styles.item, styles.lastItem]}
+                    onPress={editCrew}
+                >
+                    <Text style={styles.text}>Add/Edit Crew Members</Text>
                     <Image
                         resizeMode="center"
                         source={chevron}

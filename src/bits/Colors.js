@@ -11,6 +11,7 @@ export default {
         greenLight: '#ecfafa',
         pink: '#ffe2f2',
         pinkLight: '#fff6fb',
+        gray: '#FAF8F5',
     },
     black: '#000000',
     grey: '#979797',
@@ -34,4 +35,5 @@ export default {
     },
     transparent: 'rgba(0, 0, 0, 0.0)',
     white: '#FFFFFF',
+    whiteBorder: '#F8F5F1',
 };

@@ -12,8 +12,8 @@ const styles = StyleSheet.create({
     bar: {
         flexDirection: 'row',
         height: 30,
-        marginTop: 16,
-        marginBottom: 26,
+        marginTop: 8,
+        marginBottom: 8,
         marginLeft: 32,
         marginRight: 32,
         alignItems: 'stretch',

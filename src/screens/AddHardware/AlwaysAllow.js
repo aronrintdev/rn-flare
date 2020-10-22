@@ -69,7 +69,7 @@ const AlwaysAllow = ({
         <PermissionsScreen
             style={style}
             headline="“Always Allow”"
-            subhead="Our connected jewelry only works if it can “always” access your location and Bluetooth is turned on."
+            subhead="We need your location so we can send your location to your friends and/or 911 when you activate your bracelet, even if the app isn’t open."
             visitSettings={visitSettings}
             tellMeMore={tellMeMore}
         >

@@ -1,39 +1,47 @@
 import * as React from 'react';
 import {
-    Image,
     SafeAreaView,
-    ScrollView,
     StatusBar,
     StyleSheet,
     Text,
     View,
+    Image,
+    ScrollView,
+    Dimensions,
 } from 'react-native';
 import { Navigation } from 'react-native-navigation';
+import Carousel, { Pagination } from 'react-native-snap-carousel';
+import VideoPlayer from 'react-native-video-controls';
 
 import Colors from '../bits/Colors';
-import CloseButton from './CloseButton';
 import Headline from './Onboarding/Headline';
-import GoldenRules from './Scenarios/GoldenRules';
 import RoundedButton from '../bits/RoundedButton';
+import GoldenRules from './Scenarios/GoldenRules--HowItWorks';
+import StarryLocation from '../assets/starry-location.png';
+import { useSlideMenu } from '../bits/useNavigationCallback';
 
-import incomingCall from '../assets/incoming-flare-call.png';
+const video1 = require('../assets/videos/product-demo-button-location.mp4');
+const video2 = require('../assets/videos/product-demo-short-press.mp4');
+const video3 = require('../assets/videos/product-demo-long-press.mp4');
+
+const SPACE_HEIGHT = Dimensions.get('window').height - 100;
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'column',
-        backgroundColor: Colors.theme.cream,
+        backgroundColor: Colors.theme.white,
         alignItems: 'center',
     },
     shrink: {
-        height: 32,
+        height: (SPACE_HEIGHT * 16) / 670,
         flexShrink: 1,
     },
     headline: {
         alignSelf: 'center',
         textAlign: 'center',
         color: Colors.black,
-        marginBottom: 0,
+        marginBottom: (SPACE_HEIGHT * 10) / 670,
     },
     line: {
         height: 1,
@@ -42,12 +50,17 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.black,
     },
     subhead: {
+        flex: 1,
         width: 300,
         color: Colors.black,
         fontSize: 15,
         fontFamily: 'Nocturno Display Std',
         textAlign: 'center',
-        marginBottom: 48,
+    },
+    subheadView: {
+        width: 300,
+        height: 40,
+        marginVertical: (SPACE_HEIGHT * 10) / 670,
     },
     l: {
         alignSelf: 'flex-start',
@@ -68,17 +81,6 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-end',
         marginRight: 32,
     },
-    chatItem: {
-        backgroundColor: Colors.white,
-        borderRadius: 30,
-        maxWidth: 240,
-        padding: 16,
-        marginTop: 16,
-    },
-    chatItemText: {
-        color: Colors.black,
-        fontSize: 14,
-    },
     emojis: {
         marginTop: -10,
         fontSize: 20,
@@ -92,58 +94,160 @@ const styles = StyleSheet.create({
         marginTop: 16,
         marginBottom: 24,
     },
+    slide: {
+        flex: 1,
+        backgroundColor: Colors.theme.white,
+        alignItems: 'center',
+    },
+    slideImage: {
+        width: (SPACE_HEIGHT * 230) / 670,
+        resizeMode: 'contain',
+        flex: 1,
+    },
+    videoPlayerStyle: {
+        backgroundColor: Colors.theme.white,
+    },
 });
 
 const HowItWorks = ({ componentId }) => {
-    const [golden, setGolden] = React.useState(false);
-    const close = React.useCallback(() => {
-        Navigation.dismissModal(componentId);
-    }, [componentId]);
-    const showGolden = React.useCallback(() => {
-        setGolden(true);
-    }, []);
+    const entries = [
+        {
+            subtitle: 'Flare’s Golden Rules',
+            showGolden: true,
+        },
+        {
+            subtitle: 'There’s a hidden button on the side of your bracelet.',
+            video: video1,
+        },
+        {
+            subtitle: 'Click once to get an automated call.',
+            video: video2,
+        },
+        {
+            subtitle:
+                'Hold for 3 seconds to share your location with your Crew and 911 (optional).',
+            video: video3,
+        },
+        {
+            subtitle: 'Explore the 911 feature',
+            showExplore911: true,
+            image: StarryLocation,
+            button: {
+                text: 'Learn More',
+                onPress: React.useCallback(() => {
+                    Navigation.dismissModal(componentId);
+                    Navigation.push(componentId, {
+                        component: {
+                            name: 'com.flarejewelry.how911works.main',
+                            options: {
+                                topBar: {
+                                    visible: false,
+                                    animate: false,
+                                },
+                            },
+                        },
+                    });
+                }, [componentId]),
+            },
+        },
+    ];
 
-    if (golden) {
-        return <GoldenRules finishUp={close} />;
-    }
+    const [subtitleText, setSubtitleText] = React.useState(entries[0].subtitle);
+    const [activeSlide, setActiveSlide] = React.useState(0);
+
+    useSlideMenu(componentId);
+
+    const renderItem = ({ item, index }) => {
+        if (item.showGolden) {
+            return (
+                <ScrollView
+                    style={{
+                        flex: 1,
+                        alignSelf: 'stretch',
+                        paddingHorizontal: 6,
+                    }}
+                    contentContinerStyle={{
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                    }}
+                    alwaysBounceVertical={false}
+                    key={index}
+                >
+                    <GoldenRules />
+                </ScrollView>
+            );
+        }
+
+        return (
+            <View style={styles.slide} key={index}>
+                {item.video && index === activeSlide && (
+                    <VideoPlayer
+                        source={item.video}
+                        disableFullscreen
+                        disablePlayPause
+                        disableSeekbar
+                        disableVolume
+                        disableTimer
+                        disableBack
+                        showOnStart={0}
+                        repeat
+                        resizeMode="contain"
+                        style={styles.videoPlayerStyle}
+                    />
+                )}
+                {item.image && (
+                    <Image source={item.image} style={styles.slideImage} />
+                )}
+                {item.button && (
+                    <RoundedButton
+                        onPress={item.button.onPress}
+                        wrapperStyle={styles.button}
+                        text={item.button.text}
+                    />
+                )}
+            </View>
+        );
+    };
+
+    const onChangeItem = index => {
+        setActiveSlide(index);
+        setSubtitleText(entries[index].subtitle);
+    };
 
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar barStyle="dark-content" />
-            <CloseButton black onPress={close} />
             <View style={styles.shrink} />
-            <Headline style={styles.headline}>How Flare Works</Headline>
+            <Headline style={styles.headline}>How It Works</Headline>
             <View style={styles.line} />
-            <Text style={styles.subhead}>The basics.</Text>
-            <ScrollView style={styles.grow} alwaysBounceVertical={false}>
-                <Text style={[styles.l, styles.sectionhead]}>
-                    Press for a call.
-                </Text>
-                <Image
-                    style={[styles.l, styles.incomingCall]}
-                    source={incomingCall}
-                />
-                <Text style={[styles.r, styles.sectionhead]}>
-                    Hold for a friend.
-                </Text>
-                <View style={[styles.r, styles.chatItem]}>
-                    <Text style={styles.chatItemText}>
-                        Are any of you with Nicky?
-                    </Text>
-                </View>
-                <View style={[styles.r, styles.chatItem]}>
-                    <Text style={styles.chatItemText}>
-                        We just talked. She’s all good! Just needed an excuse to
-                        leave.
-                    </Text>
-                </View>
-                <Text style={[styles.r, styles.emojis]}>👌✨💛</Text>
-            </ScrollView>
-            <RoundedButton
-                onPress={showGolden}
-                wrapperStyle={styles.button}
-                text="Read More"
-                width={240}
+            <View style={styles.subheadView}>
+                <Text style={styles.subhead}>{subtitleText}</Text>
+            </View>
+            <Carousel
+                data={entries}
+                renderItem={renderItem}
+                sliderWidth={310}
+                itemWidth={310}
+                onSnapToItem={onChangeItem}
+                pagingEnabled
+            />
+            <Pagination
+                dotsLength={entries.length}
+                activeDotIndex={activeSlide}
+                dotStyle={{
+                    width: 10,
+                    height: 10,
+                    borderRadius: 5,
+                    marginHorizontal: 4,
+                    backgroundColor: Colors.black,
+                    borderWidth: 1,
+                    borderColor: Colors.black,
+                }}
+                inactiveDotStyle={{
+                    backgroundColor: Colors.white,
+                }}
+                inactiveDotOpacity={0.4}
+                inactiveDotScale={1}
             />
         </SafeAreaView>
     );

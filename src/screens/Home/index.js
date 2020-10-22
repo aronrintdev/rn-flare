@@ -4,6 +4,7 @@ import React from 'react';
 import { AppState } from 'react-native';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import messaging from '@react-native-firebase/messaging';
 
 import { connect } from 'react-redux';
 import { Navigation } from 'react-native-navigation';
@@ -11,6 +12,7 @@ import moment from 'moment';
 import BackgroundTimer from 'react-native-background-timer';
 import { PERMISSIONS } from 'react-native-permissions';
 
+import RNBluetoothInfo from '@bitfly/react-native-bluetooth-info';
 import {
     ACCOUNT_SYNC_INTERVAL,
     ACCOUNT_SYNC_INTERVAL_FLARE,
@@ -29,7 +31,6 @@ import { startBleListening } from '../../actions/hardwareActions';
 import getCurrentPosition from '../../helpers/location';
 import Strings from '../../locales/en';
 import SoftLand from './SoftLand';
-import RNBluetoothInfo from '@bitfly/react-native-bluetooth-info';
 
 export { default as PermissionsReminder } from './PermissionsReminder';
 
@@ -39,7 +40,14 @@ class Home extends React.Component {
 
         this.shuttingDown = false;
         this.setSyncTiming();
+        this.appStatusSync = null;
+
         Navigation.events().bindComponent(this);
+        this.screenEventListener = Navigation.events().registerComponentDidDisappearListener(
+            () => {
+                this.setState({ showSideMenu: false });
+            }
+        );
 
         this.state = {
             showSideMenu: false,
@@ -59,7 +67,6 @@ class Home extends React.Component {
         if (hasActiveFlare) {
             dispatch(changeAppRoot('secure-active-event'));
         }
-
         // Contacts are not stored on the server. It takes a while to fetch them locally, so we
         // start that process now before users need to view them.
         if (permissions.contacts) {
@@ -76,14 +83,13 @@ class Home extends React.Component {
 
         // Users may have modified their accounts on other devices or on the web. Keep this device
         // in sync by fetching server-stored data.
-        dispatch(
-            syncAccountDetails({
-                analyticsToken,
-            })
-        );
+        const appStatus = {
+            analyticsToken,
+        };
+        dispatch(syncAccountDetails(appStatus));
 
-        BackgroundTimer.stopBackgroundTimer();
-        BackgroundTimer.runBackgroundTimer(
+        BackgroundTimer.clearInterval(this.appStatusSync);
+        this.appStatusSync = BackgroundTimer.setInterval(
             this.syncAccount,
             this.accountSyncTimeInMs
         );
@@ -100,25 +106,29 @@ class Home extends React.Component {
             crewEventNotificationMessage,
             dispatch,
             permissions: { contacts: contactsPermission },
+            crewEnabled,
+            crews,
         } = this.props;
         /**
          * Handle transitions in flare state: reset intervals for fetching data
          */
+        this.requestUserPermission();
         if (hasActiveFlare !== prevProps.hasActiveFlare) {
             this.setSyncTiming();
-            BackgroundTimer.stop();
-            BackgroundTimer.stopBackgroundTimer();
+            BackgroundTimer.clearInterval(this.appStatusSync);
 
             if (hasActiveFlare) {
                 console.log('>>>>> Local notify!');
-                PushNotificationIOS.requestPermissions();
-                PushNotificationIOS.presentLocalNotification({
-                    alertBody: crewEventNotificationMessage,
-                    alertTitle: Strings.notifications.title,
-                });
+                if (crewEnabled && crews.length > 0) {
+                    PushNotificationIOS.requestPermissions();
+                    PushNotificationIOS.presentLocalNotification({
+                        alertBody: crewEventNotificationMessage,
+                        alertTitle: Strings.notifications.title,
+                    });
+                }
                 dispatch(changeAppRoot('secure-active-event'));
             } else {
-                BackgroundTimer.runBackgroundTimer(
+                this.appStatusSync = BackgroundTimer.setInterval(
                     () => this.syncAccount(),
                     this.accountSyncTimeInMs
                 );
@@ -136,7 +146,10 @@ class Home extends React.Component {
 
     componentWillUnmount() {
         this.shuttingDown = true;
-        BackgroundTimer.stopBackgroundTimer();
+        this.unsubscribe = null;
+        this.screenEventListener.remove();
+
+        BackgroundTimer.clearInterval(this.appStatusSync);
         AppState.removeEventListener('change', this.handleAppStateChange);
         RNBluetoothInfo.removeEventListener(
             'change',
@@ -145,7 +158,7 @@ class Home extends React.Component {
     }
 
     bluetoothEnabledListener = resp => {
-        const connectionState = resp.type.connectionState;
+        const { connectionState } = resp.type;
         if (connectionState === 'off') {
             PushNotificationIOS.requestPermissions();
             PushNotificationIOS.presentLocalNotification({
@@ -162,6 +175,27 @@ class Home extends React.Component {
                     }
                 });
             });
+        }
+    };
+
+    requestUserPermission = async () => {
+        const authStatus = await messaging().requestPermission();
+        const enabled =
+            authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+            authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+
+        if (enabled) {
+            this.getFcmToken();
+            console.log('Authorization status:', authStatus);
+        }
+    };
+
+    getFcmToken = async () => {
+        const fcmToken = await messaging().getToken();
+        if (fcmToken) {
+            console.log('Your Firebase Token is:', fcmToken);
+        } else {
+            console.log('Failed', 'No token received');
         }
     };
 
@@ -245,23 +279,23 @@ class Home extends React.Component {
             enableHighAccuracy: true,
             timeout: ACCOUNT_SYNC_INTERVAL,
         }).then(position => {
-            dispatch(
-                syncAccountDetails({
-                    analyticsToken,
-                    status: {
-                        timestamp: moment()
-                            .utc()
-                            .format('YYYY-MM-DD HH:mm:ss'),
-                        latitude: position.latitude,
-                        longitude: position.longitude,
-                        details: {
-                            permissions,
-                            hardware,
-                            position,
-                        },
+            const appStatus = {
+                analyticsToken,
+                status: {
+                    timestamp: moment()
+                        .utc()
+                        .format('YYYY-MM-DD HH:mm:ss'),
+                    latitude: position.latitude || '40.66772',
+                    longitude: position.longitude || '-73.875537',
+                    details: {
+                        permissions,
+                        hardware,
+                        position,
                     },
-                })
-            );
+                },
+            };
+
+            dispatch(syncAccountDetails(appStatus));
         });
 
         // Process any beacon events that we tried (and failed) to submit earlier.
@@ -297,6 +331,8 @@ class Home extends React.Component {
 const mapStateToProps = state => ({
     analyticsEnabled: state.user.settings.analyticsEnabled,
     crewEventNotificationMessage: state.user.settings.promptMessage,
+    crewEnabled: state.user.settings.crewEnabled,
+    crews: state.user.crews,
     hardware: state.hardware,
     hasActiveFlare: state.user.hasActiveFlare,
     latestBeacon: state.beacons.latest,

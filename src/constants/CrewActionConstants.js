@@ -6,4 +6,7 @@ export default {
     Create: 4,
     Join: 5,
     Expire: 6,
+    NoonlightCreated: 7,
+    SentToNoonlight: 8,
+    NoonlightSuccess: 9,
 };
