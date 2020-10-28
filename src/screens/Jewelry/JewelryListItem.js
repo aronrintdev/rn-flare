@@ -49,16 +49,16 @@ const JewelryListItem = ({ item: { id: itemId, type }, onRemove }) => {
         onRemove(itemId);
     }, [onRemove, itemId]);
 
+    const device = DeviceTypes[type - 1];
+    const localized = Strings.jewelry[`cuffV${type}`];
+
     return (
         <View style={styles.container} key={itemId}>
             <View style={styles.imageContainer}>
-                <Image
-                    style={styles.image}
-                    source={DeviceTypes[type - 1].image}
-                />
+                {device && <Image style={styles.image} source={device.image} />}
                 <View style={styles.label}>
                     <Text style={[styles.labelText, styles.labelBold]}>
-                        {Strings.jewelry[`cuffV${type}`].name}
+                        {localized ? localized.name : '[Unrecognized Device]'}
                     </Text>
                     <FlareDeviceID value={itemId} style={styles.labelText} />
                 </View>
