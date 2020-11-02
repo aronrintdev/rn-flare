@@ -1,9 +1,19 @@
 # Flare iOS App
 
+This is the documentation for the frontend of the app, written in React Native. For the Python backend, see [Flare Docs](https://drive.google.com/file/d/1bCEZMSum7lDYz9hCIaO9pdGeSnDKVuOo/view).
+
+## System Requirements
+
+- Mac running macOS Catalina 10.15.2 or later
+- [Xcode 11.7](https://developer.apple.com/download/more/). Xcode 12+ will not work unless the React Native version is also upgraded in concert, which requires additional migration work.
+- Git
+- [Yarn](https://yarnpkg.com/) or NPM
+- [CocoaPods](https://cocoapods.org/)
+
 ## Installation
 
 ```zsh
-git clone [repo url]
+git clone [repo url] flare
 cd flare
 
 # Install JavaScript dependencies
@@ -12,19 +22,36 @@ yarn install
 # Install iOS dependencies
 cd ios/
 pod install
+
+cd ..
 ```
 
 ## Development
 
 ```zsh
-# Start Metro Bundler:
+# Start Metro Bundler (compiles JavaScript on-the-fly):
 yarn start # react-native start
 
-# In a separate tab, start the iOS Simulator
+# In a separate tab/window, start the iOS Simulator:
 yarn ios # react-native run-ios
+```
 
-# To run iOS Simulator with an older iPhone model:
+To run iOS Simulator with an older iPhone model:
+
+```zsh
 yarn ios-legacy # react-native run-ios --simulator="iPhone SE (2nd generation)"
+```
+
+To run on a custom hardware model, first list which iOS Simulators are available:
+
+```zsh
+yarn ios-list # xcrun simctl list
+```
+
+…then plug the device name into `ios-custom`:
+
+```zsh
+yarn ios-custom 'iPhone 8'
 ```
 
 ### Flare Account
@@ -35,7 +62,11 @@ When you register a new account for development/testing purposes, you can prefix
 GET https://app2.flarejewelry.co/api/users/dev/remove_users
 ```
 
+Currently there is no way to delete individual dev users via API; that would have to be done manually.
+
 ### App Structure
+
+**ℹ️ Note:** This section is inexhaustive.
 
 - `__tests__/`
 - `android/` - Android project files; not currently in use.
@@ -49,7 +80,7 @@ GET https://app2.flarejewelry.co/api/users/dev/remove_users
   - `bits/` - Miscellaneous code snippets.
   - `constants/`
     - `Config.js` - Environment variables.
-    - `CrewActionConstants.js` - A mapping from Timeline action names to their numerical codes as used in the Timeline API.
+    - `CrewActionConstants.js` - A mapping from Timeline action names to their numeric codes as used in the Timeline API.
     - `EventTimelineSettings.js` - A mapping from Timeline constants to string IDs specifying the different modes of the Timeline.
     - `EventTypes.js`
     - `ManufacturingStages.js`
@@ -66,19 +97,17 @@ GET https://app2.flarejewelry.co/api/users/dev/remove_users
 - `.env` - Environment variables. **⚠️ Warning**: Some (all?) of these variables are not actually used during the build process, so changes here may not affect anything. For the live variables, refer to `src/constants/Config.js`. This file is kept intact just in case it is used somehow.
 - `index.js` - App entrypoint.
 
-## Developer Permissions
+## Build Prerequisites
 
 Before you can build the app you must be invited to Flare’s [Apple Developer account](https://developer.apple.com/account/#/overview/M8SR977JX7) and assigned the `Developer` role or higher.
 
-Additionally, you have to have active `Development` and `Distribution` certificates from [Certificates, Identifiers & Profiles](https://developer.apple.com/account/resources/certificates/list) installed in your Keychain. If either certificate is expired you will have to click the “+” button and create a new one. You can check which certificates you have instealled or add new ones within Xcode by going to `Xcode → Preferences → Accounts → [Your Apple ID] → Flare Jewelry, Inc.; Manage Certificates`.
+Additionally, you have to have active `Development` and `Distribution` certificates from [Certificates, Identifiers & Profiles](https://developer.apple.com/account/resources/certificates/list) installed in your Keychain. If either certificate is expired or nonexistent you will have to click the “+” button on that page and create a new one. You can check which certificates you have instealled or add new ones within Xcode by going to `Xcode → Preferences → Accounts → [Your Apple ID] → Flare Jewelry, Inc.; Manage Certificates`.
 
 ![Screenshot: Certificatios](docs/images/xcode-certificates@2x.png)
 
-Otherwise if each certificate is still valid, you can click the link on its name to download the corresponding `.cer` file. Then, double-click the `.cer` launch Keychain Access and install it. Note that even if you have created a new certificate and installed it to your Keychain, it may take a while for Apple’s servers to recognize it as valid. You won’t be able to upload any app builds to TestFlight or the App Store until that happens.
+Otherwise if each certificate is still valid, you can click their name in Certificates, Identifiers & Profiles to download the corresponding `.cer` file. Then on your computer, open the `.cer` file to launch Keychain Access and install it. Note that even if you have created a new certificate and installed it to your Keychain, it may take a while for Apple’s servers to recognize it as valid. You won’t be able to upload any app builds to TestFlight or the App Store until that happens.
 
 ## Build Process
-
-Building is only possible on a Mac running macOS Catalina or later (10.15+) with Xcode 11 installed. Xcode 12+ will not work unless the React Native version is also upgraded in concert, which requires additional migration work.
 
 Open `ios/GetFlare.xcworkspace` in Xcode.
 
@@ -103,7 +132,7 @@ In the menu bar, go to `Product → Archive`. This will build an executable `.ap
 When the build is complete, in the menu bar, go to `Window → Organizer` and click the **Distribute App** button. Then select `App Store Connect; Next → Upload; Next` and wait for the upload to complete. The upload will only complete successfully if you:
 
 1. Are logged into Xcode with your Apple ID, and
-2. Have the appropriate permissions in App Store Connect.
+2. Have the appropriate permissions in App Store Connect. (See Build Prerequisites)
 
 ![Screenshot: Organizer](docs/images/xcode-organizer@2x.png)
 
@@ -112,14 +141,14 @@ When the build is complete, in the menu bar, go to `Window → Organizer` and cl
 A flare (also known as an “alarm”) is triggered when the user presses the button on her Bluetooth-connected jewelry. The data flow is as follows:
 
 1. User presses button on jewelery
-2. Jewelry sends BLE beacon to the app (one of 20 UUIDs) - `
+2. Jewelry sends BLE beacon to the app (one of 20 UUIDs)
 3. The app examines the beacon payload and decodes a device ID
 4. The app submits an API request to the backend including the device ID
 5. The backend performs an action depending on the request, connecting to third-party APIs as-needed.
 
 ### Short Press
 
-Pressing the button and immediately releasing triggers a real phone call with prerecorded audio on the other end. The call script is configurable in `Menu → Settings → Choose Your Call`. ([`src/screens/Settings/Call.js`](src/screens/Settings/Call.js))
+Pressing the button and immediately releasing triggers a real phone call with prerecorded audio on the other end. The user can configure her call script by going to `Menu → Settings → Choose Your Call`. ([`src/screens/Settings/Call.js`](src/screens/Settings/Call.js))
 
 ![Screenshot: Fake Call](docs/images/app-fake-call@0.5x.png)
 
@@ -190,6 +219,8 @@ These are mapped to the `CONFIG_API_URL` Xcode variable depending on the current
 
 All examples herein point to the Development API.
 
+To perform an authenticated API call, use `ProtectedAPICall` from [`src/bits/ProtectedAPICall.js`](src/bits/ProtectedAPICall.js).
+
 ### App Status
 
 - **Endpoint**: `/api/auth/status`
@@ -208,13 +239,15 @@ All examples herein point to the Development API.
   - `ACCOUNT_DETAILS_*` in [`src/actions/actionTypes.js`](src/actions/actionTypes.js)
   - `ACCOUNT_SYNC_INTERVAL*` in [`src/constants/Config.js`](src/constants/Config.js)
 
-The App Status endpoint is used to send information about the current user to the server for logging purposes.
+The App Status endpoint is used to send information about the current user, including current location, to the server for logging purposes.
 
-When the user is logged in, app statuses send at the interval defined by `ACCOUNT_SYNC_INTERVAL`. They do not include location data [???].
+When the user is logged in, app statuses send at the rate defined by `ACCOUNT_SYNC_INTERVAL`.
 
-When a long-press flare is active, app statuses send at the interval defined by `ACCOUNT_SYNC_INTERVAL_FLARE`. They do inc
+When a long-press flare is active, app statuses send at the rate defined by `ACCOUNT_SYNC_INTERVAL_FLARE`.
 
-The reason for having two separate timings is so that app statuses can be sent more frequently in the case of an emergency.
+The reason for having two separate timings is so that app statuses can be sent more frequently in the case of an emergency (i.e. long-press).
+
+The timings are controlled by [React Native Background Timer](https://github.com/ocetnik/react-native-background-timer), using its `setInterval` and `clearInterval` methods.
 
 #### Example: 200 OK
 
@@ -222,20 +255,51 @@ The reason for having two separate timings is so that app statuses can be sent m
 POST https://app2.flarejewelry.co/api/auth/status
 ```
 
-```json
+```jsonc
+// Post Body
 {
-  "timestamp": "2020-10-31 20:52:45",
-  "latitude": "40.66772",
-  "longitude": "-73.875537",
-  "details": {
-    "permissions": {},
-    "hardware": {},
-    "position": {}
+  "analyticsToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MzU0NTYwMDMsImlhdCI6MTYwMzkyMDAwMywic3ViIjo2NTh9.hTEKsayLOQI_vsxSekfYNgrigjbLKsR5R6hj88w0QLY",
+  "status": {
+    "timestamp": "2020-11-02 02:22:20",
+    "latitude": 40.66772,
+    "longitude": -73.875537,
+    "details": {
+      "permissions": {
+        "bluetooth": false,
+        "contacts": false,
+        "location": true,
+        "locationPrompted": true,
+        "notification": false
+      },
+      "hardware": {
+        "bluetooth": "on",
+        "bleListening": false,
+        "bleListeningChange": "requested",
+        "bleListeningChangeDir": "up",
+        "callStatus": null
+      },
+      "position": {
+        "coords": {
+          "latitude": 40.66772,
+          "longitude": -73.875537
+        },
+        "timestamp": 1604283573691.138,
+        "course": -1,
+        "speed": -1,
+        "longitude": -122.406417,
+        "floor": 0,
+        "latitude": 37.785834,
+        "accuracy": 5,
+        "altitude": 0,
+        "altitudeAccuracy": -1
+      }
+    }
   }
 }
 ```
 
-```json
+```jsonc
+// Response
 {
   "analytics_enabled": true,
   "call_script": 4,
@@ -400,9 +464,9 @@ POST https://app2.flarejewelry.co/api/config/user/591/toggle_crew
 - **Localizations**: `Strings.eventTimeline.headings` in [`src/locales/*.js`](src/locales/en.js)
 - **Constants**: [`src/constants/CrewActionConstants.js`](src/constants/CrewActionConstants.js)
 
-The Timeline endpoint is called when the user activates a long-press. Once activated, the frontend will periodically poll the server for updates to the `actions` array. Each action in the array has an associated `action_type`, a numerical ID that maps to a different message in the UI.
+The Timeline endpoint is called when the user activates a long-press. Once activated, the frontend will periodically poll the server for updates to the `actions` array. Each action in the array has an associated `action_type`, a numeric ID that maps to different message copy in the UI.
 
-| Action Type | Action Type Name | Example Message Text                                       |
+| Action Type | Action Name      | Message Copy                                               |
 | ----------- | ---------------- | ---------------------------------------------------------- |
 | 0           | Unknown          | 🤮 Something got mixed up on our end                       |
 | 1           | Notification     | 💌 We reached out to [Crew Member]                         |
