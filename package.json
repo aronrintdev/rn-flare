@@ -7,6 +7,8 @@
         "android": "react-native run-android",
         "ios": "react-native run-ios",
         "ios-legacy": "react-native run-ios --simulator=\"iPhone SE (2nd generation)\"",
+        "ios-list": "xcrun simctl list --json",
+        "ios-custom": "react-native run-ios --simulator",
         "start": "react-native start",
         "test": "jest",
         "postversion": "react-native-version -A"
