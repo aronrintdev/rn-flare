@@ -37,34 +37,34 @@ GET https://app2.flarejewelry.co/api/users/dev/remove_users
 
 ### App Structure
 
--   `__tests__/`
--   `android/` - Android project files; not currently in use.
--   `docs/`
--   `ios/` - iOS project files.
--   `node_modules/` - JavaScript dependencies.
--   `patches/` - Hotfixes for dependencies.
--   `src/` - React Native application source.
-    -   `actions/`
-    -   `assets/` - Images, videos, etc.
-    -   `bits/` - Miscellaneous code snippets.
-    -   `constants/`
-        -   `Config.js` - Environment variables.
-        -   `CrewActionConstants.js` - A mapping from Timeline action names to their numerical codes as used in the Timeline API.
-        -   `EventTimelineSettings.js` - A mapping from Timeline constants to string IDs specifying the different modes of the Timeline.
-        -   `EventTypes.js`
-        -   `ManufacturingStages.js`
-        -   `Roles.js`
-    -   `fonts/`
-    -   `helpers/`
-    -   `locales/` - Localization strings for all copy in the app. Currently only English (`en.js`) is supported.
-    -   `reducers/` - Redux reducers.
-    -   `screens/` - The different sections of the app.
-        -   `How911Works` - The 911 Walkthrough.
-    -   `store/` - Redux store.
-    -   `App.js` - App bootstrap.
-    -   `App.test.js`
--   `.env` - Environment variables. **⚠️ Warning**: Some (all?) of these variables are not actually used during the build process, so changes here may not affect anything. For the live variables, refer to `src/constants/Config.js`. This file is kept intact just in case it is used somehow.
--   `index.js` - App entrypoint.
+- `__tests__/`
+- `android/` - Android project files; not currently in use.
+- `docs/`
+- `ios/` - iOS project files.
+- `node_modules/` - JavaScript dependencies.
+- `patches/` - Hotfixes for dependencies.
+- `src/` - React Native application source.
+  - `actions/`
+  - `assets/` - Images, videos, etc.
+  - `bits/` - Miscellaneous code snippets.
+  - `constants/`
+    - `Config.js` - Environment variables.
+    - `CrewActionConstants.js` - A mapping from Timeline action names to their numerical codes as used in the Timeline API.
+    - `EventTimelineSettings.js` - A mapping from Timeline constants to string IDs specifying the different modes of the Timeline.
+    - `EventTypes.js`
+    - `ManufacturingStages.js`
+    - `Roles.js`
+  - `fonts/`
+  - `helpers/`
+  - `locales/` - Localization strings for all copy in the app. Currently only English (`en.js`) is supported.
+  - `reducers/` - Redux reducers.
+  - `screens/` - The different sections of the app.
+    - `How911Works` - The 911 Walkthrough.
+  - `store/` - Redux store.
+  - `App.js` - App bootstrap.
+  - `App.test.js`
+- `.env` - Environment variables. **⚠️ Warning**: Some (all?) of these variables are not actually used during the build process, so changes here may not affect anything. For the live variables, refer to `src/constants/Config.js`. This file is kept intact just in case it is used somehow.
+- `index.js` - App entrypoint.
 
 ## Developer Permissions
 
@@ -92,11 +92,11 @@ For an App Store build, increment the **Version** number and reset the Build num
 
 In the menu bar, go to `Product → Scheme` and select the relevant scheme:
 
--   `GetFlare Development (Staging)`
--   `GetFlare (Release)`
--   `GetFlare (Debug)`
--   `GetFlare`
-    -   This scheme is redundant, but React Native requires a scheme that matches the project name in order for `run-ios` to work.
+- `GetFlare Development (Staging)`
+- `GetFlare (Release)`
+- `GetFlare (Debug)`
+- `GetFlare`
+  - This scheme is redundant, but React Native requires a scheme that matches the project name in order for `run-ios` to work.
 
 In the menu bar, go to `Product → Archive`. This will build an executable `.app` file that can be uploaded to App Store Connect.
 
@@ -183,8 +183,8 @@ GET https://app2.flarejewelry.co/api/endpoint
 
 There are two base URLs for interfacing with the backend server:
 
--   **Development**: https://app2.flarejewelry.co/
--   **Production**: https://app.flarejewelry.co/
+- **Development**: https://app2.flarejewelry.co/
+- **Production**: https://app.flarejewelry.co/
 
 These are mapped to the `CONFIG_API_URL` Xcode variable depending on the current Build Configuration. The **Debug** and **Staging** configurations map to the Development API. The **Release** configuration maps to the Production API.
 
@@ -192,21 +192,21 @@ All examples herein point to the Development API.
 
 ### App Status
 
--   **Endpoint**: `/api/auth/status`
--   **Method**: `POST`
--   **Authenticated**: Yes
--   **Idempotent**: Yes
--   **Callers**:
-    -   `syncAccountDetails()` in [`src/actions/userActions.js`](src/actions/userActions.js)
-    -   `syncAccount()` in [`src/screens/HomeActive.js`](src/screens/HomeActive.js)
-    -   `componentDidMount()` in [`src/screens/Home/index.js`](src/screens/Home/index.js)
-    -   `syncAccount()` in [`src/screens/Home/index.js`](src/screens/Home/index.js)
--   **Views**:
-    -   [`src/screens/Home/index.js`](src/screens/Home/index.js)
-    -   [`src/screens/HomeActive.js`](src/screens/HomeActive.js)
--   **Constants**:
-    -   `ACCOUNT_DETAILS_*` in [`src/actions/actionTypes.js`](src/actions/actionTypes.js)
-    -   `ACCOUNT_SYNC_INTERVAL*` in [`src/constants/Config.js`](src/constants/Config.js)
+- **Endpoint**: `/api/auth/status`
+- **Method**: `POST`
+- **Authenticated**: Yes
+- **Idempotent**: Yes
+- **Callers**:
+  - `syncAccountDetails()` in [`src/actions/userActions.js`](src/actions/userActions.js)
+  - `syncAccount()` in [`src/screens/HomeActive.js`](src/screens/HomeActive.js)
+  - `componentDidMount()` in [`src/screens/Home/index.js`](src/screens/Home/index.js)
+  - `syncAccount()` in [`src/screens/Home/index.js`](src/screens/Home/index.js)
+- **Views**:
+  - [`src/screens/Home/index.js`](src/screens/Home/index.js)
+  - [`src/screens/HomeActive.js`](src/screens/HomeActive.js)
+- **Constants**:
+  - `ACCOUNT_DETAILS_*` in [`src/actions/actionTypes.js`](src/actions/actionTypes.js)
+  - `ACCOUNT_SYNC_INTERVAL*` in [`src/constants/Config.js`](src/constants/Config.js)
 
 The App Status endpoint is used to send information about the current user to the server for logging purposes.
 
@@ -224,64 +224,64 @@ POST https://app2.flarejewelry.co/api/auth/status
 
 ```json
 {
-    "timestamp": "2020-10-31 20:52:45",
-    "latitude": "40.66772",
-    "longitude": "-73.875537",
-    "details": {
-        "permissions": {},
-        "hardware": {},
-        "position": {}
-    }
+  "timestamp": "2020-10-31 20:52:45",
+  "latitude": "40.66772",
+  "longitude": "-73.875537",
+  "details": {
+    "permissions": {},
+    "hardware": {},
+    "position": {}
+  }
 }
 ```
 
 ```json
 {
-    "analytics_enabled": true,
-    "call_script": 4,
-    "crew_events": [],
-    "crews": [
+  "analytics_enabled": true,
+  "call_script": 4,
+  "crew_events": [],
+  "crews": [
+    {
+      "is_default": true,
+      "members": [
         {
-            "is_default": true,
-            "members": [
-                {
-                    "id": 1171,
-                    "label": " - mobile",
-                    "name": "Hugh Guiney",
-                    "phone": "+16175551234"
-                }
-            ],
-            "name": "New Crew"
+          "id": 1171,
+          "label": " - mobile",
+          "name": "Hugh Guiney",
+          "phone": "+16175551234"
         }
-    ],
-    "devices": [
-        {
-            "id": 5443,
-            "type": 2
-        }
-    ],
-    "profile": {
-        "active": true,
-        "created_at": "Wed, 14 Oct 2020 18:29:19 GMT",
-        "email": "hugh@duomo.dev",
-        "first_name": "devHugh",
-        "id": 658,
-        "last_name": "devGuiney"
-    },
-    "referral_key": "fl-edggdx",
-    "role": 0,
-    "status": "success",
-    "viewed_tutorial": true
+      ],
+      "name": "New Crew"
+    }
+  ],
+  "devices": [
+    {
+      "id": 5443,
+      "type": 2
+    }
+  ],
+  "profile": {
+    "active": true,
+    "created_at": "Wed, 14 Oct 2020 18:29:19 GMT",
+    "email": "hugh@duomo.dev",
+    "first_name": "devHugh",
+    "id": 658,
+    "last_name": "devGuiney"
+  },
+  "referral_key": "fl-edggdx",
+  "role": 0,
+  "status": "success",
+  "viewed_tutorial": true
 }
 ```
 
 ### Delete Dev Users
 
--   **Endpoint**: `/api/users/dev/remove_users`
--   **Method**: `GET`
--   **Authenticated**: No
--   **Idempotent**: No
--   **Callers**: Manual
+- **Endpoint**: `/api/users/dev/remove_users`
+- **Method**: `GET`
+- **Authenticated**: No
+- **Idempotent**: No
+- **Callers**: Manual
 
 #### Example: 200 OK
 
@@ -291,23 +291,23 @@ GET https://app2.flarejewelry.co/api/users/dev/remove_users
 
 ```json
 {
-    "message": "Dev users removed",
-    "status": "success"
+  "message": "Dev users removed",
+  "status": "success"
 }
 ```
 
 ### Settings: Toggle 911 Services
 
--   **Endpoint**: `/api/config/user/__userId__/toggle_ems`
--   **Method**: `POST`
--   **Authenticated**: Yes
--   **Idempotent**: No
--   **Callers**:
-    -   `set911Features()` in [`src/actions/userActions.js`](src/actions/userActions.js)
-    -   `setEnable911Feature()` in [`src/screens/Settings/Home.js`](src/screens/Settings/Home.js)
-    -   `enable911()` in [`src/screens/How911Works/GotYourBack.js`](src/screens/How911Works/GotYourBack.js)
--   **Views**:
-    -   [`src/screens/Settings/Home.js`](src/screens/Settings/Home.js)
+- **Endpoint**: `/api/config/user/__userId__/toggle_ems`
+- **Method**: `POST`
+- **Authenticated**: Yes
+- **Idempotent**: No
+- **Callers**:
+  - `set911Features()` in [`src/actions/userActions.js`](src/actions/userActions.js)
+  - `setEnable911Feature()` in [`src/screens/Settings/Home.js`](src/screens/Settings/Home.js)
+  - `enable911()` in [`src/screens/How911Works/GotYourBack.js`](src/screens/How911Works/GotYourBack.js)
+- **Views**:
+  - [`src/screens/Settings/Home.js`](src/screens/Settings/Home.js)
 
 Calling this endpoint flips the user’s 911 Services setting in the database, then returns the new value.
 
@@ -325,8 +325,8 @@ POST https://app2.flarejewelry.co/api/config/user/591/toggle_ems
 
 ```json
 {
-    "ems_services": false,
-    "user_id": "591"
+  "ems_services": false,
+  "user_id": "591"
 }
 ```
 
@@ -336,23 +336,23 @@ POST https://app2.flarejewelry.co/api/config/user/591/toggle_ems
 
 ```json
 {
-    "ems_services": true,
-    "user_id": "591"
+  "ems_services": true,
+  "user_id": "591"
 }
 ```
 
 ### Settings: Toggle Crew
 
--   **Endpoint**: `/api/config/user/__userId__/toggle_crew`
--   **Method**: `POST`
--   **Authenticated**: Yes
--   **Idempotent**: No
--   **Callers**:
-    -   `setCrewEnabled()` in [`src/actions/userActions.js`](src/actions/userActions.js)
-    -   `performSave()` in [`src/screens/Contacts/index.js`](src/screens/Contacts/index.js)
--   **Views**:
-    -   [`src/screens/Contacts/index.js`](src/screens/Contacts/index.js)
-    -   [`src/screens/Settings/Home.js`](src/screens/Settings/Home.js)
+- **Endpoint**: `/api/config/user/__userId__/toggle_crew`
+- **Method**: `POST`
+- **Authenticated**: Yes
+- **Idempotent**: No
+- **Callers**:
+  - `setCrewEnabled()` in [`src/actions/userActions.js`](src/actions/userActions.js)
+  - `performSave()` in [`src/screens/Contacts/index.js`](src/screens/Contacts/index.js)
+- **Views**:
+  - [`src/screens/Contacts/index.js`](src/screens/Contacts/index.js)
+  - [`src/screens/Settings/Home.js`](src/screens/Settings/Home.js)
 
 Calling this endpoint flips the user’s Crew setting in the database, then returns the new value.
 
@@ -370,8 +370,8 @@ POST https://app2.flarejewelry.co/api/config/user/591/toggle_crew
 
 ```json
 {
-    "crew_services": true,
-    "user_id": "591"
+  "crew_services": true,
+  "user_id": "591"
 }
 ```
 
@@ -381,24 +381,24 @@ POST https://app2.flarejewelry.co/api/config/user/591/toggle_crew
 
 ```json
 {
-    "crew_services": false,
-    "user_id": "591"
+  "crew_services": false,
+  "user_id": "591"
 }
 ```
 
 ### Timeline
 
--   **Endpoint**: `/api/user/__userID__/crews/event`
--   **Method**: `GET`
--   **Authenticated**: Yes
--   **Idempotent**: Yes
--   **Callers**:
-    -   `getEventTimeline()` in [`src/actions/userActions.js`](src/actions/userActions.js)
--   **Views**:
-    -   [`src/screens/HomeActive.js`](src/screens/HomeActive.js)
-    -   [`src/bits/EventTimeline.js`](src/bits/EventTimeline.js)
--   **Localizations**: `Strings.eventTimeline.headings` in [`src/locales/*.js`](src/locales/en.js)
--   **Constants**: [`src/constants/CrewActionConstants.js`](src/constants/CrewActionConstants.js)
+- **Endpoint**: `/api/user/__userID__/crews/event`
+- **Method**: `GET`
+- **Authenticated**: Yes
+- **Idempotent**: Yes
+- **Callers**:
+  - `getEventTimeline()` in [`src/actions/userActions.js`](src/actions/userActions.js)
+- **Views**:
+  - [`src/screens/HomeActive.js`](src/screens/HomeActive.js)
+  - [`src/bits/EventTimeline.js`](src/bits/EventTimeline.js)
+- **Localizations**: `Strings.eventTimeline.headings` in [`src/locales/*.js`](src/locales/en.js)
+- **Constants**: [`src/constants/CrewActionConstants.js`](src/constants/CrewActionConstants.js)
 
 The Timeline endpoint is called when the user activates a long-press. Once activated, the frontend will periodically poll the server for updates to the `actions` array. Each action in the array has an associated `action_type`, a numerical ID that maps to a different message in the UI.
 
@@ -423,37 +423,37 @@ GET https://app2.flarejewelry.co/api/user/591/crews/event
 
 ```json
 {
-    "actions": [
-        {
-            "action_type": 4,
-            "id": 2802,
-            "message": null,
-            "name": null,
-            "timestamp": "Wed, 19 Aug 2020 15:25:22 GMT"
-        },
-        {
-            "action_type": 1,
-            "id": 2803,
-            "message": null,
-            "name": "Austin",
-            "timestamp": "Wed, 19 Aug 2020 15:25:22 GMT"
-        },
-        {
-            "action_type": 1,
-            "id": 2804,
-            "message": null,
-            "name": "Oliver Guiney",
-            "timestamp": "Wed, 19 Aug 2020 15:25:22 GMT"
-        },
-        {
-            "action_type": 3,
-            "id": 2805,
-            "message": null,
-            "name": null,
-            "timestamp": "Wed, 19 Aug 2020 15:25:41 GMT"
-        }
-    ],
-    "status": "success"
+  "actions": [
+    {
+      "action_type": 4,
+      "id": 2802,
+      "message": null,
+      "name": null,
+      "timestamp": "Wed, 19 Aug 2020 15:25:22 GMT"
+    },
+    {
+      "action_type": 1,
+      "id": 2803,
+      "message": null,
+      "name": "Austin",
+      "timestamp": "Wed, 19 Aug 2020 15:25:22 GMT"
+    },
+    {
+      "action_type": 1,
+      "id": 2804,
+      "message": null,
+      "name": "Oliver Guiney",
+      "timestamp": "Wed, 19 Aug 2020 15:25:22 GMT"
+    },
+    {
+      "action_type": 3,
+      "id": 2805,
+      "message": null,
+      "name": null,
+      "timestamp": "Wed, 19 Aug 2020 15:25:41 GMT"
+    }
+  ],
+  "status": "success"
 }
 ```
 
